@@ -35,7 +35,11 @@ abstract class Plugin : JavaPlugin() {
         PLUGIN = this
         Bukkit.getServer().messenger.registerOutgoingPluginChannel(this, "BungeeCord")
 
-        loadConfiguration(*configurations)
+        loadConfiguration(
+                ServerConfig,
+                DatabaseConfig,
+                *configurations
+        )
 
         loadServerDefinition(ServerConfig.BUNGEE_NAME).let {
             if (it == null) {

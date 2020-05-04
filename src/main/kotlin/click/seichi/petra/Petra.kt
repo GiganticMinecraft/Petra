@@ -11,9 +11,8 @@ import org.jetbrains.exposed.sql.Table
  * @author tar0ss
  */
 class Petra : Plugin() {
-    override val configurations : Array<Config> = arrayOf(
-                ServerConfig
-        )
+    override val configurations: Array<Config> = arrayOf(
+    )
     override val listeners: Array<Listener> = arrayOf(
 
     )
