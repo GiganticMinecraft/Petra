@@ -1,0 +1,21 @@
+name: @name@
+version: @version@
+main: click.seichi.@lname@.@name@
+api-version: 1.15
+
+
+commands:
+  vote:
+    description: This is vote command.
+    usage: /vote <playername> <num>
+    aliases: [vote]
+    default: op
+    permission: gigantic.vote
+    permission-message: You don't have <permission>
+  donate:
+    description: This is donate command.
+    usage: /donate <playername> <num>
+    aliases: [donate]
+    default: op
+    permission: gigantic.donate
+    permission-message: You don't have <permission>
