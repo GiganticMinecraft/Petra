@@ -17,6 +17,5 @@ enum class ServerDefinition(
 
         fun findById(id: Int) = idMap[id]
         fun findByBungeeName(bungeeName: String) = bungeeNameMap[bungeeName]
-
     }
 }
