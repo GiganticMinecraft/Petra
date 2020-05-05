@@ -33,6 +33,7 @@ abstract class Plugin : JavaPlugin() {
 
     override fun onEnable() {
         PLUGIN = this
+
         Bukkit.getServer().messenger.registerOutgoingPluginChannel(this, "BungeeCord")
 
         loadConfiguration(
@@ -40,6 +41,8 @@ abstract class Plugin : JavaPlugin() {
                 DatabaseConfig,
                 *configurations
         )
+
+        Debug.setLogger(logger)
 
         loadServerDefinition(ServerConfig.BUNGEE_NAME).let {
             if (it == null) {
