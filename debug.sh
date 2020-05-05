@@ -11,6 +11,9 @@ while true;do
 echo "Copying build plugin"
 sh copy.sh
 
+# ”world"フォルダー削除
+rm -rf server/world
+
 # サーバー起動
 cd ./server
 java -Dfile.encording=UTF-8 -Xms2G -Xmx2G -jar ${SERVER}.jar

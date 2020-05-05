@@ -7,9 +7,12 @@ SERVER=''
 
 while true;do
 
+# ”world"フォルダー削除
+rm -rf server/world
+
 # サーバー起動
 cd ./server
-java -Dfile.encording=UTF-8 -verbose:gc -server -Xms2G -Xmx2G -XX:MetaspaceSize=512M -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+DisableExplicitGC -XX:+UseCompressedOops -XX:+OptimizeStringConcat -XX:+UseTLAB -jar ${SERVER}.jar
+java -Dfile.encording=UTF-8 -Xms2G -Xmx2G -jar ${SERVER}.jar
 cd ../
 
 echo "Restarting in 10 seconds..."
