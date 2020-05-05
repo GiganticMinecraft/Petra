@@ -2,6 +2,7 @@ name: @name@
 version: @version@
 main: click.seichi.@lname@.@name@
 api-version: 1.15
+load: STARTUP
 
 
 commands:

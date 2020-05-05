@@ -4,6 +4,7 @@ import click.seichi.Plugin
 import click.seichi.config.Config
 import org.bukkit.command.CommandExecutor
 import org.bukkit.event.Listener
+import org.bukkit.generator.ChunkGenerator
 import org.jetbrains.exposed.sql.Table
 
 /**
@@ -28,5 +29,9 @@ class Petra : Plugin() {
     override fun onEnable() {
         super.onEnable()
         stage = Stage.find(PetraConfig.STAGE_NAME)!!
+    }
+
+    override fun getDefaultWorldGenerator(worldName: String, id: String?): ChunkGenerator? {
+        return StageChunkGenerator()
     }
 }
