@@ -33,6 +33,6 @@ class Petra : Plugin() {
     }
 
     override fun getDefaultWorldGenerator(worldName: String, id: String?): ChunkGenerator? {
-        return StageChunkGenerator()
+        return StageChunkGenerator(stage)
     }
 }
