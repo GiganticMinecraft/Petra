@@ -29,6 +29,7 @@ class Petra : Plugin() {
     override fun onEnable() {
         super.onEnable()
         stage = Stage.find(PetraConfig.STAGE_NAME)!!
+        logger.fine("Load Stage \"${stage.key}\"")
     }
 
     override fun getDefaultWorldGenerator(worldName: String, id: String?): ChunkGenerator? {
