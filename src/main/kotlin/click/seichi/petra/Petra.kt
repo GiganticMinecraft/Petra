@@ -12,12 +12,14 @@ import org.jetbrains.exposed.sql.Table
  */
 class Petra : Plugin() {
     private lateinit var stage: Stage
+    private val playerLocator = PlayerLocator()
 
     override val configurations: Array<Config> = arrayOf(
             PetraConfig
     )
-    override val listeners: Array<Listener> = arrayOf(
 
+    override val listeners: Array<Listener> = arrayOf(
+            PlayerConnectionListener(playerLocator)
     )
     override val commands: Array<Pair<String, CommandExecutor>> = arrayOf(
 
