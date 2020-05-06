@@ -11,7 +11,7 @@ import org.bukkit.command.CommandExecutor
  * plugin.ymlで登録したコマンドをexecutorに紐づけする
  */
 fun CommandExecutor.bind(id: String) {
-    Plugin.PLUGIN.run {
+    Plugin.INSTANCE.run {
         getCommand(id).also { pluginCommand ->
             if (pluginCommand == null) {
                 logger.warning("${this@bind::class.simpleName}を登録できませんでした")

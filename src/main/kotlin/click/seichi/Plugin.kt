@@ -22,7 +22,7 @@ abstract class Plugin : JavaPlugin() {
     private lateinit var serverDefinition: ServerDefinition
 
     companion object {
-        lateinit var PLUGIN: Plugin
+        lateinit var INSTANCE: Plugin
             private set
     }
 
@@ -32,8 +32,8 @@ abstract class Plugin : JavaPlugin() {
     abstract val tables: Array<Table>
 
     override fun onEnable() {
-        PLUGIN = this
-
+        INSTANCE = this
+        Debug.setLogger(logger)
         Bukkit.getServer().messenger.registerOutgoingPluginChannel(this, "BungeeCord")
 
         loadConfiguration(
@@ -41,8 +41,6 @@ abstract class Plugin : JavaPlugin() {
                 DatabaseConfig,
                 *configurations
         )
-
-        Debug.setLogger(logger)
 
         loadServerDefinition(ServerConfig.BUNGEE_NAME).let {
             if (it == null) {
