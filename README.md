@@ -7,7 +7,6 @@ Description
 当プラグインはMySQLを用いて全データベースを管理しています．
 デバッグサーバ起動時には”gigantic”データベースを作成済であることを確認してください．
 
-
 Development
 ---
 * [IntelliJ IDEA 2020.1](https://www.jetbrains.com/idea/)
@@ -19,7 +18,6 @@ Development
 
 ## Nullable
 !!演算子は，原則使用禁止とするが，Nullではないことが明確な場合は使用可能とする．
-
 
 ## JavaDocs
 publicなメソッドについては、JavaDocsを記載するよう心がけてください。
