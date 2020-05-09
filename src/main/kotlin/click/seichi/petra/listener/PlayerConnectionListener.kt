@@ -1,4 +1,4 @@
-package click.seichi.petra
+package click.seichi.petra.listener
 
 import click.seichi.petra.PlayerLocator
 import org.bukkit.event.EventHandler
