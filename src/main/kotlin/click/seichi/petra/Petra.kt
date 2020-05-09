@@ -2,6 +2,8 @@ package click.seichi.petra
 
 import click.seichi.Plugin
 import click.seichi.config.Config
+import click.seichi.petra.command.ReadyCommand
+import click.seichi.petra.listener.PlayerConnectionListener
 import org.bukkit.command.CommandExecutor
 import org.bukkit.event.Listener
 import org.bukkit.generator.ChunkGenerator
@@ -12,17 +14,16 @@ import org.jetbrains.exposed.sql.Table
  */
 class Petra : Plugin() {
     private lateinit var stage: Stage
-    private val playerLocator = PlayerLocator()
 
     override val configurations: Array<Config> = arrayOf(
             PetraConfig
     )
 
     override val listeners: Array<Listener> = arrayOf(
-            PlayerConnectionListener(playerLocator)
+            PlayerConnectionListener()
     )
     override val commands: Array<Pair<String, CommandExecutor>> = arrayOf(
-
+            "ready" to ReadyCommand()
     )
     override val tables: Array<Table> = arrayOf()
 
