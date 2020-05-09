@@ -60,8 +60,7 @@ abstract class Plugin : JavaPlugin() {
         if (tables.isNotEmpty()) {
             // データベース作成
             runCatching {
-                prepareDatabase(*tables
-                )
+                prepareDatabase(*tables)
             }.onFailure { exception ->
                 // 例外時はプラグインを終了する
                 exception.printStackTrace()

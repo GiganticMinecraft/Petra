@@ -24,9 +24,7 @@ class Petra : Plugin() {
     override val commands: Array<Pair<String, CommandExecutor>> = arrayOf(
 
     )
-    override val tables: Array<Table> = arrayOf(
-
-    )
+    override val tables: Array<Table> = arrayOf()
 
     override fun onEnable() {
         super.onEnable()
