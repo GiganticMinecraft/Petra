@@ -1,5 +1,7 @@
 package click.seichi.petra
 
+import click.seichi.petra.event.*
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
 /**
@@ -33,14 +35,17 @@ object PlayerLocator {
         if (isStarted) {
             if (leftPlayers.contains(player)) {
                 players.add(player)
+                Bukkit.getPluginManager().callEvent(PlayerBackGameEvent(player))
                 return "${player.name} が再接続しました"
             } else {
                 spectators.add(player)
                 // 観戦はメッセージなし　
+                Bukkit.getPluginManager().callEvent(SpectatorJoinEvent(player))
                 return null
             }
         } else {
             players.add(player)
+            Bukkit.getPluginManager().callEvent(PlayerJoinGameEvent(player))
             return "${player.name} が入場しました"
         }
     }
@@ -51,15 +56,18 @@ object PlayerLocator {
             if (players.contains(player)) {
                 leftPlayers.add(player)
                 players.remove(player)
+                Bukkit.getPluginManager().callEvent(PlayerQuitInGameEvent(player))
                 return "${player.name} が退場しました"
             } else {
                 spectators.remove(player)
+                Bukkit.getPluginManager().callEvent(SpectatorQuitEvent(player))
                 // 観戦はメッセージなし　
                 return null
             }
         } else {
             // キャンセル
             players.remove(player)
+            Bukkit.getPluginManager().callEvent(PlayerQuitGameEvent(player))
             return "${player.name} が退場しました"
         }
     }
