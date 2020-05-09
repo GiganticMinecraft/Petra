@@ -2,8 +2,8 @@ package click.seichi.petra
 
 import click.seichi.Plugin
 import click.seichi.config.Config
-import click.seichi.petra.command.ReadyCommand
-import click.seichi.petra.listener.PlayerConnectionListener
+import click.seichi.game.command.ReadyCommand
+import click.seichi.game.listener.PlayerConnectionListener
 import org.bukkit.command.CommandExecutor
 import org.bukkit.event.Listener
 import org.bukkit.generator.ChunkGenerator
@@ -18,7 +18,6 @@ class Petra : Plugin() {
     override val configurations: Array<Config> = arrayOf(
             PetraConfig
     )
-
     override val listeners: Array<Listener> = arrayOf(
             PlayerConnectionListener()
     )

@@ -1,6 +1,6 @@
-package click.seichi.petra.command
+package click.seichi.game.command
 
-import click.seichi.petra.GameStarter
+import click.seichi.game.GameStarter
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor

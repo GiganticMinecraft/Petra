@@ -1,6 +1,6 @@
-package click.seichi.petra.listener
+package click.seichi.game.listener
 
-import click.seichi.petra.PlayerLocator
+import click.seichi.game.PlayerLocator
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent

@@ -1,4 +1,4 @@
-package click.seichi.petra.event
+package click.seichi.game.event
 
 import click.seichi.event.CustomEvent
 import org.bukkit.entity.Player
@@ -6,4 +6,4 @@ import org.bukkit.entity.Player
 /**
  * @author tar0ss
  */
-class PlayerBackGameEvent(val player: Player) : CustomEvent()
+class PlayerQuitInGameEvent(val player: Player) : CustomEvent()

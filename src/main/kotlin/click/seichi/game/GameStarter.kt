@@ -1,7 +1,7 @@
-package click.seichi.petra
+package click.seichi.game
 
-import click.seichi.petra.event.PlayerReadyEvent
-import click.seichi.petra.event.StartGameEvent
+import click.seichi.game.event.PlayerReadyEvent
+import click.seichi.game.event.StartGameEvent
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 

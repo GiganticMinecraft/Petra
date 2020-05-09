@@ -1,4 +1,4 @@
-package click.seichi.petra.event
+package click.seichi.game.event
 
 import click.seichi.event.CustomEvent
 

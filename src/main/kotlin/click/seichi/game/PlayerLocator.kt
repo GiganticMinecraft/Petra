@@ -1,6 +1,6 @@
-package click.seichi.petra
+package click.seichi.game
 
-import click.seichi.petra.event.*
+import click.seichi.game.event.*
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
