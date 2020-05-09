@@ -5,23 +5,20 @@ import org.bukkit.entity.Player
 /**
  * @author tar0ss
  */
-class PlayerLocator {
+object PlayerLocator {
+
+    val isStarted: Boolean
+        get() = GameStarter.isStarted
 
     // 参加者
-    private val players = mutableListOf<Player>()
-    val playerList: List<Player> = players
+    private val players = mutableSetOf<Player>()
+    val playerSet: Set<Player> = players
 
     // 落ち戻り処理用
-    private val leftPlayers = mutableListOf<Player>()
+    private val leftPlayers = mutableSetOf<Player>()
 
-    private val spectators = mutableListOf<Player>()
-    val spectatorList: List<Player> = spectators
-
-    var isStarted = false
-
-    fun onStart() {
-        isStarted = true
-    }
+    private val spectators = mutableSetOf<Player>()
+    val spectatorSet: Set<Player> = spectators
 
     /**
      * @return ログインを例外的に許可する時 true

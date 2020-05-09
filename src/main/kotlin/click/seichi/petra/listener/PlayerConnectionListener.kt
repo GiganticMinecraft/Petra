@@ -1,5 +1,6 @@
 package click.seichi.petra
 
+import click.seichi.petra.PlayerLocator
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
@@ -9,7 +10,9 @@ import org.bukkit.event.player.PlayerQuitEvent
 /**
  * @author tar0ss
  */
-class PlayerConnectionListener(val locator: PlayerLocator) : Listener {
+class PlayerConnectionListener : Listener {
+
+    private val locator = PlayerLocator
 
     @EventHandler
     fun onPlayerLogin(event: PlayerLoginEvent) {
