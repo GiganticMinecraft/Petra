@@ -33,7 +33,6 @@ abstract class Plugin : JavaPlugin() {
 
     override fun onEnable() {
         INSTANCE = this
-        Debug.setLogger(logger)
         Bukkit.getServer().messenger.registerOutgoingPluginChannel(this, "BungeeCord")
 
         loadConfiguration(
