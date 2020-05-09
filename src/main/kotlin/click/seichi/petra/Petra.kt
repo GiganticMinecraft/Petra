@@ -14,7 +14,8 @@ class Petra : GamePlugin() {
     private lateinit var stage: Stage
 
     override val configurations: Array<Config> = arrayOf(
-            PetraConfig
+            PetraConfig,
+            *super.configurations
     )
     override val listeners: Array<Listener> = arrayOf(
             *super.listeners
@@ -22,7 +23,9 @@ class Petra : GamePlugin() {
     override val commands: Array<Pair<String, CommandExecutor>> = arrayOf(
             *super.commands
     )
-    override val tables: Array<Table> = arrayOf()
+    override val tables: Array<Table> = arrayOf(
+            *super.tables
+    )
 
     override fun onEnable() {
         super.onEnable()
