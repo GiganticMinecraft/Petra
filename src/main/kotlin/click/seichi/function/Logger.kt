@@ -19,5 +19,5 @@ fun fine(str: String) {
 }
 
 fun debug(str: String) {
-    Bukkit.getServer().logger.info("${ChatColor.LIGHT_PURPLE}str")
+    Bukkit.getServer().logger.info("${ChatColor.LIGHT_PURPLE}$str")
 }
