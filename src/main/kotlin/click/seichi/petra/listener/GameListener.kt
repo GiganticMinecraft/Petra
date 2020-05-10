@@ -1,9 +1,6 @@
 package click.seichi.petra.listener
 
-import click.seichi.game.event.GameStartCountEvent
-import click.seichi.game.event.PlayerCancelReadyEvent
-import click.seichi.game.event.PlayerReadyEvent
-import click.seichi.game.event.StartGameEvent
+import click.seichi.game.event.*
 import click.seichi.petra.GameMessage
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
@@ -13,20 +10,30 @@ import org.bukkit.event.Listener
 /**
  * @author tar0ss
  */
-class GameListener(private val players: Set<Player>) : Listener {
+class GameListener(
+        private val players: Set<Player>,
+        private val readyPlayers: Set<Player>
+) : Listener {
+
+    @EventHandler
+    fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
+        val player = event.player
+        player.setPlayerListName("${ChatColor.WHITE}${player.name}")
+        GameMessage.READY(readyPlayers.count(), players.count()).broadcastTo { players.contains(it) }
+    }
 
     @EventHandler
     fun onPlayerReady(event: PlayerReadyEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.GREEN}${player.name}")
-        GameMessage.READY_GAME(event.ready, event.all).broadcastTo { players.contains(it) }
+        GameMessage.CANCEL_READY(event.ready, event.all).broadcastTo { players.contains(it) }
     }
 
     @EventHandler
     fun onPlayerCancelReady(event: PlayerCancelReadyEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.WHITE}${player.name}")
-        GameMessage.READY_GAME(event.ready, event.all).broadcastTo { players.contains(it) }
+        GameMessage.READY(event.ready, event.all).broadcastTo { players.contains(it) }
     }
 
     @EventHandler

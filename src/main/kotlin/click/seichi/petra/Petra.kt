@@ -22,7 +22,10 @@ class Petra : Plugin() {
     // 参加者
     private val players = mutableSetOf<Player>()
 
-    private val gameStarter = SimpleGameStarter(players)
+    // 準備完了
+    private val readyPlayers = mutableSetOf<Player>()
+
+    private val gameStarter = SimpleGameStarter(players, readyPlayers)
     private val playerLocator = PlayerLocator(players, gameStarter)
 
 
@@ -31,7 +34,7 @@ class Petra : Plugin() {
     )
     override val listeners: Array<Listener> = arrayOf(
             PlayerConnectionListener(playerLocator),
-            GameListener(players)
+            GameListener(players, readyPlayers)
     )
     override val commands: Array<Pair<String, CommandExecutor>> = arrayOf(
             "ready" to ReadyCommand(gameStarter)

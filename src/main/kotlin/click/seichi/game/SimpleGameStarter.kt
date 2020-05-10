@@ -10,10 +10,9 @@ import org.bukkit.entity.Player
 
 class SimpleGameStarter(
         private val players: Set<Player>,
+        private val readyPlayerSet: MutableSet<Player>,
         startCount: Int = 5
 ) : IGameStarter {
-
-    private val readyPlayerSet = mutableSetOf<Player>()
 
     override var isStarted = false
         private set
