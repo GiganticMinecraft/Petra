@@ -35,19 +35,18 @@ open class Timer(
             if (isCancelled) {
                 isStarted = false
                 onCancelled()
-                return@sync true
+                return@sync false
             }
 
             val remainSeconds = finishSeconds - elapsedSeconds.toInt()
-
             onNext(remainSeconds)
 
             if (remainSeconds <= 0) {
                 isStarted = false
                 onComplete()
-                return@sync true
+                return@sync false
             }
-            return@sync false
+            return@sync true
         }
     }
 
