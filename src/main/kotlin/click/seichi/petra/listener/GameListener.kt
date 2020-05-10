@@ -3,6 +3,7 @@ package click.seichi.petra.listener
 import click.seichi.game.event.GameStartCountEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PlayerReadyEvent
+import click.seichi.game.event.StartGameEvent
 import click.seichi.message.TitleMessage
 import click.seichi.util.Random
 import org.bukkit.ChatColor
@@ -39,13 +40,21 @@ class GameListener(private val players: Set<Player>) : Listener {
 
     @EventHandler
     fun onGameStartCount(event: GameStartCountEvent) {
-        updateStartCount(event.remainSeconds)
-    }
-
-    private fun updateStartCount(remainSeconds: Int) {
+        val remainSeconds = event.remainSeconds
         TitleMessage(
                 "${Random.nextChatColor()}$remainSeconds",
-                "${ChatColor.RED}/r で キャンセル"
+                "${ChatColor.RED}/r で キャンセル",
+                fadeIn = 5,
+                stay = 10,
+                fadeOut = 10
+        ).broadcastTo { players.contains(it) }
+    }
+
+    @EventHandler
+    fun onStartGame(event: StartGameEvent) {
+        TitleMessage(
+                "${ChatColor.YELLOW}スタート",
+                ""
         ).broadcastTo { players.contains(it) }
     }
 }
