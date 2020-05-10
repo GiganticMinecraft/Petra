@@ -1,6 +1,6 @@
 package click.seichi.game.command
 
-import click.seichi.game.GameStarter
+import click.seichi.game.IGameStarter
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
@@ -9,9 +9,9 @@ import org.bukkit.entity.Player
 /**
  * @author tar0ss
  */
-class ReadyCommand : TabExecutor {
-
-    private val gameStarter = GameStarter
+class ReadyCommand(
+        private val gameStarter: IGameStarter
+) : TabExecutor {
 
     override fun onCommand(
             sender: CommandSender,
@@ -35,12 +35,12 @@ class ReadyCommand : TabExecutor {
         }
 
         if (gameStarter.isReady(sender)) {
-            sender.sendMessage("既に準備完了しています")
+            gameStarter.cancelReady(sender)
+            return true
+        } else {
+            gameStarter.ready(sender)
             return true
         }
-
-        gameStarter.ready(sender)
-        return true
     }
 
     override fun onTabComplete(

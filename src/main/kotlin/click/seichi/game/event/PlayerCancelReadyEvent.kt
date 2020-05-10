@@ -6,7 +6,7 @@ import org.bukkit.entity.Player
 /**
  * @author tar0ss
  */
-class PlayerReadyEvent(
+class PlayerCancelReadyEvent(
         val player: Player,
         val ready: Int,
         val all: Int

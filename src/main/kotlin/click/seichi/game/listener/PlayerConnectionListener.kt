@@ -1,6 +1,6 @@
 package click.seichi.game.listener
 
-import click.seichi.game.PlayerLocator
+import click.seichi.game.IPlayerLocator
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
@@ -10,10 +10,9 @@ import org.bukkit.event.player.PlayerQuitEvent
 /**
  * @author tar0ss
  */
-class PlayerConnectionListener : Listener {
-
-    private val locator = PlayerLocator
-
+class PlayerConnectionListener(
+        private val locator: IPlayerLocator
+) : Listener {
     @EventHandler
     fun onPlayerLogin(event: PlayerLoginEvent) {
         if (locator.isLeft(event.player)) {
