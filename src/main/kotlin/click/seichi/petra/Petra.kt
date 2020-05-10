@@ -6,7 +6,7 @@ import click.seichi.game.PlayerLocator
 import click.seichi.game.SimpleGameStarter
 import click.seichi.game.command.ReadyCommand
 import click.seichi.game.listener.PlayerConnectionListener
-import click.seichi.petra.listener.PlayerGameListener
+import click.seichi.petra.listener.GameListener
 import org.bukkit.command.CommandExecutor
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
@@ -31,7 +31,7 @@ class Petra : Plugin() {
     )
     override val listeners: Array<Listener> = arrayOf(
             PlayerConnectionListener(playerLocator),
-            PlayerGameListener(players)
+            GameListener(players)
     )
     override val commands: Array<Pair<String, CommandExecutor>> = arrayOf(
             "ready" to ReadyCommand(gameStarter)

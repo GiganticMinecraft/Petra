@@ -1,5 +1,6 @@
 package click.seichi.petra.listener
 
+import click.seichi.game.event.GameStartCountEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PlayerReadyEvent
 import click.seichi.message.TitleMessage
@@ -11,7 +12,7 @@ import org.bukkit.event.Listener
 /**
  * @author tar0ss
  */
-class PlayerGameListener(private val players: Set<Player>) : Listener {
+class GameListener(private val players: Set<Player>) : Listener {
 
     @EventHandler
     fun onPlayerReady(event: PlayerReadyEvent) {
@@ -29,9 +30,21 @@ class PlayerGameListener(private val players: Set<Player>) : Listener {
 
     private fun updateMessage(ready: Int, all: Int) {
         TitleMessage(
-                "ゲームスタート $ready / $all",
-                "/r で じゅんび",
+                "${ChatColor.WHITE}ゲームスタート $ready / $all",
+                "${ChatColor.BLUE}/r で じゅんび",
                 stay = Int.MAX_VALUE
+        ).broadcastTo { players.contains(it) }
+    }
+
+    @EventHandler
+    fun onGameStartCount(event: GameStartCountEvent) {
+        updateStartCount(event.remainSeconds)
+    }
+
+    private fun updateStartCount(remainSeconds: Int) {
+        TitleMessage(
+                "${ChatColor.YELLOW}$remainSeconds",
+                "${ChatColor.RED}/r で キャンセル"
         ).broadcastTo { players.contains(it) }
     }
 }
