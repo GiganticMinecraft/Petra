@@ -2,6 +2,7 @@ package click.seichi.petra.listener
 
 import click.seichi.game.event.*
 import click.seichi.petra.GameMessage
+import click.seichi.petra.GameSound
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -38,11 +39,16 @@ class GameListener(
 
     @EventHandler
     fun onGameStartCount(event: GameStartCountEvent) {
+        val remainSeconds = event.remainSeconds
+        val count = event.count
         GameMessage.START_COUNT(event.remainSeconds).broadcastTo { players.contains(it) }
+        val soundPlayer = if (remainSeconds == count) GameSound.START_COUNT else GameSound.COUNT
+        soundPlayer.broadcastTo { players.contains(it) }
     }
 
     @EventHandler
     fun onStartGame(event: StartGameEvent) {
         GameMessage.START_GAME.broadcastTo { players.contains(it) }
+        GameSound.START_GAME.broadcastTo { players.contains(it) }
     }
 }

@@ -1,6 +1,5 @@
-package click.seichi.sound
+package click.seichi.message
 
-import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Sound
 import org.bukkit.SoundCategory
@@ -15,12 +14,12 @@ import org.bukkit.entity.Player
  * /playsound minecraft:ambient.cave master @p ~0 ~0 ~0 0.5 1.4
  *
  */
-data class SoundPlayer(
+data class SoundMessage(
         private val sound: Sound,
         private val category: SoundCategory,
         private val volume: Float = 1.0F,
         private val pitch: Float = 1.0F
-) {
+) : Message {
     constructor(sound: Sound, category: SoundCategory, volume: Float, pitchLevel: Int)
             : this(sound, category, volume, when (pitchLevel) {
         0 -> 0.5F //F#
@@ -51,29 +50,9 @@ data class SoundPlayer(
         else -> 0.0F
     })
 
-    fun playOnly(player: Player) =
+    override fun sendTo(player: Player) =
             player.playSound(player.location, sound, category, volume, pitch)
 
-    fun playAt(location: Location) =
+    fun sendAt(location: Location) =
             location.world.playSound(location, sound, category, volume, pitch)
-
-    fun broadcast() {
-        Bukkit.getServer().onlinePlayers
-                .filterNotNull()
-                .filter { it.isValid }
-                .forEach {
-                    playOnly(it)
-                }
-    }
-
-    fun broadcastTo(filter: (Player) -> Boolean) {
-
-        Bukkit.getServer().onlinePlayers
-                .filterNotNull()
-                .filter { it.isValid }
-                .filter(filter)
-                .forEach {
-                    playOnly(it)
-                }
-    }
 }
