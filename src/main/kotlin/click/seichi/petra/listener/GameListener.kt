@@ -4,6 +4,7 @@ import click.seichi.game.event.GameStartCountEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PlayerReadyEvent
 import click.seichi.message.TitleMessage
+import click.seichi.util.Random
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -43,7 +44,7 @@ class GameListener(private val players: Set<Player>) : Listener {
 
     private fun updateStartCount(remainSeconds: Int) {
         TitleMessage(
-                "${ChatColor.YELLOW}$remainSeconds",
+                "${Random.nextChatColor()}$remainSeconds",
                 "${ChatColor.RED}/r で キャンセル"
         ).broadcastTo { players.contains(it) }
     }
