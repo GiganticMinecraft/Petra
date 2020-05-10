@@ -18,11 +18,7 @@ abstract class Cache<C : Cache<C>> {
         return clazz.newInstance().from(this)?.apply(manipulating)?.set(this) ?: false
     }
 
-    abstract fun read()
-
-    abstract fun write()
-
-    private fun <V : Any?> registerKey(key: Key<C, out V>, value: V? = null) {
+    protected fun <V : Any?> registerKey(key: Key<C, out V>, value: V? = null) {
         keyMap[key] = value ?: key.default
     }
 
@@ -52,15 +48,6 @@ abstract class Cache<C : Cache<C>> {
 
     fun <V : Any?> offer(key: Key<C, V>, value: V): Boolean {
         if (!key.satisfyWith(value)) return false
-        registerKey(key, value)
-        return true
-    }
-
-    /**
-     * 強制的に値を書き換える．
-     * 安易に利用することを禁ずる
-     */
-    fun <V : Any?> force(key: Key<C, V>, value: V): Boolean {
         registerKey(key, value)
         return true
     }
