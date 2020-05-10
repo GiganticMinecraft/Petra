@@ -7,19 +7,21 @@ import click.seichi.function.warning
  * @author tar0ss
  */
 open class Timer(
-        private val finishSeconds: Long,
-        private val onStart: () -> Unit,
+        private val finishSeconds: Int,
+        private val onStart: () -> Unit = {},
         /**
          * ex) [finishSeconds] = 5の時
          * i = 5,4,3,2,1,0
          */
-        private val onNext: (Long) -> Unit,
-        private val onComplete: () -> Unit,
-        private val onCancelled: () -> Unit
+        private val onNext: (Int) -> Unit = {},
+        private val onComplete: () -> Unit = {},
+        private val onCancelled: () -> Unit = {}
 ) {
 
-    private var isStarted = false
-    private var isCancelled = false
+    var isStarted = false
+        private set
+    var isCancelled = false
+        private set
 
     fun start() {
         if (isStarted) {
@@ -31,15 +33,17 @@ open class Timer(
 
         sync(0L, 20L) { elapsedSeconds ->
             if (isCancelled) {
+                isStarted = false
                 onCancelled()
                 return@sync true
             }
 
-            val remainSeconds = finishSeconds - elapsedSeconds
+            val remainSeconds = finishSeconds - elapsedSeconds.toInt()
 
             onNext(remainSeconds)
 
             if (remainSeconds <= 0) {
+                isStarted = false
                 onComplete()
                 return@sync true
             }
