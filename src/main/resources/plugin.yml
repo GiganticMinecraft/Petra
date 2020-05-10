@@ -6,17 +6,10 @@ load: STARTUP
 
 
 commands:
-  vote:
-    description: This is vote command.
-    usage: /vote <playername> <num>
-    aliases: [vote]
-    default: op
-    permission: gigantic.vote
-    permission-message: You don't have <permission>
-  donate:
-    description: This is donate command.
-    usage: /donate <playername> <num>
-    aliases: [donate]
-    default: op
-    permission: gigantic.donate
+  ready:
+    description: This is ready command.
+    usage: /ready
+    aliases: [r]
+    default: default
+    permission: petra.vote
     permission-message: You don't have <permission>
