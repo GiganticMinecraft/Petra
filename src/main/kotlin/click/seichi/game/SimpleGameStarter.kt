@@ -1,19 +1,28 @@
 package click.seichi.game
 
+import click.seichi.game.event.GameStartCountEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PlayerReadyEvent
 import click.seichi.game.event.StartGameEvent
+import click.seichi.util.Timer
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
 class SimpleGameStarter(
-        private val players: Set<Player>
+        private val players: Set<Player>,
+        startCount: Int = 5
 ) : IGameStarter {
 
     private val readyPlayerSet = mutableSetOf<Player>()
 
     override var isStarted = false
         private set
+
+    private val timer = Timer(startCount,
+            onNext = { remainSeconds ->
+                if (remainSeconds == 0) start()
+                else Bukkit.getPluginManager().callEvent(GameStartCountEvent(remainSeconds, startCount))
+            })
 
     override fun start() {
         isStarted = true
@@ -33,11 +42,14 @@ class SimpleGameStarter(
                 players.count()
         ))
 
-        if (canStart) start()
+        if (canStart) timer.start()
     }
 
     override fun cancelReady(player: Player) {
         readyPlayerSet.remove(player)
+        if (timer.isStarted) {
+            timer.cancel()
+        }
         Bukkit.getPluginManager().callEvent(PlayerCancelReadyEvent(
                 player,
                 readyPlayerSet.count(),
