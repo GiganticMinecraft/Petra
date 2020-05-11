@@ -11,17 +11,17 @@ import org.bukkit.ChatColor
 object GameMessage {
     val READY: (Int, Int) -> Message = { ready: Int, all: Int ->
         TitleMessage(
-                "${ChatColor.WHITE}ゲームスタート $ready / $all",
+                "${ChatColor.WHITE} $ready / $all",
                 "${ChatColor.BLUE}/r で じゅんび",
-                stay = Int.MAX_VALUE
+                stay = 20 * 60
         )
     }
 
     val CANCEL_READY: (Int, Int) -> Message = { ready: Int, all: Int ->
         TitleMessage(
-                "${ChatColor.WHITE}ゲームスタート $ready / $all",
+                "${ChatColor.WHITE} $ready / $all",
                 "${ChatColor.BLUE}/r で キャンセル",
-                stay = Int.MAX_VALUE
+                stay = 20 * 60
         )
     }
 
