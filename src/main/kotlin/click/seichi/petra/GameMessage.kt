@@ -11,29 +11,30 @@ import org.bukkit.ChatColor
 object GameMessage {
     val READY: (Int, Int) -> Message = { ready: Int, all: Int ->
         TitleMessage(
-                "${ChatColor.WHITE} $ready / $all",
-                "${ChatColor.BLUE}/r で じゅんび",
+                "${ChatColor.WHITE}スタートまで",
+                "${ChatColor.AQUA}$ready / $all",
                 stay = 20 * 60
         )
     }
 
     val CANCEL_READY: (Int, Int) -> Message = { ready: Int, all: Int ->
         TitleMessage(
-                "${ChatColor.WHITE} $ready / $all",
-                "${ChatColor.BLUE}/r で キャンセル",
+                "${ChatColor.WHITE}スタートまで",
+                "${ChatColor.AQUA}$ready / $all",
                 stay = 20 * 60
         )
     }
 
-    val START_COUNT: (Int) -> Message = { remainSeconds: Int ->
+    val COUNT: (Int) -> Message = { remainSeconds: Int ->
         TitleMessage(
                 "${Random.nextChatColor()}$remainSeconds",
-                "${ChatColor.RED}/r で キャンセル",
+                "",
                 fadeIn = 5,
                 stay = 10,
                 fadeOut = 10
         )
     }
+
     val START_GAME: Message = TitleMessage(
             "${ChatColor.YELLOW}スタート",
             ""
