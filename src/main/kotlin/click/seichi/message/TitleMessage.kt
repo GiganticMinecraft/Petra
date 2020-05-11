@@ -11,9 +11,9 @@ class TitleMessage(
         private val fadeIn: Int = 10,
         private val stay: Int = 70,
         private val fadeOut: Int = 20
-) : Message {
+) : Message() {
 
-    override fun sendTo(player: Player) {
+    override fun sendToSub(player: Player) {
         player.sendTitle(
                 title,
                 subTitle,

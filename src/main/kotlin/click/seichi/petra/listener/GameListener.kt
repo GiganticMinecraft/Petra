@@ -41,14 +41,15 @@ class GameListener(
     fun onGameStartCount(event: GameStartCountEvent) {
         val remainSeconds = event.remainSeconds
         val count = event.count
-        GameMessage.START_COUNT(event.remainSeconds).broadcastTo { players.contains(it) }
-        val soundPlayer = if (remainSeconds == count) GameSound.START_COUNT else GameSound.COUNT
-        soundPlayer.broadcastTo { players.contains(it) }
+        GameMessage.COUNT(event.remainSeconds).add(
+                if (remainSeconds == count) GameSound.START_COUNT else GameSound.COUNT
+        ).broadcastTo { players.contains(it) }
     }
 
     @EventHandler
     fun onStartGame(event: StartGameEvent) {
-        GameMessage.START_GAME.broadcastTo { players.contains(it) }
-        GameSound.START_GAME.broadcastTo { players.contains(it) }
+        GameMessage.START_GAME.add(
+                GameSound.START_GAME
+        ).broadcastTo { players.contains(it) }
     }
 }

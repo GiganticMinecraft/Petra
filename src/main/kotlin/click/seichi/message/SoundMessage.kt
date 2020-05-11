@@ -19,7 +19,7 @@ data class SoundMessage(
         private val category: SoundCategory,
         private val volume: Float = 1.0F,
         private val pitch: Float = 1.0F
-) : Message {
+) : Message() {
     constructor(sound: Sound, category: SoundCategory, volume: Float, pitchLevel: Int)
             : this(sound, category, volume, when (pitchLevel) {
         0 -> 0.5F //F#
@@ -50,7 +50,7 @@ data class SoundMessage(
         else -> 0.0F
     })
 
-    override fun sendTo(player: Player) =
+    override fun sendToSub(player: Player) =
             player.playSound(player.location, sound, category, volume, pitch)
 
     fun sendAt(location: Location) =

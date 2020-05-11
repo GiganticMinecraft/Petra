@@ -8,9 +8,24 @@ import org.bukkit.entity.Player
  * @author tar0ss
  *
  */
-interface Message {
+abstract class Message {
 
-    fun sendTo(player: Player)
+    var messages: MutableList<Message>? = null
+
+    fun add(m: Message): Message {
+        if (messages == null) {
+            messages = mutableListOf()
+        }
+        messages!!.add(m)
+        return this
+    }
+
+    fun sendTo(player: Player) {
+        sendToSub(player)
+        messages?.forEach { it.sendTo(player) }
+    }
+
+    protected abstract fun sendToSub(player: Player)
 
     fun broadcast() {
         Bukkit.getServer().onlinePlayers
