@@ -7,10 +7,11 @@ import click.seichi.game.event.StartGameEvent
 import click.seichi.util.Timer
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
+import java.util.*
 
 class SimpleGameStarter(
-        private val players: Set<Player>,
-        private val readyPlayerSet: MutableSet<Player>,
+        private val players: Set<UUID>,
+        private val readyPlayerSet: MutableSet<UUID>,
         startCount: Int = 5
 ) : IGameStarter {
 
@@ -32,8 +33,8 @@ class SimpleGameStarter(
         get() = players.count() == readyPlayerSet.count()
 
     override fun ready(player: Player) {
-        if (!players.contains(player)) return
-        readyPlayerSet.add(player)
+        if (!players.contains(player.uniqueId)) return
+        readyPlayerSet.add(player.uniqueId)
 
         Bukkit.getPluginManager().callEvent(PlayerReadyEvent(
                 player,
@@ -45,7 +46,7 @@ class SimpleGameStarter(
     }
 
     override fun cancelReady(player: Player) {
-        readyPlayerSet.remove(player)
+        readyPlayerSet.remove(player.uniqueId)
         if (timer.isStarted) {
             timer.cancel()
         }
@@ -56,7 +57,7 @@ class SimpleGameStarter(
     }
 
     override fun isReady(player: Player): Boolean {
-        return readyPlayerSet.contains(player)
+        return readyPlayerSet.contains(player.uniqueId)
     }
 
 }

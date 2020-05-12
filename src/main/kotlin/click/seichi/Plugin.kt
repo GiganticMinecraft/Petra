@@ -26,19 +26,13 @@ abstract class Plugin : JavaPlugin() {
             private set
     }
 
-    abstract val configurations: Array<Config>
-    abstract val listeners: Array<Listener>
-    abstract val commands: Array<Pair<String, CommandExecutor>>
-    abstract val tables: Array<Table>
-
     override fun onEnable() {
         INSTANCE = this
         Bukkit.getServer().messenger.registerOutgoingPluginChannel(this, "BungeeCord")
 
         loadConfiguration(
                 ServerConfig,
-                DatabaseConfig,
-                *configurations
+                DatabaseConfig
         )
 
         loadServerDefinition(ServerConfig.BUNGEE_NAME).let {
@@ -52,20 +46,18 @@ abstract class Plugin : JavaPlugin() {
             serverDefinition = it
         }
 
-        registerListeners(*listeners)
+        registerListeners()
 
-        bindCommands(*commands)
+        bindCommands()
 
-        if (tables.isNotEmpty()) {
-            // データベース作成
-            runCatching {
-                prepareDatabase(*tables)
-            }.onFailure { exception ->
-                // 例外時はプラグインを終了する
-                exception.printStackTrace()
-                pluginLoader.disablePlugin(this)
-                return
-            }
+        // データベース作成
+        runCatching {
+            prepareDatabase()
+        }.onFailure { exception ->
+            // 例外時はプラグインを終了する
+            exception.printStackTrace()
+            pluginLoader.disablePlugin(this)
+            return
         }
 
         logger.info("Enabled")
@@ -81,15 +73,16 @@ abstract class Plugin : JavaPlugin() {
         logger.info("Disabled")
     }
 
-    private fun loadConfiguration(vararg configurations: Config) = configurations.forEach { it.init(this) }
+    open fun loadConfiguration(vararg configurations: Config) = configurations.forEach { it.init(this) }
 
     private fun loadServerDefinition(bungeeName: String) = ServerDefinition.findByBungeeName(bungeeName)
 
-    private fun registerListeners(vararg listeners: Listener) = listeners.forEach { it.register() }
+    open fun registerListeners(vararg listeners: Listener) = listeners.forEach { it.register() }
 
-    private fun bindCommands(vararg commands: Pair<String, CommandExecutor>) = commands.toMap().forEach { id, executor -> executor.bind(id) }
+    open fun bindCommands(vararg commands: Pair<String, CommandExecutor>) = commands.toMap().forEach { id, executor -> executor.bind(id) }
 
-    private fun prepareDatabase(vararg tables: Table) {
+    open fun prepareDatabase(vararg tables: Table) {
+        if (tables.isEmpty()) return
         //connect MySQL
         Database.connect("jdbc:mysql://${DatabaseConfig.HOST}/${DatabaseConfig.DATABASE}",
                 "com.mysql.jdbc.Driver", DatabaseConfig.USER, DatabaseConfig.PASSWORD)
