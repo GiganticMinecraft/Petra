@@ -1,5 +1,6 @@
 package click.seichi.petra.stage.generator
 
+import click.seichi.extension.setRegion
 import click.seichi.generator.TreePopulator
 import org.bukkit.Material
 import org.bukkit.World
@@ -12,6 +13,9 @@ import kotlin.math.sqrt
  * @author tar0ss
  */
 class FirstStageGenerator : RoundStageGenerator(64, 10) {
+
+    private val baseHeight = 50
+    private val maxHeight = 65
 
     override fun generateChunkData(world: World, random: Random, chunkX: Int, chunkZ: Int, biome: BiomeGrid): ChunkData {
         val generator = PerlinOctaveGenerator(Random(world.seed), 8)
@@ -26,29 +30,25 @@ class FirstStageGenerator : RoundStageGenerator(64, 10) {
                 chunk.setBlock(localX, 0, localZ, Material.BEDROCK)
             } else if (distance > dangerZoneRadius + 1) {
                 //　範囲外最近点 + 1
-                (1 until world.maxHeight).forEach { y ->
-                    chunk.setBlock(localX, y, localZ, Material.BARRIER)
-                }
+                chunk.setRegion(localX, localZ, 1, world.maxHeight, Material.BARRIER)
                 chunk.setBlock(localX, 0, localZ, Material.BEDROCK)
             } else if (distance > dangerZoneRadius) {
                 // 範囲外最近点
-                currentHeight = (generator.noise(globalX.toDouble(), globalZ.toDouble(), 0.5, 0.5) * 15.0 + 50.0).toInt()
-                chunk.setBlock(localX, currentHeight + 6, localZ, Material.GLOWSTONE)
-                (1..currentHeight + 5).forEach { chunk.setBlock(localX, it, localZ, Material.QUARTZ_PILLAR) }
+                chunk.setBlock(localX, maxHeight + 1, localZ, Material.GLOWSTONE)
+                chunk.setRegion(localX, localZ, 1, maxHeight, Material.QUARTZ_PILLAR)
                 chunk.setBlock(localX, 0, localZ, Material.BEDROCK)
             } else if (distance > radius) {
                 // デンジャーゾーン
-                currentHeight = (generator.noise(globalX.toDouble(), globalZ.toDouble(), 0.5, 0.5) * 15.0 + 50.0).toInt()
+                val currentHeight = (generator.noise(globalX.toDouble(), globalZ.toDouble(), 0.5, 0.5) * 15.0 + 50.0).toInt()
                 chunk.setBlock(localX, currentHeight, localZ, Material.NETHER_BRICKS)
-                (1 until currentHeight).forEach { chunk.setBlock(localX, it, localZ, Material.NETHERRACK) }
-                for (i in currentHeight - 2 downTo 1) chunk.setBlock(localX, i, localZ, Material.STONE)
+                chunk.setRegion(localX, localZ, 1, currentHeight, Material.NETHERRACK)
                 chunk.setBlock(localX, 0, localZ, Material.BEDROCK)
             } else {
                 // セーフゾーン
-                currentHeight = (generator.noise(globalX.toDouble(), globalZ.toDouble(), 0.5, 0.5) * 15.0 + 50.0).toInt()
+                val currentHeight = (generator.noise(globalX.toDouble(), globalZ.toDouble(), 0.5, 0.5) * 15.0 + 50.0).toInt()
                 chunk.setBlock(localX, currentHeight, localZ, Material.GRASS_BLOCK)
                 chunk.setBlock(localX, currentHeight - 1, localZ, Material.DIRT)
-                for (i in currentHeight - 2 downTo 1) chunk.setBlock(localX, i, localZ, Material.STONE)
+                chunk.setRegion(localX, localZ, 1, currentHeight - 2, Material.STONE)
                 chunk.setBlock(localX, 0, localZ, Material.BEDROCK)
             }
         }

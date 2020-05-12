@@ -15,7 +15,6 @@ abstract class RoundStageGenerator(
         // セーフゾーンからデンジャーゾーン端までの距離
         dangerZoneLength: Int
 ) : StageGenerator() {
-    protected var currentHeight = 50
     protected val dangerZoneRadius = radius + dangerZoneLength
 
     override fun isDangerZone(globalX: Int, globalY: Int, globalZ: Int): Boolean {
