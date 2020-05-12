@@ -19,13 +19,13 @@ abstract class RoundStageGenerator(
     protected val dangerZoneRadius = radius + dangerZoneLength
 
     override fun isDangerZone(globalX: Int, globalY: Int, globalZ: Int): Boolean {
-        val distance = sqrt((globalX * globalX + globalZ * globalZ).toDouble()).toInt()
-        return distance in (radius + 1)..dangerZoneRadius
+        val distance = sqrt((globalX * globalX + globalZ * globalZ).toDouble())
+        return distance in (radius + 1).toDouble()..dangerZoneRadius.toDouble()
     }
 
     override fun isSafeZone(globalX: Int, globalY: Int, globalZ: Int): Boolean {
-        val distance = sqrt((globalX * globalX + globalZ * globalZ).toDouble()).toInt()
-        return distance in 0..radius
+        val distance = sqrt((globalX * globalX + globalZ * globalZ).toDouble())
+        return distance in 0.0..radius.toDouble()
     }
 
     override fun getFixedSpawnLocation(world: World, random: Random): Location? {
