@@ -1,36 +1,41 @@
 package click.seichi.game
 
-import click.seichi.game.event.GameStartCountEvent
+import click.seichi.function.warning
+import click.seichi.game.event.CompletePreparationCountDownEvent
+import click.seichi.game.event.CompletePreparationEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PlayerReadyEvent
-import click.seichi.game.event.StartGameEvent
 import click.seichi.util.Timer
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.*
 
-class SimpleGameStarter(
+class SimplePreparator(
         private val players: Set<UUID>,
         private val readyPlayerSet: MutableSet<UUID>,
-        startCount: Int = 5
-) : IGameStarter {
+        count: Int = 5
+) : Preparator {
 
-    override var isStarted = false
+    override var isCompleted = false
         private set
 
-    private val timer = Timer(startCount,
+    private val timer = Timer(count,
             onNext = { remainSeconds ->
-                if (remainSeconds == 0) start()
-                else Bukkit.getPluginManager().callEvent(GameStartCountEvent(remainSeconds, startCount))
+                if (remainSeconds == 0) complete()
+                else Bukkit.getPluginManager().callEvent(CompletePreparationCountDownEvent(remainSeconds, count))
             })
 
-    override fun start() {
-        isStarted = true
-        Bukkit.getPluginManager().callEvent(StartGameEvent())
+    private fun complete() {
+        if (isCompleted) {
+            warning("Already complete preparation")
+            return
+        }
+        isCompleted = true
+        Bukkit.getPluginManager().callEvent(CompletePreparationEvent(players))
     }
 
-    private val canStart: Boolean
-        get() = players.count() == readyPlayerSet.count()
+    private val canComplete: Boolean
+        get() = !isCompleted && players.count() == readyPlayerSet.count()
 
     override fun ready(player: Player) {
         if (!players.contains(player.uniqueId)) return
@@ -42,7 +47,7 @@ class SimpleGameStarter(
                 players.count()
         ))
 
-        if (canStart) timer.start()
+        if (canComplete) timer.start()
     }
 
     override fun cancelReady(player: Player) {

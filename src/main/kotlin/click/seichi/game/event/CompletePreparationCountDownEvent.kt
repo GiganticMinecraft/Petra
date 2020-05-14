@@ -5,7 +5,7 @@ import click.seichi.event.CustomEvent
 /**
  * @author tar0ss
  */
-class GameStartCountEvent(
+class CompletePreparationCountDownEvent(
         val remainSeconds: Int,
         val count: Int
 ) : CustomEvent()

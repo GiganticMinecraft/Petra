@@ -3,11 +3,11 @@ package click.seichi.petra
 import click.seichi.Plugin
 import click.seichi.config.Config
 import click.seichi.game.PlayerLocator
-import click.seichi.game.SimpleGameStarter
+import click.seichi.game.SimplePreparator
 import click.seichi.game.command.ReadyCommand
+import click.seichi.game.listener.DebugListener
 import click.seichi.game.listener.PlayerConnectionListener
-import click.seichi.petra.listener.DebugListener
-import click.seichi.petra.listener.GameActionListener
+import click.seichi.petra.listener.GameListener
 import click.seichi.petra.listener.PlayerNavigator
 import click.seichi.petra.listener.WorldListener
 import click.seichi.petra.stage.Stage
@@ -28,8 +28,8 @@ class Petra : Plugin() {
     // 準備完了
     private val readyPlayers = mutableSetOf<UUID>()
 
-    private val gameStarter = SimpleGameStarter(players, readyPlayers)
-    private val playerLocator = PlayerLocator(players, gameStarter)
+    private val preparator = SimplePreparator(players, readyPlayers)
+    private val playerLocator = PlayerLocator(players, preparator)
 
     override fun loadConfiguration(vararg configurations: Config) {
         super.loadConfiguration(
@@ -45,7 +45,7 @@ class Petra : Plugin() {
                 *listeners,
                 PlayerConnectionListener(playerLocator),
                 PlayerNavigator(players, readyPlayers),
-                GameActionListener(gameStarter, stage),
+                GameListener(preparator, stage),
                 WorldListener(),
                 DebugListener()
         )
@@ -54,7 +54,7 @@ class Petra : Plugin() {
     override fun bindCommands(vararg commands: Pair<String, CommandExecutor>) {
         super.bindCommands(
                 *commands,
-                "ready" to ReadyCommand(gameStarter)
+                "ready" to ReadyCommand(preparator)
         )
     }
 
