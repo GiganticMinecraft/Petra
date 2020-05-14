@@ -1,4 +1,4 @@
-package click.seichi.petra.stage.generator
+package click.seichi.petra.stage
 
 import org.bukkit.generator.ChunkGenerator
 
