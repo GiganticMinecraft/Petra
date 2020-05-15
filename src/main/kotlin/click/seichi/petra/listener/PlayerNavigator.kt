@@ -1,5 +1,6 @@
 package click.seichi.petra.listener
 
+import click.seichi.game.IGame
 import click.seichi.game.event.*
 import click.seichi.petra.GameMessage
 import click.seichi.petra.GameSound
@@ -13,9 +14,10 @@ import java.util.*
  * @author tar0ss
  */
 class PlayerNavigator(
-        private val players: Set<UUID>,
+        game: IGame,
         private val readyPlayers: Set<UUID>
 ) : Listener {
+    private val players: Set<UUID> = game.players
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
@@ -39,7 +41,7 @@ class PlayerNavigator(
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onCountDown(event: CompletePreparationCountDownEvent) {
+    fun onCountDown(event: CountDownEvent) {
         val remainSeconds = event.remainSeconds
         val count = event.count
         GameMessage.COUNT(event.remainSeconds).add(
@@ -48,7 +50,7 @@ class PlayerNavigator(
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onCompletePreparation(event: CompletePreparationEvent) {
+    fun onCompletePreparation(event: PrepareEvent) {
         GameMessage.START_GAME.add(
                 GameSound.START_GAME
         ).broadcastTo { players.contains(it.uniqueId) }

@@ -6,4 +6,4 @@ import java.util.*
 /**
  * @author tar0ss
  */
-class CompletePreparationEvent(val players: Set<UUID>) : CustomEvent()
+class PrepareEvent(val players: Set<UUID>) : CustomEvent()

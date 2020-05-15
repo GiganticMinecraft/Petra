@@ -7,7 +7,7 @@ import click.seichi.game.SimplePreparator
 import click.seichi.game.command.ReadyCommand
 import click.seichi.game.listener.DebugListener
 import click.seichi.game.listener.PlayerConnectionListener
-import click.seichi.petra.listener.GameListener
+import click.seichi.petra.listener.PetraGame
 import click.seichi.petra.listener.PlayerNavigator
 import click.seichi.petra.listener.WorldListener
 import click.seichi.petra.stage.Stage
@@ -21,15 +21,13 @@ import java.util.*
  */
 class Petra : Plugin() {
     private lateinit var stage: Stage
-
-    // 参加者
-    private val players = mutableSetOf<UUID>()
+    private val game = PetraGame(stage)
 
     // 準備完了
     private val readyPlayers = mutableSetOf<UUID>()
 
-    private val preparator = SimplePreparator(players, readyPlayers)
-    private val playerLocator = PlayerLocator(players, preparator)
+    private val preparator = SimplePreparator(game, readyPlayers)
+    private val playerLocator = PlayerLocator(game, preparator)
 
     override fun loadConfiguration(vararg configurations: Config) {
         super.loadConfiguration(
@@ -44,8 +42,8 @@ class Petra : Plugin() {
         super.registerListeners(
                 *listeners,
                 PlayerConnectionListener(playerLocator),
-                PlayerNavigator(players, readyPlayers),
-                GameListener(preparator, stage),
+                PlayerNavigator(game, readyPlayers),
+                game,
                 WorldListener(),
                 DebugListener()
         )
@@ -54,7 +52,7 @@ class Petra : Plugin() {
     override fun bindCommands(vararg commands: Pair<String, CommandExecutor>) {
         super.bindCommands(
                 *commands,
-                "ready" to ReadyCommand(preparator)
+                "ready" to ReadyCommand(game, preparator)
         )
     }
 

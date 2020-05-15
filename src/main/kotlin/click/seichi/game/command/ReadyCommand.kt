@@ -1,5 +1,6 @@
 package click.seichi.game.command
 
+import click.seichi.game.IGame
 import click.seichi.game.Preparator
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -10,8 +11,12 @@ import org.bukkit.entity.Player
  * @author tar0ss
  */
 class ReadyCommand(
+        private val game: IGame,
         private val preparator: Preparator
 ) : TabExecutor {
+
+    private val isStarted: Boolean
+        get() = game.isStarted
 
     override fun onCommand(
             sender: CommandSender,
@@ -29,7 +34,7 @@ class ReadyCommand(
             return true
         }
 
-        if (preparator.isCompleted) {
+        if (isStarted) {
             sender.sendMessage("既にゲームが開始されています")
             return true
         }

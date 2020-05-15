@@ -9,9 +9,13 @@ import java.util.*
  * @author tar0ss
  */
 class PlayerLocator(
-        private val players: MutableSet<UUID>,
+        private val game: IGame,
         private val preparator: Preparator
 ) : IPlayerLocator {
+
+    private val isStarted
+        get() = game.isStarted
+    private val players = game.players
 
     // 落ち戻り処理用
     private val leftPlayers = mutableSetOf<UUID>()
@@ -28,7 +32,7 @@ class PlayerLocator(
     }
 
     override fun join(player: Player): String? {
-        if (preparator.isCompleted) {
+        if (isStarted) {
             if (leftPlayers.contains(player.uniqueId)) {
                 players.add(player.uniqueId)
                 Bukkit.getPluginManager().callEvent(PlayerBackGameEvent(player))
@@ -47,12 +51,12 @@ class PlayerLocator(
     }
 
     override fun leave(player: Player): String? {
-        if (preparator.isCompleted) {
+        if (isStarted) {
             // 落ち戻り待機
             if (players.contains(player.uniqueId)) {
                 leftPlayers.add(player.uniqueId)
                 players.remove(player.uniqueId)
-                if (preparator.isReady(player) && !preparator.isCompleted) {
+                if (preparator.isReady(player) && !isStarted) {
                     preparator.cancelReady(player)
                 }
                 Bukkit.getPluginManager().callEvent(PlayerQuitInGameEvent(player))
