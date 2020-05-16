@@ -1,9 +1,9 @@
 package click.seichi.petra.stage.generator
 
 import click.seichi.petra.stage.StageGenerator
+import click.seichi.util.Random
 import org.bukkit.Location
 import org.bukkit.World
-import java.util.*
 import kotlin.math.sqrt
 
 
@@ -28,10 +28,10 @@ abstract class RoundStageGenerator(
         return distance in 0.0..radius.toDouble()
     }
 
-    override fun getFixedSpawnLocation(world: World, random: Random): Location? {
-        val radius = random.nextDouble() * radius
-        val x = random.nextDouble() * 15
-        val z = sqrt(radius * radius + x * x)
+    override fun getFixedSpawnLocation(world: World, random: java.util.Random): Location? {
+        val xz = Random.nextRoundPoint(radius.toDouble())
+        val x = xz.first
+        val z = xz.second
         val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
         return Location(world, x, (highestHeight + 2).toDouble(), z)
     }
