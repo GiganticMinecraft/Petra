@@ -14,10 +14,10 @@ import java.util.*
  * @author tar0ss
  */
 class PlayerNavigator(
-        game: IGame,
-        private val readyPlayers: Set<UUID>
+        game: IGame
 ) : Listener {
     private val players: Set<UUID> = game.players
+    private val readyPlayers: Set<UUID> = game.readyPlayers
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {

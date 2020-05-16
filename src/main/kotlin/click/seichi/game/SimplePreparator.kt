@@ -9,11 +9,11 @@ import org.bukkit.entity.Player
 import java.util.*
 
 class SimplePreparator(
-        game: IGame,
-        private val readyPlayerSet: MutableSet<UUID>
+        game: IGame
 ) : Preparator {
 
-    private val players = game.players
+    private val players: Set<UUID> = game.players
+    private val readyPlayerSet = game.readyPlayers
     private var isPrepared = false
 
     private fun prepare() {

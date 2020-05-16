@@ -23,6 +23,8 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
     override val players = mutableSetOf<UUID>()
 
+    override val readyPlayers = mutableSetOf<UUID>()
+
     private val count = 5
 
     private val timer = Timer(count,

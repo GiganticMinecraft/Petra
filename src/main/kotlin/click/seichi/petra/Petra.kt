@@ -15,15 +15,11 @@ import click.seichi.petra.stage.Stage
 import org.bukkit.command.CommandExecutor
 import org.bukkit.event.Listener
 import org.bukkit.generator.ChunkGenerator
-import java.util.*
 
 /**
  * @author tar0ss
  */
 class Petra : Plugin() {
-    // 準備完了
-    private val readyPlayers = mutableSetOf<UUID>()
-
     private lateinit var stage: Stage
     private lateinit var game: PetraGame
     private lateinit var preparator: Preparator
@@ -38,7 +34,7 @@ class Petra : Plugin() {
         stage = Stage.find(PetraConfig.STAGE_NAME)!!
         logger.fine("Load Stage \"${stage.key}\"")
         game = PetraGame(stage)
-        preparator = SimplePreparator(game, readyPlayers)
+        preparator = SimplePreparator(game)
         playerLocator = PlayerLocator(game, preparator)
     }
 
@@ -46,7 +42,7 @@ class Petra : Plugin() {
         super.registerListeners(
                 *listeners,
                 PlayerConnectionListener(playerLocator),
-                PlayerNavigator(game, readyPlayers),
+                PlayerNavigator(game),
                 game,
                 WorldListener(),
                 DebugListener()
