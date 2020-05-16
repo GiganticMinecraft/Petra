@@ -8,6 +8,7 @@ import click.seichi.game.SimplePreparator
 import click.seichi.game.command.ReadyCommand
 import click.seichi.game.listener.DebugListener
 import click.seichi.game.listener.PlayerConnectionListener
+import click.seichi.petra.listener.MonsterListener
 import click.seichi.petra.listener.PetraGame
 import click.seichi.petra.listener.PlayerNavigator
 import click.seichi.petra.listener.WorldListener
@@ -45,7 +46,8 @@ class Petra : Plugin() {
                 PlayerNavigator(game),
                 game,
                 WorldListener(),
-                DebugListener()
+                DebugListener(),
+                MonsterListener()
         )
     }
 

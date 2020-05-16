@@ -1,9 +1,11 @@
 package click.seichi.petra.stage.spawn
 
+import click.seichi.function.debug
 import click.seichi.util.Random
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.entity.Entity
+import org.bukkit.entity.EntityType
 import org.bukkit.util.Consumer
 
 /**
@@ -15,13 +17,14 @@ class RoundStageSpawner(
 ) : SpawnProxy {
     private val dangerZoneRadius = radius + dangerZoneLength
 
-    override fun <T : Entity> spawn(world: World, clazz: Class<T>, function: Consumer<T>?) {
-        val xz = Random.nextDoughnutPoint(radius.toDouble(), dangerZoneLength.toDouble())
+    override fun spawn(world: World, entityType: EntityType, function: Consumer<Entity>?) {
+        val xz = Random.nextDoughnutPoint(radius.toDouble(), (dangerZoneLength - 2).toDouble())
         val x = xz.first
         val z = xz.second
         val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
+        debug("highest = $highestHeight")
         val loc = Location(world, x, (highestHeight + 2).toDouble(), z)
-        if (function == null) world.spawn(loc, clazz)
-        else world.spawn(loc, clazz, function)
+        if (function == null) world.spawnEntity(loc, entityType)
+        else world.spawn(loc, entityType.entityClass as Class<Entity>, function)
     }
 }

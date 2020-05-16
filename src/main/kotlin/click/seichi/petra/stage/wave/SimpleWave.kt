@@ -7,9 +7,11 @@ import click.seichi.util.Timer
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import org.bukkit.Bukkit
 import org.bukkit.World
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
+import org.bukkit.entity.Monster
 import org.bukkit.entity.Zombie
 import org.bukkit.util.Consumer
 
@@ -26,9 +28,13 @@ class SimpleWave(private val monsterNum: Int, seconds: Int) : Wave {
     private val timer = Timer(
             seconds,
             onStart = {
-                debug("start wave")
                 spawn(monsterNum)
             },
+            onNext = {
+                debug("remainSeconds : $it")
+                debug("entity : ${Bukkit.getServer().getWorld("world")!!.entities.count { it is Monster }}")
+            }
+            ,
             onComplete = {
                 subject.onNext(Unit)
             }
@@ -42,9 +48,10 @@ class SimpleWave(private val monsterNum: Int, seconds: Int) : Wave {
 
     private fun spawn(n: Int) {
         (1..n).forEach { _ ->
-            spawnProxy.spawn(world, EntityType.ZOMBIE.entityClass as Class<out Entity>, Consumer { e: Entity ->
+            spawnProxy.spawn(world, EntityType.ZOMBIE, Consumer { e: Entity ->
                 val zombie = e as Zombie
                 zombie.setShouldBurnInDay(false)
+                zombie.removeWhenFarAway = false
             })
         }
     }

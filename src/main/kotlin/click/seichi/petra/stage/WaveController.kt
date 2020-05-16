@@ -1,6 +1,5 @@
 package click.seichi.petra.stage
 
-import click.seichi.function.debug
 import click.seichi.function.warning
 import click.seichi.petra.event.WaveEvent
 import click.seichi.petra.stage.spawn.SpawnProxy
@@ -45,7 +44,6 @@ class WaveController(
     }
 
     private fun end() {
-        debug("end wave")
     }
 
 }

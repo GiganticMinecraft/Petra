@@ -13,7 +13,7 @@ class WorldListener : Listener {
     @EventHandler
     fun onWorldInit(event: WorldInitEvent) {
         val world = event.world
-        world.setSpawnFlags(false, false)
+        world.setSpawnFlags(true, true)
         world.pvp = false
         world.difficulty = Difficulty.NORMAL
         world.isAutoSave = true
@@ -32,6 +32,10 @@ class WorldListener : Listener {
         world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
         world.setGameRule(GameRule.DO_INSOMNIA, false)
         world.setGameRule(GameRule.NATURAL_REGENERATION, true)
+        world.keepSpawnInMemory = true
+        world.fullTime = 0
+        world.isAutoSave = false
+        world.monsterSpawnLimit = 100
         world.worldBorder.setCenter(0.0, 0.0)
         world.worldBorder.size = 1000.0
         world.worldBorder.warningDistance = 0
