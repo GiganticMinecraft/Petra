@@ -26,6 +26,12 @@ class WorldListener : Listener {
         world.setGameRule(GameRule.DO_FIRE_TICK, false)
         world.setGameRule(GameRule.DO_LIMITED_CRAFTING, false)
         world.setGameRule(GameRule.SPAWN_RADIUS, 0)
+        world.setGameRule(GameRule.DO_PATROL_SPAWNING, false)
+        world.setGameRule(GameRule.DO_TRADER_SPAWNING, false)
+        world.setGameRule(GameRule.DISABLE_RAIDS, true)
+        world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
+        world.setGameRule(GameRule.DO_INSOMNIA, false)
+        world.setGameRule(GameRule.NATURAL_REGENERATION, true)
         world.worldBorder.setCenter(0.0, 0.0)
         world.worldBorder.size = 1000.0
         world.worldBorder.warningDistance = 0
