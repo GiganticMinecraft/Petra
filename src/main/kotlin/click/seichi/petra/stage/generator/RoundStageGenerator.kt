@@ -29,10 +29,10 @@ abstract class RoundStageGenerator(
     }
 
     override fun getFixedSpawnLocation(world: World, random: Random): Location? {
-        val highestHeight = world.getHighestBlockYAt(0, 0)
         val radius = random.nextDouble() * radius
         val x = random.nextDouble() * 15
         val z = sqrt(radius * radius + x * x)
+        val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
         return Location(world, x, (highestHeight + 2).toDouble(), z)
     }
 }
