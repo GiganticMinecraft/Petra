@@ -1,12 +1,13 @@
 package click.seichi.petra.stage
 
+import click.seichi.petra.stage.spawn.SpawnProxy
 import io.reactivex.Observable
+import org.bukkit.World
 
 /**
  * @author tar0ss
  */
 interface Wave {
-    val canStart: Boolean
-    fun start()
+    fun start(spawnProxy: SpawnProxy, world: World)
     fun endAsObservable(): Observable<Unit>
 }

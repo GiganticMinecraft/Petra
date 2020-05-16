@@ -1,13 +1,16 @@
 package click.seichi.petra.stage
 
+import click.seichi.function.debug
 import click.seichi.function.warning
 import click.seichi.petra.event.WaveEvent
+import click.seichi.petra.stage.spawn.SpawnProxy
 import org.bukkit.Bukkit
 
 /**
  * @author tar0ss
  */
 class WaveController(
+        private val spawnProxy: SpawnProxy,
         vararg waves: Wave
 ) {
     private var currentWaveIndex = -1
@@ -32,15 +35,17 @@ class WaveController(
     private fun start(i: Int) {
         val wave = waveList[i]
         Bukkit.getPluginManager().callEvent(WaveEvent(i))
-        wave.start()
+        val world = Bukkit.getWorld("world")!!
+        wave.start(spawnProxy, world)
         wave.endAsObservable()
+                .take(1)
                 .subscribe {
                     nextWave()
                 }
     }
 
     private fun end() {
-
+        debug("end wave")
     }
 
 }

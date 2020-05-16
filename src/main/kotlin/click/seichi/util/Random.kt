@@ -3,6 +3,9 @@ package click.seichi.util
 import org.bukkit.ChatColor
 import org.bukkit.Color
 import org.bukkit.Material
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 import kotlin.random.asKotlinRandom
 
 /**
@@ -32,6 +35,24 @@ internal object Random {
     fun nextGaussian(mean: Double = 0.0, variance: Double = 1.0) = generator.nextGaussian() * variance + mean
 
     fun nextColor() = Color.fromRGB(nextInt(255), nextInt(255), nextInt(255))
+
+    fun nextRoundPoint(radius: Double = 1.0): Pair<Double, Double> {
+        val r = sqrt(nextDouble()) * radius
+        val theta = (nextDouble() * 2 - 1) * Math.PI
+        return Pair(r * cos(theta), r * sin(theta))
+    }
+
+    /**
+     *ドーナツ内の一様分布
+     *
+     * @param radius ドーナツの内円の半径
+     * @param diff 外円の半径 - 内円の半径
+     */
+    fun nextDoughnutPoint(radius: Double, diff: Double): Pair<Double, Double> {
+        val r = sqrt(nextDouble()) * diff + radius
+        val theta = (nextDouble() * 2 - 1) * Math.PI
+        return Pair(r * cos(theta), r * sin(theta))
+    }
 
     private val chatColorSet = setOf(
             ChatColor.YELLOW,

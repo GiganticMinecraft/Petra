@@ -12,7 +12,10 @@ import kotlin.math.sqrt
 /**
  * @author tar0ss
  */
-class FirstStageGenerator : RoundStageGenerator(64, 10) {
+class FirstStageGenerator(
+        radius: Int,
+        dangerZoneLength: Int
+) : RoundStageGenerator(radius, dangerZoneLength) {
 
     private val baseHeight = 50
     private val maxHeight = 65

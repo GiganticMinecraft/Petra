@@ -5,6 +5,7 @@ import click.seichi.game.event.CountDownEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PrepareEvent
 import click.seichi.petra.stage.Stage
+import click.seichi.petra.stage.WaveController
 import click.seichi.util.Timer
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
@@ -25,6 +26,8 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
     override val readyPlayers = mutableSetOf<UUID>()
 
+    private val waveController = WaveController(stage.spawnProxy, *stage.waves)
+
     private val count = 5
 
     private val timer = Timer(count,
@@ -36,7 +39,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
     private fun start() {
         isStarted = true
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a[gamemode=survival] *")
-        stage.waveController.start()
+        waveController.start()
     }
 
     @EventHandler(ignoreCancelled = true)
