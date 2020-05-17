@@ -21,7 +21,7 @@ import kotlin.math.sqrt
  */
 object FirstLayer {
 
-    const val KEY = "FirstLayer"
+    const val KEY = "1stLayer"
 
     private const val RADIUS = 64
     private const val DANGER_ZONE_LENGTH = 10
