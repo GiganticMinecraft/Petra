@@ -7,6 +7,7 @@ import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PrepareEvent
 import click.seichi.petra.stage.Raid
 import click.seichi.petra.stage.Stage
+import click.seichi.util.Random
 import click.seichi.util.Timer
 import org.bukkit.Bukkit
 import org.bukkit.World
@@ -15,6 +16,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.player.PlayerRespawnEvent
 import java.util.*
 
 /**
@@ -33,8 +35,6 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
     override val waveBossBar: BossBar by lazy { createInvisibleBossBar() }
 
-    private val waveController = Raid()
-
     private val count = 5
 
     private val timer = Timer(count,
@@ -49,7 +49,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
         isStarted = true
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a[gamemode=survival] *")
-        waveController.start(this, stage)
+        Raid().start(this, stage)
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -72,5 +72,11 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onCancelReady(event: PlayerCancelReadyEvent) {
         if (timer.isStarted) timer.cancel()
+    }
+
+    @EventHandler
+    fun onRespawn(event: PlayerRespawnEvent) {
+        val player = event.player
+        event.respawnLocation = stage.generator.getFixedSpawnLocation(player.world, Random.generator)!!
     }
 }
