@@ -8,7 +8,7 @@ import org.bukkit.World
  */
 class MultiEntity(val entity: StageEntity, val n: Int) : StageEntity {
     override fun spawn(world: World, spawnProxy: SpawnProxy) {
-        (1..n).forEach { _ -> entity.spawn(world, spawnProxy) }
+        entity.spawn(world, spawnProxy)
     }
 
     override fun calcNumSpawn(playerCount: Int): Int {

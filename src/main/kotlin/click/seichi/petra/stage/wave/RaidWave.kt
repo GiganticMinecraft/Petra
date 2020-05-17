@@ -28,8 +28,7 @@ class RaidWave(private val raidData: WaveData, seconds: Int) : Wave {
                 val stageEntity = raidData.findEntity(elapsedSeconds) ?: return@Timer
                 val count = stageEntity.calcNumSpawn(players.size)
                 spawn(stageEntity, count)
-            }
-            ,
+            },
             onComplete = {
                 subject.onNext(Unit)
             }
