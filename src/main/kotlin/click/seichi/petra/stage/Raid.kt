@@ -42,8 +42,7 @@ class Raid {
     private fun startWave(i: Int) {
         val wave = waveList[i]
         Bukkit.getPluginManager().callEvent(WaveEvent(i))
-        val world = Bukkit.getWorld("world")!!
-        wave.start(game, spawnProxy)
+        wave.start(i, game, spawnProxy)
         wave.endAsObservable()
                 .take(1)
                 .subscribe {

@@ -1,5 +1,6 @@
 package click.seichi.petra.listener
 
+import click.seichi.function.createInvisibleBossBar
 import click.seichi.game.IGame
 import click.seichi.game.event.CountDownEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
@@ -9,6 +10,7 @@ import click.seichi.petra.stage.Stage
 import click.seichi.util.Timer
 import org.bukkit.Bukkit
 import org.bukkit.World
+import org.bukkit.boss.BossBar
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -29,6 +31,8 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
     override val world: World by lazy { Bukkit.getServer().getWorld("world")!! }
 
+    override val waveBossBar: BossBar by lazy { createInvisibleBossBar() }
+
     private val waveController = Raid()
 
     private val count = 5
@@ -40,6 +44,9 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
             })
 
     private fun start() {
+        players.mapNotNull { Bukkit.getServer().getPlayer(it) }
+                .forEach { waveBossBar.addPlayer(it) }
+
         isStarted = true
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a[gamemode=survival] *")
         waveController.start(this, stage)

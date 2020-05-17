@@ -1,6 +1,7 @@
 package click.seichi.game
 
 import org.bukkit.World
+import org.bukkit.boss.BossBar
 import java.util.*
 
 /**
@@ -11,4 +12,5 @@ interface IGame {
     val players: MutableSet<UUID>
     val readyPlayers: MutableSet<UUID>
     val world: World
+    val waveBossBar: BossBar
 }
