@@ -4,10 +4,11 @@ import click.seichi.game.IGame
 import click.seichi.game.event.CountDownEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PrepareEvent
+import click.seichi.petra.stage.Raid
 import click.seichi.petra.stage.Stage
-import click.seichi.petra.stage.WaveController
 import click.seichi.util.Timer
 import org.bukkit.Bukkit
+import org.bukkit.World
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -26,7 +27,9 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
     override val readyPlayers = mutableSetOf<UUID>()
 
-    private val waveController = WaveController(stage.spawnProxy, *stage.waves)
+    override val world: World by lazy { Bukkit.getServer().getWorld("world")!! }
+
+    private val waveController = Raid()
 
     private val count = 5
 
@@ -39,7 +42,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
     private fun start() {
         isStarted = true
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a[gamemode=survival] *")
-        waveController.start()
+        waveController.start(this, stage)
     }
 
     @EventHandler(ignoreCancelled = true)

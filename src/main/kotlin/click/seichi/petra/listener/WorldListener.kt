@@ -41,5 +41,4 @@ class WorldListener : Listener {
         world.worldBorder.warningDistance = 0
         world.worldBorder.warningTime = 0
     }
-
 }

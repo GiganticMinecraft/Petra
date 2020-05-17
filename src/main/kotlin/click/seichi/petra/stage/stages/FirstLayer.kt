@@ -3,8 +3,11 @@ package click.seichi.petra.stage.stages
 import click.seichi.extension.setRegion
 import click.seichi.generator.TreePopulator
 import click.seichi.petra.stage.generator.RoundStageGenerator
+import click.seichi.petra.stage.raider.MultiEntity
+import click.seichi.petra.stage.raider.Zombie
 import click.seichi.petra.stage.spawn.RoundStageSpawner
-import click.seichi.petra.stage.wave.SimpleWave
+import click.seichi.petra.stage.wave.RaidWave
+import click.seichi.petra.stage.wave.WaveData
 import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.generator.BlockPopulator
@@ -20,8 +23,8 @@ object FirstLayer {
 
     const val KEY = "FirstLayer"
 
-    private val RADIUS = 64
-    private val DANGER_ZONE_LENGTH = 10
+    private const val RADIUS = 64
+    private const val DANGER_ZONE_LENGTH = 10
 
     val GENERATOR = object : RoundStageGenerator(RADIUS, DANGER_ZONE_LENGTH) {
 
@@ -75,5 +78,10 @@ object FirstLayer {
 
     val SPAWN_PROXY = RoundStageSpawner(RADIUS, DANGER_ZONE_LENGTH)
 
-    val WAVES = arrayOf(SimpleWave(10, 60))
+    val WAVES = arrayOf(
+            RaidWave(
+                    WaveData(mapOf(
+                            0 to MultiEntity(Zombie(), 5)
+                    )), 60)
+    )
 }

@@ -1,6 +1,7 @@
 package click.seichi.petra.stage
 
 import click.seichi.function.warning
+import click.seichi.game.IGame
 import click.seichi.petra.event.WaveEvent
 import click.seichi.petra.stage.spawn.SpawnProxy
 import click.seichi.petra.stage.wave.Wave
@@ -9,34 +10,40 @@ import org.bukkit.Bukkit
 /**
  * @author tar0ss
  */
-class WaveController(
-        private val spawnProxy: SpawnProxy,
-        vararg waves: Wave
-) {
+class Raid {
+    private lateinit var game: IGame
+    private lateinit var waveList: List<Wave>
+    private lateinit var spawnProxy: SpawnProxy
+
+
     private var currentWaveIndex = -1
-    private val waveList = waves.toList()
     private var isStarted = false
 
-    fun start() {
+    fun start(game: IGame, stage: Stage) {
         if (isStarted) {
             warning("wave is already started.")
             return
         }
         isStarted = true
+
+        this.game = game
+        this.waveList = stage.waves.toList()
+        this.spawnProxy = stage.spawnProxy
+
         currentWaveIndex = 0
-        start(currentWaveIndex)
+        startWave(currentWaveIndex)
     }
 
     private fun nextWave() {
-        if (++currentWaveIndex < waveList.size) start(currentWaveIndex)
+        if (++currentWaveIndex < waveList.size) startWave(currentWaveIndex)
         else end()
     }
 
-    private fun start(i: Int) {
+    private fun startWave(i: Int) {
         val wave = waveList[i]
         Bukkit.getPluginManager().callEvent(WaveEvent(i))
         val world = Bukkit.getWorld("world")!!
-        wave.start(spawnProxy, world)
+        wave.start(game, spawnProxy)
         wave.endAsObservable()
                 .take(1)
                 .subscribe {
