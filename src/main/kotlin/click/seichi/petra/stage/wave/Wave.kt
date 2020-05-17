@@ -1,4 +1,4 @@
-package click.seichi.petra.stage
+package click.seichi.petra.stage.wave
 
 import click.seichi.petra.stage.spawn.SpawnProxy
 import io.reactivex.Observable

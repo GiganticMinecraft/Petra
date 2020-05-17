@@ -1,7 +1,6 @@
 package click.seichi.petra.stage.wave
 
 import click.seichi.function.debug
-import click.seichi.petra.stage.Wave
 import click.seichi.petra.stage.spawn.SpawnProxy
 import click.seichi.util.Timer
 import io.reactivex.Observable

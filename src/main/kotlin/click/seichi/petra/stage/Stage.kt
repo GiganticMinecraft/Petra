@@ -3,6 +3,7 @@ package click.seichi.petra.stage
 import click.seichi.petra.stage.generator.StageGenerator
 import click.seichi.petra.stage.spawn.SpawnProxy
 import click.seichi.petra.stage.stages.FirstLayer
+import click.seichi.petra.stage.wave.Wave
 
 /**
  * @author tar0ss

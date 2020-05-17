@@ -3,6 +3,7 @@ package click.seichi.petra.stage
 import click.seichi.function.warning
 import click.seichi.petra.event.WaveEvent
 import click.seichi.petra.stage.spawn.SpawnProxy
+import click.seichi.petra.stage.wave.Wave
 import org.bukkit.Bukkit
 
 /**
