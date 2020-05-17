@@ -32,6 +32,7 @@ class WorldListener : Listener {
         world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
         world.setGameRule(GameRule.DO_INSOMNIA, false)
         world.setGameRule(GameRule.NATURAL_REGENERATION, true)
+        world.setGameRule(GameRule.MOB_GRIEFING, false)
         world.keepSpawnInMemory = true
         world.fullTime = 0
         world.isAutoSave = false
