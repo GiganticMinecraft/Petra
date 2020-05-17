@@ -1,6 +1,5 @@
 package click.seichi.petra.stage.spawn
 
-import click.seichi.function.debug
 import click.seichi.util.Random
 import org.bukkit.Location
 import org.bukkit.World
@@ -22,7 +21,6 @@ class RoundStageSpawner(
         val x = xz.first
         val z = xz.second
         val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
-        debug("highest = $highestHeight")
         val loc = Location(world, x, (highestHeight + 2).toDouble(), z)
         if (function == null) world.spawnEntity(loc, entityType)
         else world.spawn(loc, entityType.entityClass as Class<Entity>, function)

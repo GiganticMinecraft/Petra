@@ -1,9 +1,8 @@
 package click.seichi.petra.stage
 
-import click.seichi.petra.stage.generator.FirstStageGenerator
-import click.seichi.petra.stage.spawn.RoundStageSpawner
+import click.seichi.petra.stage.generator.StageGenerator
 import click.seichi.petra.stage.spawn.SpawnProxy
-import click.seichi.petra.stage.wave.SimpleWave
+import click.seichi.petra.stage.stages.FirstLayer
 
 /**
  * @author tar0ss
@@ -15,10 +14,10 @@ enum class Stage(
         vararg _waves: Wave
 ) {
     PETRA_ONE(
-            "1stLayer",
-            FirstStageGenerator(64, 10),
-            RoundStageSpawner(64, 10),
-            SimpleWave(10, 60)
+            FirstLayer.KEY,
+            FirstLayer.GENERATOR,
+            FirstLayer.SPAWN_PROXY,
+            *FirstLayer.WAVES
     )
     ;
 

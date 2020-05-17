@@ -1,6 +1,5 @@
 package click.seichi.petra.stage.generator
 
-import click.seichi.petra.stage.StageGenerator
 import click.seichi.util.Random
 import org.bukkit.Location
 import org.bukkit.World
