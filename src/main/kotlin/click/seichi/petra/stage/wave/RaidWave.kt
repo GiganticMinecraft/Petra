@@ -69,7 +69,6 @@ class RaidWave(private val raidData: WaveData, private val seconds: Int) : Wave 
 
     private fun end() {
         bar.isVisible = false
-        bar.removeAll()
         subject.onNext(Unit)
     }
 
