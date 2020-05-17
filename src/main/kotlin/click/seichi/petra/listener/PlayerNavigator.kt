@@ -18,6 +18,7 @@ class PlayerNavigator(
 ) : Listener {
     private val players: Set<UUID> = game.players
     private val readyPlayers: Set<UUID> = game.readyPlayers
+    private val bar = game.waveBossBar
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
@@ -54,5 +55,10 @@ class PlayerNavigator(
         GameMessage.START_GAME.add(
                 GameSound.START_GAME
         ).broadcastTo { players.contains(it.uniqueId) }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onBackPlayer(event: PlayerBackGameEvent) {
+        bar.addPlayer(event.player)
     }
 }
