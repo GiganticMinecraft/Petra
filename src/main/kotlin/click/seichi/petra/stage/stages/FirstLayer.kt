@@ -3,8 +3,10 @@ package click.seichi.petra.stage.stages
 import click.seichi.extension.setRegion
 import click.seichi.generator.TreePopulator
 import click.seichi.petra.stage.generator.RoundStageGenerator
+import click.seichi.petra.stage.raider.CreeperEntity
 import click.seichi.petra.stage.raider.MultiEntity
-import click.seichi.petra.stage.raider.Zombie
+import click.seichi.petra.stage.raider.SkeletonEntity
+import click.seichi.petra.stage.raider.ZombieEntity
 import click.seichi.petra.stage.spawn.RoundStageSpawner
 import click.seichi.petra.stage.wave.RaidWave
 import click.seichi.petra.stage.wave.WaveData
@@ -81,7 +83,19 @@ object FirstLayer {
     val WAVES = arrayOf(
             RaidWave(
                     WaveData(mapOf(
-                            0 to MultiEntity(Zombie(), 5)
+                            0 to MultiEntity(ZombieEntity(), 5)
+                    )), 60),
+            RaidWave(
+                    WaveData(mapOf(
+                            0 to MultiEntity(ZombieEntity(), 5)
+                    )), 60),
+            RaidWave(
+                    WaveData(mapOf(
+                            0 to MultiEntity(SkeletonEntity(), 5)
+                    )), 60),
+            RaidWave(
+                    WaveData(mapOf(
+                            0 to MultiEntity(CreeperEntity(), 1)
                     )), 60)
     )
 }
