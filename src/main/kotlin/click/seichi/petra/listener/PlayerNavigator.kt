@@ -4,6 +4,7 @@ import click.seichi.game.IGame
 import click.seichi.game.event.*
 import click.seichi.petra.GameMessage
 import click.seichi.petra.GameSound
+import click.seichi.util.TopBar
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -18,7 +19,7 @@ class PlayerNavigator(
 ) : Listener {
     private val players: Set<UUID> = game.players
     private val readyPlayers: Set<UUID> = game.readyPlayers
-    private val bar = game.waveBossBar
+    private val bar: TopBar = game.topBar
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
@@ -60,5 +61,10 @@ class PlayerNavigator(
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onBackPlayer(event: PlayerBackGameEvent) {
         bar.addPlayer(event.player)
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onQuitInGame(event: PlayerQuitInGameEvent) {
+        bar.removePlayer(event.player)
     }
 }

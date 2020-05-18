@@ -2,17 +2,16 @@ package click.seichi.petra.stage.stages
 
 import click.seichi.extension.setRegion
 import click.seichi.generator.TreePopulator
+import click.seichi.message.TitleMessage
 import click.seichi.petra.stage.generator.RoundStageGenerator
-import click.seichi.petra.stage.raider.InflammableSkeleton
 import click.seichi.petra.stage.raider.InflammableZombie
 import click.seichi.petra.stage.raider.MultiEntity
-import click.seichi.petra.stage.raider.Raider
 import click.seichi.petra.stage.spawn.RoundStageSpawner
-import click.seichi.petra.stage.wave.RaidWave
+import click.seichi.petra.stage.wave.TimedWave
 import click.seichi.petra.stage.wave.WaveData
+import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.World
-import org.bukkit.entity.EntityType
 import org.bukkit.generator.BlockPopulator
 import org.bukkit.generator.ChunkGenerator
 import org.bukkit.util.noise.PerlinOctaveGenerator
@@ -82,24 +81,12 @@ object FirstLayer {
     val SPAWN_PROXY = RoundStageSpawner(RADIUS, DANGER_ZONE_LENGTH)
 
     val WAVES = arrayOf(
-            RaidWave(
+            TimedWave(
                     WaveData(mapOf(
-                            0 to MultiEntity(
-                                    InflammableZombie() to 5,
-                                    InflammableSkeleton() to 5
+                            60 to MultiEntity(
+                                    InflammableZombie() to 5
                             )
-                    )), 60),
-            RaidWave(
-                    WaveData(mapOf(
-                            0 to MultiEntity(InflammableZombie() to 5)
-                    )), 60),
-            RaidWave(
-                    WaveData(mapOf(
-                            0 to MultiEntity(Raider(EntityType.SKELETON) to 5)
-                    )), 60),
-            RaidWave(
-                    WaveData(mapOf(
-                            0 to MultiEntity(Raider(EntityType.CREEPER) to 1)
-                    )), 60)
+                    )), 120,
+                    TitleMessage("${ChatColor.RED}襲撃", "${ChatColor.AQUA}2分間生き延びろ"))
     )
 }
