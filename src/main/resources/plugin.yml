@@ -7,9 +7,13 @@ load: STARTUP
 
 commands:
   ready:
-    description: This is ready command.
+    description: Ready to the game
     usage: /ready
     aliases: [r]
-    default: default
-    permission: petra.vote
+    permission: petra.ready
     permission-message: You don't have <permission>
+
+permissions:
+  petra.ready:
+    description: Ready to the game
+    default: true
