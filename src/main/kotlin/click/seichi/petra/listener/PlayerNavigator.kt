@@ -9,6 +9,8 @@ import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.event.player.PlayerQuitEvent
 import java.util.*
 
 /**
@@ -59,12 +61,12 @@ class PlayerNavigator(
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onBackPlayer(event: PlayerBackGameEvent) {
+    fun onBackPlayer(event: PlayerJoinEvent) {
         bar.addPlayer(event.player)
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onQuitInGame(event: PlayerQuitInGameEvent) {
+    fun onQuitInGame(event: PlayerQuitEvent) {
         bar.removePlayer(event.player)
     }
 }

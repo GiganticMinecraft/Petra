@@ -9,7 +9,6 @@ import click.seichi.game.command.ReadyCommand
 import click.seichi.game.listener.DebugListener
 import click.seichi.game.listener.PlayerConnectionListener
 import click.seichi.petra.listener.MonsterListener
-import click.seichi.petra.listener.PetraGame
 import click.seichi.petra.listener.PlayerNavigator
 import click.seichi.petra.listener.WorldListener
 import click.seichi.petra.stage.Stage

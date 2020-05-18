@@ -12,12 +12,14 @@ enum class Stage(
         val key: String,
         val generator: StageGenerator,
         val spawnProxy: SpawnProxy,
+        val startTime: Long,
         vararg _waves: Wave
 ) {
     PETRA_ONE(
             FirstLayer.KEY,
             FirstLayer.GENERATOR,
             FirstLayer.SPAWN_PROXY,
+            6000L,
             *FirstLayer.WAVES
     )
     ;

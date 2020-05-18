@@ -1,10 +1,9 @@
-package click.seichi.petra.listener
+package click.seichi.petra
 
 import click.seichi.game.IGame
 import click.seichi.game.event.CountDownEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PrepareEvent
-import click.seichi.petra.TopBarConstants
 import click.seichi.petra.stage.Stage
 import click.seichi.petra.stage.Waver
 import click.seichi.util.Random
@@ -12,7 +11,6 @@ import click.seichi.util.Timer
 import click.seichi.util.TopBar
 import com.destroystokyo.paper.event.block.BlockDestroyEvent
 import org.bukkit.Bukkit
-import org.bukkit.GameRule
 import org.bukkit.World
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -51,11 +49,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
     private fun start() {
 
         topBar.register(TopBarConstants.WAVE)
-
-        players.mapNotNull { Bukkit.getServer().getPlayer(it) }
-                .forEach { topBar.addPlayer(it) }
-
-        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true)
+        world.time = stage.startTime
 
         isStarted = true
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a[gamemode=survival] *")
