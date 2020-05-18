@@ -29,6 +29,7 @@ open class Timer(
             return
         }
         isStarted = true
+        isCancelled = false
         onStart()
 
         sync(0L, 20L) { elapsedSeconds ->

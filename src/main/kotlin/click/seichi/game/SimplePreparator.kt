@@ -1,6 +1,7 @@
 package click.seichi.game
 
 import click.seichi.function.warning
+import click.seichi.game.event.CancelPrepareEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PlayerReadyEvent
 import click.seichi.game.event.PrepareEvent
@@ -39,6 +40,10 @@ class SimplePreparator(
     }
 
     override fun cancelReady(player: Player) {
+        if (isPrepared) {
+            isPrepared = false
+            Bukkit.getPluginManager().callEvent(CancelPrepareEvent())
+        }
         readyPlayerSet.remove(player.uniqueId)
         Bukkit.getPluginManager().callEvent(PlayerCancelReadyEvent(
                 player,

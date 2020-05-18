@@ -1,9 +1,13 @@
 package click.seichi.petra.listener
 
 import click.seichi.game.IGame
-import click.seichi.game.event.*
+import click.seichi.game.event.CountDownEvent
+import click.seichi.game.event.PlayerCancelReadyEvent
+import click.seichi.game.event.PlayerJoinGameEvent
+import click.seichi.game.event.PlayerReadyEvent
 import click.seichi.petra.GameMessage
 import click.seichi.petra.GameSound
+import click.seichi.petra.event.StartGameEvent
 import click.seichi.util.TopBar
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
@@ -54,7 +58,7 @@ class PlayerNavigator(
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onCompletePreparation(event: PrepareEvent) {
+    fun onStartGame(event: StartGameEvent) {
         GameMessage.START_GAME.add(
                 GameSound.START_GAME
         ).broadcastTo { players.contains(it.uniqueId) }

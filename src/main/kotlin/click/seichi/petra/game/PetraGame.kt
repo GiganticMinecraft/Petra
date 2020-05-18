@@ -1,10 +1,11 @@
 package click.seichi.petra.game
 
 import click.seichi.game.IGame
+import click.seichi.game.event.CancelPrepareEvent
 import click.seichi.game.event.CountDownEvent
-import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PrepareEvent
 import click.seichi.petra.TopBarConstants
+import click.seichi.petra.event.StartGameEvent
 import click.seichi.petra.stage.Stage
 import click.seichi.petra.stage.Waver
 import click.seichi.util.Random
@@ -48,11 +49,12 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
             })
 
     private fun start() {
+        isStarted = true
+
+        Bukkit.getPluginManager().callEvent(StartGameEvent())
 
         topBar.register(TopBarConstants.WAVE)
         world.time = stage.startTime
-
-        isStarted = true
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a[gamemode=survival] *")
         Waver().start(this, stage)
     }
@@ -106,7 +108,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onCancelReady(event: PlayerCancelReadyEvent) {
+    fun onCancelPrepare(event: CancelPrepareEvent) {
         if (timer.isStarted) timer.cancel()
     }
 
