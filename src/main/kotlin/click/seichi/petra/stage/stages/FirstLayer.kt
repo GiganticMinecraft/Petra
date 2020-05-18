@@ -83,10 +83,10 @@ object FirstLayer {
     val WAVES = arrayOf(
             TimedWave(
                     WaveData(mapOf(
-                            60 to MultiEntity(
+                            10 to MultiEntity(
                                     InflammableZombie() to 5
                             )
-                    )), 120,
+                    )), 20,
                     TitleMessage("${ChatColor.RED}襲撃", "${ChatColor.AQUA}2分間生き延びろ"))
     )
 }

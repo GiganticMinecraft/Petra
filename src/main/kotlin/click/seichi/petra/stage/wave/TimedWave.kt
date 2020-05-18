@@ -45,16 +45,17 @@ class TimedWave(
     private val timer = Timer(
             seconds,
             onStart = {
-                remainedNextRaidSeconds = raidData.calcRemainedNextRaidSeconds(0)
             },
             onNext = { remainSeconds ->
                 updateBar(remainSeconds)
                 val elapsedSeconds = seconds - remainSeconds
-                if (raidData.hasNextRaid(elapsedSeconds)) {
-                    updateRaidBar(raidData.calcRemainedNextRaidSeconds(elapsedSeconds)!!, remainedNextRaidSeconds!!)
-                }
+                val hasNextRaid = raidData.hasNextRaid(elapsedSeconds)
+                val _remainedNextRaidSeconds = raidData.calcRemainedNextRaidSeconds(elapsedSeconds)
+                if (hasNextRaid) updateRaidBar(_remainedNextRaidSeconds!!)
+
                 val stageEntity = raidData.findEntity(elapsedSeconds) ?: return@Timer
-                remainedNextRaidSeconds = raidData.calcRemainedNextRaidSeconds(elapsedSeconds)
+                if (hasNextRaid) remainedNextRaidSeconds = _remainedNextRaidSeconds
+                else removeRaidBar()
                 stageEntity.spawn(world, spawnProxy, players)
             },
             onComplete = {
@@ -69,6 +70,7 @@ class TimedWave(
         this.index = index
         this.topBar = game.topBar
         this.bar = topBar.findBar(TopBarConstants.WAVE)!!
+        remainedNextRaidSeconds = raidData.calcRemainedNextRaidSeconds(0)
         startMessage.broadcastTo { players.contains(it.uniqueId) }
         setupBar()
         if (raidData.hasNextRaid(0)) {
@@ -80,32 +82,37 @@ class TimedWave(
     }
 
     private fun setupBar() {
-        val title = "${ChatColor.RED}Wave${index.plus(1)} 残り時間"
-        bar.setTitle(title)
         bar.style = BarStyle.SEGMENTED_20
         bar.color = BarColor.WHITE
+        updateBar(seconds)
         bar.isVisible = true
     }
 
     private fun updateBar(remainSeconds: Int) {
+        val title = "${ChatColor.WHITE}Wave${index.plus(1)} 残り時間 ${remainSeconds}秒"
+        bar.setTitle(title)
         bar.progress = remainSeconds.toDouble() / seconds.toDouble()
     }
 
     private fun setupRaidBar() {
-        val title = "${ChatColor.WHITE}次の襲撃まで"
-        raidBar.setTitle(title)
         raidBar.style = BarStyle.SEGMENTED_20
         raidBar.color = BarColor.RED
+        updateRaidBar(remainedNextRaidSeconds!!)
         raidBar.isVisible = true
     }
 
-    private fun updateRaidBar(remainSeconds: Int, raidSeconds: Int) {
-        raidBar.progress = remainSeconds.toDouble() / raidSeconds.toDouble()
+    private fun updateRaidBar(remainSeconds: Int) {
+        val title = "${ChatColor.RED}次の襲撃まで ${remainSeconds}秒"
+        raidBar.setTitle(title)
+        raidBar.progress = remainSeconds.toDouble() / remainedNextRaidSeconds!!.toDouble()
+    }
+
+    private fun removeRaidBar() {
+        topBar.removeBar(TopBarConstants.RAID_TIME)
     }
 
     private fun end() {
         bar.isVisible = false
-        topBar.removeBar(TopBarConstants.RAID_TIME)
         subject.onNext(Unit)
     }
 
