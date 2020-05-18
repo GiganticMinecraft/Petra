@@ -3,15 +3,16 @@ package click.seichi.petra.stage.stages
 import click.seichi.extension.setRegion
 import click.seichi.generator.TreePopulator
 import click.seichi.petra.stage.generator.RoundStageGenerator
-import click.seichi.petra.stage.raider.CreeperEntity
+import click.seichi.petra.stage.raider.InflammableSkeleton
+import click.seichi.petra.stage.raider.InflammableZombie
 import click.seichi.petra.stage.raider.MultiEntity
-import click.seichi.petra.stage.raider.SkeletonEntity
-import click.seichi.petra.stage.raider.ZombieEntity
+import click.seichi.petra.stage.raider.Raider
 import click.seichi.petra.stage.spawn.RoundStageSpawner
 import click.seichi.petra.stage.wave.RaidWave
 import click.seichi.petra.stage.wave.WaveData
 import org.bukkit.Material
 import org.bukkit.World
+import org.bukkit.entity.EntityType
 import org.bukkit.generator.BlockPopulator
 import org.bukkit.generator.ChunkGenerator
 import org.bukkit.util.noise.PerlinOctaveGenerator
@@ -83,19 +84,22 @@ object FirstLayer {
     val WAVES = arrayOf(
             RaidWave(
                     WaveData(mapOf(
-                            0 to MultiEntity(ZombieEntity(), 5)
+                            0 to MultiEntity(
+                                    InflammableZombie() to 5,
+                                    InflammableSkeleton() to 5
+                            )
                     )), 60),
             RaidWave(
                     WaveData(mapOf(
-                            0 to MultiEntity(ZombieEntity(), 5)
+                            0 to MultiEntity(InflammableZombie() to 5)
                     )), 60),
             RaidWave(
                     WaveData(mapOf(
-                            0 to MultiEntity(SkeletonEntity(), 5)
+                            0 to MultiEntity(Raider(EntityType.SKELETON) to 5)
                     )), 60),
             RaidWave(
                     WaveData(mapOf(
-                            0 to MultiEntity(CreeperEntity(), 1)
+                            0 to MultiEntity(Raider(EntityType.CREEPER) to 1)
                     )), 60)
     )
 }

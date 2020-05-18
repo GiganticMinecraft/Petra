@@ -10,7 +10,7 @@ import org.bukkit.Bukkit
 /**
  * @author tar0ss
  */
-class Raid {
+class Waver {
     private lateinit var game: IGame
     private lateinit var waveList: List<Wave>
     private lateinit var spawnProxy: SpawnProxy

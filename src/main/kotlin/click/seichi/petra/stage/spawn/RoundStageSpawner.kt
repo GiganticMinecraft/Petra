@@ -16,13 +16,13 @@ class RoundStageSpawner(
 ) : SpawnProxy {
     private val dangerZoneRadius = radius + dangerZoneLength
 
-    override fun spawn(world: World, entityType: EntityType, function: Consumer<Entity>?) {
+    override fun spawn(world: World, entityType: EntityType, function: Consumer<Entity>?): Entity {
         val xz = Random.nextDoughnutPoint(radius.toDouble(), (dangerZoneLength - 2).toDouble())
         val x = xz.first
         val z = xz.second
         val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
         val loc = Location(world, x, (highestHeight + 2).toDouble(), z)
-        if (function == null) world.spawnEntity(loc, entityType)
+        return if (function == null) world.spawnEntity(loc, entityType)
         else world.spawn(loc, entityType.entityClass as Class<Entity>, function)
     }
 }

@@ -9,5 +9,5 @@ import org.bukkit.util.Consumer
  * @author tar0ss
  */
 interface SpawnProxy {
-    fun spawn(world: World, entityType: EntityType, function: Consumer<Entity>? = null)
+    fun spawn(world: World, entityType: EntityType, function: Consumer<Entity>? = null): Entity
 }

@@ -53,7 +53,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true)
         isStarted = true
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a[gamemode=survival] *")
-        Raid().start(this, stage)
+        Waver().start(this, stage)
     }
 
     @EventHandler(ignoreCancelled = true)
