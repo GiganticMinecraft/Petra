@@ -8,6 +8,5 @@ import java.util.*
  * @author tar0ss
  */
 interface StageEntity {
-    fun spawn(world: World, spawnProxy: SpawnProxy)
-    fun calcNumSpawn(playerCount: Int): Int
+    fun spawn(world: World, spawnProxy: SpawnProxy, players: Set<UUID>)
 }

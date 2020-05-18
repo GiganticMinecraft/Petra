@@ -7,13 +7,16 @@ import java.util.*
 /**
  * @author tar0ss
  */
-class MultiEntity(val entity: StageEntity, val n: Int) : StageEntity {
-    override fun spawn(world: World, spawnProxy: SpawnProxy) {
-        entity.spawn(world, spawnProxy)
-    }
+class MultiEntity(vararg pairs: Pair<StageEntity, Int>) : StageEntity {
 
-    override fun calcNumSpawn(playerCount: Int): Int {
-        return entity.calcNumSpawn(playerCount).times(n)
+    private val entityPairList = listOf(*pairs)
+
+    override fun spawn(world: World, spawnProxy: SpawnProxy, players: Set<UUID>) {
+        entityPairList.forEach { (entity, n) ->
+            (1..n).forEach { _ ->
+                entity.spawn(world, spawnProxy, players)
+            }
+        }
     }
 
 }

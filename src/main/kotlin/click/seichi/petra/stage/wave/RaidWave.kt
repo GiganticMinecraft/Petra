@@ -1,7 +1,6 @@
 package click.seichi.petra.stage.wave
 
 import click.seichi.game.IGame
-import click.seichi.petra.stage.raider.StageEntity
 import click.seichi.petra.stage.spawn.SpawnProxy
 import click.seichi.util.Timer
 import io.reactivex.Observable
@@ -36,8 +35,7 @@ class RaidWave(private val raidData: WaveData, private val seconds: Int) : Wave 
                 updateBar(remainSeconds)
                 val elapsedSeconds = seconds - remainSeconds
                 val stageEntity = raidData.findEntity(elapsedSeconds) ?: return@Timer
-                val count = stageEntity.calcNumSpawn(players.size)
-                spawn(stageEntity, count)
+                stageEntity.spawn(world, spawnProxy, players)
             },
             onComplete = {
                 end()
@@ -70,10 +68,6 @@ class RaidWave(private val raidData: WaveData, private val seconds: Int) : Wave 
     private fun end() {
         bar.isVisible = false
         subject.onNext(Unit)
-    }
-
-    private fun spawn(stageEntity: StageEntity, n: Int) {
-        (1..n).forEach { _ -> stageEntity.spawn(world, spawnProxy) }
     }
 
     override fun endAsObservable(): Observable<Unit> = subject
