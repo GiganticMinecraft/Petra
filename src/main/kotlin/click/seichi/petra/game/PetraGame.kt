@@ -1,9 +1,10 @@
-package click.seichi.petra
+package click.seichi.petra.game
 
 import click.seichi.game.IGame
 import click.seichi.game.event.CountDownEvent
 import click.seichi.game.event.PlayerCancelReadyEvent
 import click.seichi.game.event.PrepareEvent
+import click.seichi.petra.TopBarConstants
 import click.seichi.petra.stage.Stage
 import click.seichi.petra.stage.Waver
 import click.seichi.util.Random
