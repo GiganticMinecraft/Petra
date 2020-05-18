@@ -21,6 +21,7 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.EntityChangeBlockEvent
 import org.bukkit.event.entity.EntityExplodeEvent
 import org.bukkit.event.player.PlayerRespawnEvent
+import org.bukkit.event.world.TimeSkipEvent
 import java.util.*
 
 /**
@@ -89,6 +90,13 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
             if (!stage.generator.isSafeZone(block.x, block.y, block.z)) {
                 iterator.remove()
             }
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    fun onBed(event: TimeSkipEvent) {
+        if (event.skipReason == TimeSkipEvent.SkipReason.NIGHT_SKIP) {
+            event.isCancelled = true
         }
     }
 
