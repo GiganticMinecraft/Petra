@@ -24,14 +24,6 @@ enum class Stage(
 
     val waves = _waves
 
-    fun isDangerZone(globalX: Int, globalY: Int, globalZ: Int): Boolean {
-        return this.generator.isDangerZone(globalX, globalY, globalZ)
-    }
-
-    fun isSafeZone(globalX: Int, globalY: Int, globalZ: Int): Boolean {
-        return this.generator.isSafeZone(globalX, globalY, globalZ)
-    }
-
     companion object {
         val keyMap = values().map { it.key to it }.toMap()
 

@@ -32,9 +32,11 @@ class WorldListener : Listener {
         world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
         world.setGameRule(GameRule.DO_INSOMNIA, false)
         world.setGameRule(GameRule.NATURAL_REGENERATION, true)
-        world.setGameRule(GameRule.MOB_GRIEFING, false)
+        world.setGameRule(GameRule.MOB_GRIEFING, true)
+        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
         world.keepSpawnInMemory = true
         world.fullTime = 0
+        world.time = 0
         world.isAutoSave = false
         world.monsterSpawnLimit = 100
         world.worldBorder.setCenter(0.0, 0.0)
