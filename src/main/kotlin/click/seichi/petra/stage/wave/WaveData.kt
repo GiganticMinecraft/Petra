@@ -1,14 +1,12 @@
 package click.seichi.petra.stage.wave
 
-import click.seichi.petra.stage.raider.StageEntity
-
 /**
  * @author tar0ss
  */
 data class WaveData(
-        private val timingMap: Map<Int, StageEntity>
+        private val timingMap: Map<Int, SpawnData>
 ) {
-    fun findEntity(timing: Int): StageEntity? {
+    fun findSpawnData(timing: Int): SpawnData? {
         return timingMap[timing]
     }
 

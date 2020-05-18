@@ -2,16 +2,16 @@ package click.seichi.petra.stage.stages
 
 import click.seichi.extension.setRegion
 import click.seichi.generator.TreePopulator
+import click.seichi.message.SoundMessage
 import click.seichi.message.TitleMessage
 import click.seichi.petra.stage.generator.RoundStageGenerator
 import click.seichi.petra.stage.raider.InflammableZombie
 import click.seichi.petra.stage.raider.MultiEntity
 import click.seichi.petra.stage.spawn.RoundStageSpawner
+import click.seichi.petra.stage.wave.SpawnData
 import click.seichi.petra.stage.wave.TimedWave
 import click.seichi.petra.stage.wave.WaveData
-import org.bukkit.ChatColor
-import org.bukkit.Material
-import org.bukkit.World
+import org.bukkit.*
 import org.bukkit.generator.BlockPopulator
 import org.bukkit.generator.ChunkGenerator
 import org.bukkit.util.noise.PerlinOctaveGenerator
@@ -83,10 +83,17 @@ object FirstLayer {
     val WAVES = arrayOf(
             TimedWave(
                     WaveData(mapOf(
-                            10 to MultiEntity(
-                                    InflammableZombie() to 5
+                            10 to SpawnData(
+                                    MultiEntity(
+                                            InflammableZombie() to 5
+                                    ),
+                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
                             )
                     )), 20,
-                    TitleMessage("${ChatColor.RED}襲撃", "${ChatColor.AQUA}2分間生き延びろ"))
+                    TitleMessage("${ChatColor.WHITE}Wave1 ${ChatColor.RED}襲撃", "${ChatColor.AQUA}2分間生き延びろ"
+                    ).add(
+                            SoundMessage(Sound.ENTITY_ILLUSIONER_CAST_SPELL, SoundCategory.BLOCKS, 2.0f, 0.3f)
+                    )
+            )
     )
 }

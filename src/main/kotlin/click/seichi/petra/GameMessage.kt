@@ -34,9 +34,4 @@ object GameMessage {
                 fadeOut = 10
         )
     }
-
-    val START_GAME: Message = TitleMessage(
-            "${ChatColor.YELLOW}スタート",
-            ""
-    )
 }

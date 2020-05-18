@@ -7,7 +7,6 @@ import click.seichi.game.event.PlayerJoinGameEvent
 import click.seichi.game.event.PlayerReadyEvent
 import click.seichi.petra.GameMessage
 import click.seichi.petra.GameSound
-import click.seichi.petra.event.StartGameEvent
 import click.seichi.util.TopBar
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
@@ -31,21 +30,21 @@ class PlayerNavigator(
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.WHITE}${player.name}")
-        GameMessage.READY(readyPlayers.count(), players.count()).broadcastTo { players.contains(it.uniqueId) }
+        GameMessage.READY(readyPlayers.count(), players.count()).broadcast()
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerReady(event: PlayerReadyEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.GREEN}${player.name}")
-        GameMessage.CANCEL_READY(event.ready, event.all).broadcastTo { players.contains(it.uniqueId) }
+        GameMessage.CANCEL_READY(event.ready, event.all).broadcast()
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerCancelReady(event: PlayerCancelReadyEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.WHITE}${player.name}")
-        GameMessage.READY(event.ready, event.all).broadcastTo { players.contains(it.uniqueId) }
+        GameMessage.READY(event.ready, event.all).broadcast()
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -54,14 +53,7 @@ class PlayerNavigator(
         val count = event.count
         GameMessage.COUNT(event.remainSeconds).add(
                 if (remainSeconds == count) GameSound.START_COUNT else GameSound.COUNT
-        ).broadcastTo { players.contains(it.uniqueId) }
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onStartGame(event: StartGameEvent) {
-        GameMessage.START_GAME.add(
-                GameSound.START_GAME
-        ).broadcastTo { players.contains(it.uniqueId) }
+        ).broadcast()
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

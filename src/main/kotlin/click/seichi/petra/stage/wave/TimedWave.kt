@@ -53,15 +53,20 @@ class TimedWave(
                 val _remainedNextRaidSeconds = raidData.calcRemainedNextRaidSeconds(elapsedSeconds)
                 if (hasNextRaid) updateRaidBar(_remainedNextRaidSeconds!!)
 
-                val stageEntity = raidData.findEntity(elapsedSeconds) ?: return@Timer
+                val spawnData = raidData.findSpawnData(elapsedSeconds) ?: return@Timer
                 if (hasNextRaid) remainedNextRaidSeconds = _remainedNextRaidSeconds
                 else removeRaidBar()
-                stageEntity.spawn(world, spawnProxy, players)
+                spawn(spawnData)
             },
             onComplete = {
                 end()
             }
     )
+
+    private fun spawn(spawnData: SpawnData) {
+        spawnData.entity.spawn(world, spawnProxy, players)
+        spawnData.message.broadcast()
+    }
 
     override fun start(index: Int, game: IGame, spawnProxy: SpawnProxy) {
         this.spawnProxy = spawnProxy
@@ -71,7 +76,7 @@ class TimedWave(
         this.topBar = game.topBar
         this.bar = topBar.findBar(TopBarConstants.WAVE)!!
         remainedNextRaidSeconds = raidData.calcRemainedNextRaidSeconds(0)
-        startMessage.broadcastTo { players.contains(it.uniqueId) }
+        startMessage.broadcast()
         setupBar()
         if (raidData.hasNextRaid(0)) {
             this.raidBar = topBar.register(TopBarConstants.RAID_TIME)
