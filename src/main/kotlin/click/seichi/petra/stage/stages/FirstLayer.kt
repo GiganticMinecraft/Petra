@@ -1,6 +1,8 @@
 package click.seichi.petra.stage.stages
 
 import click.seichi.extension.setRegion
+import click.seichi.generator.FlowerPopulator
+import click.seichi.generator.GrassPopulator
 import click.seichi.generator.TreePopulator
 import click.seichi.message.SoundMessage
 import click.seichi.message.TitleMessage
@@ -73,7 +75,9 @@ object FirstLayer {
 
         override fun getDefaultPopulators(world: World): MutableList<BlockPopulator> {
             return mutableListOf(
-                    TreePopulator()
+                    TreePopulator(),
+                    GrassPopulator(),
+                    FlowerPopulator(Material.DANDELION, Material.POPPY)
             )
         }
     }

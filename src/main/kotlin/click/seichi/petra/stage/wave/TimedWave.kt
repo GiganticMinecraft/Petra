@@ -22,6 +22,7 @@ import java.util.*
  *
  * @param raidData
  * @param seconds 終了時間
+ * @param startMessage
  */
 class TimedWave(
         private val raidData: WaveData,
@@ -36,7 +37,7 @@ class TimedWave(
     private lateinit var players: Set<UUID>
     private lateinit var topBar: TopBar
     private var index: Int = 0
-    private var remainedNextRaidSeconds: Int? = 0
+    private var remainNextSpawnSeconds: Int? = 0
 
     private lateinit var bar: BossBar
 
@@ -49,12 +50,12 @@ class TimedWave(
             onNext = { remainSeconds ->
                 updateBar(remainSeconds)
                 val elapsedSeconds = seconds - remainSeconds
-                val hasNextRaid = raidData.hasNextRaid(elapsedSeconds)
-                val _remainedNextRaidSeconds = raidData.calcRemainedNextRaidSeconds(elapsedSeconds)
-                if (hasNextRaid) updateRaidBar(_remainedNextRaidSeconds!!)
+                val hasNextSpawn = raidData.hasNextSpawn(elapsedSeconds)
+                val _remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(elapsedSeconds)
+                if (hasNextSpawn) updateRaidBar(_remainNextSpawnSeconds!!)
 
                 val spawnData = raidData.findSpawnData(elapsedSeconds) ?: return@Timer
-                if (hasNextRaid) remainedNextRaidSeconds = _remainedNextRaidSeconds
+                if (hasNextSpawn) remainNextSpawnSeconds = _remainNextSpawnSeconds
                 else removeRaidBar()
                 spawn(spawnData)
             },
@@ -75,10 +76,10 @@ class TimedWave(
         this.index = index
         this.topBar = game.topBar
         this.bar = topBar.findBar(TopBarConstants.WAVE)!!
-        remainedNextRaidSeconds = raidData.calcRemainedNextRaidSeconds(0)
+        remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(0)
         startMessage.broadcast()
         setupBar()
-        if (raidData.hasNextRaid(0)) {
+        if (raidData.hasNextSpawn(0)) {
             this.raidBar = topBar.register(TopBarConstants.RAID_TIME)
             setupRaidBar()
         }
@@ -102,14 +103,14 @@ class TimedWave(
     private fun setupRaidBar() {
         raidBar.style = BarStyle.SEGMENTED_20
         raidBar.color = BarColor.RED
-        updateRaidBar(remainedNextRaidSeconds!!)
+        updateRaidBar(remainNextSpawnSeconds!!)
         raidBar.isVisible = true
     }
 
     private fun updateRaidBar(remainSeconds: Int) {
         val title = "${ChatColor.RED}次の襲撃まで ${remainSeconds}秒"
         raidBar.setTitle(title)
-        raidBar.progress = remainSeconds.toDouble() / remainedNextRaidSeconds!!.toDouble()
+        raidBar.progress = remainSeconds.toDouble() / remainNextSpawnSeconds!!.toDouble()
     }
 
     private fun removeRaidBar() {

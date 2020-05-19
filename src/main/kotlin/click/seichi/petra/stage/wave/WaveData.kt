@@ -10,11 +10,11 @@ data class WaveData(
         return timingMap[timing]
     }
 
-    fun hasNextRaid(current: Int): Boolean {
+    fun hasNextSpawn(current: Int): Boolean {
         return timingMap.keys.firstOrNull { it > current } != null
     }
 
-    fun calcRemainedNextRaidSeconds(current: Int): Int? {
+    fun calcRemainNextSpawnSeconds(current: Int): Int? {
         val nextTiming = findNextTiming(current) ?: return null
         return nextTiming - current
     }
