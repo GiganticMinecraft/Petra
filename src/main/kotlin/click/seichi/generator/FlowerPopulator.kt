@@ -23,7 +23,9 @@ class FlowerPopulator(vararg flowers: Material) : BlockPopulator() {
             val surfaceBlock = chunk.getBlock(x, y, z)
             if (surfaceBlock.type != Material.GRASS_BLOCK) return@forEach
             if (y < 0 || 255 <= y) return@forEach
-            chunk.getBlock(x, y + 1, z).setType(flower, true)
+            val targetBlock = chunk.getBlock(x, y + 1, z)
+            if (!targetBlock.type.isAir) return@forEach
+            targetBlock.setType(flower, true)
         }
     }
 }

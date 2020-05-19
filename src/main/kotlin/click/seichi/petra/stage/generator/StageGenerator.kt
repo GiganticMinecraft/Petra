@@ -16,7 +16,7 @@ abstract class StageGenerator : ChunkGenerator() {
     }
 
     override fun isParallelCapable(): Boolean {
-        return true
+        return false
     }
 
     override fun shouldGenerateDecorations(): Boolean {

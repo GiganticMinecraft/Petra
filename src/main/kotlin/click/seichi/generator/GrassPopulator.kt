@@ -20,7 +20,9 @@ class GrassPopulator : BlockPopulator() {
             val surfaceBlock = chunk.getBlock(x, y, z)
             if (surfaceBlock.type != Material.GRASS_BLOCK) return@forEach
             if (y < 0 || 255 <= y) return@forEach
-            chunk.getBlock(x, y + 1, z).setType(Material.GRASS, true)
+            val targetBlock = chunk.getBlock(x, y + 1, z)
+            if (!targetBlock.type.isAir) return@forEach
+            targetBlock.setType(Material.GRASS, true)
         }
     }
 }

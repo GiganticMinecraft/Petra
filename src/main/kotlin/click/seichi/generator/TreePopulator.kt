@@ -2,6 +2,7 @@ package click.seichi.generator
 
 import click.seichi.extension.getHighestBlockY
 import org.bukkit.Chunk
+import org.bukkit.Material
 import org.bukkit.TreeType
 import org.bukkit.World
 import org.bukkit.generator.BlockPopulator
@@ -19,8 +20,13 @@ class TreePopulator : BlockPopulator() {
                 val x = random.nextInt(15)
                 val z = random.nextInt(15)
                 val y = chunk.getHighestBlockY(x, z)
+                val surfaceBlock = chunk.getBlock(x, y, z)
+                if (surfaceBlock.type != Material.GRASS_BLOCK) return@forEach
+                if (y < 0 || 255 <= y) return@forEach
+                val targetBlock = chunk.getBlock(x, y + 1, z)
+                if (!targetBlock.type.isAir) return@forEach
                 // The tree type can be changed if you want.
-                world.generateTree(chunk.getBlock(x, y, z).location, TreeType.TREE)
+                world.generateTree(surfaceBlock.location, TreeType.TREE)
             }
         }
     }
