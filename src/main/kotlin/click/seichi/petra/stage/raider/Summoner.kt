@@ -1,6 +1,6 @@
 package click.seichi.petra.stage.raider
 
-import click.seichi.petra.stage.spawn.SpawnProxy
+import click.seichi.petra.stage.summon.SummonProxy
 import org.bukkit.World
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
@@ -12,11 +12,11 @@ import java.util.*
 /**
  * @author tar0ss
  */
-open class StageEntity(val entityType: EntityType) : Spawnable {
+open class Summoner(val entityType: EntityType) : ISummoner {
 
-    override fun spawn(world: World, spawnProxy: SpawnProxy, players: Set<UUID>): Set<UUID> {
+    override fun summon(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID> {
         return (1..calcNumSpawns(players.count())).map { _ ->
-            val entity = spawnProxy.spawn(world, entityType, Consumer {
+            val entity = summonProxy.summon(world, entityType, Consumer {
                 val livingEntity = it as LivingEntity
                 livingEntity.removeWhenFarAway = false
                 onCreate(it)
@@ -28,14 +28,14 @@ open class StageEntity(val entityType: EntityType) : Spawnable {
                 entity.isCustomNameVisible = true
                 entity.customName = getName()
             }
-            onSpawned(entity)
+            onSummoned(entity)
             entity.uniqueId
         }.toSet()
     }
 
 
     open fun onCreate(entity: Entity) {}
-    open fun onSpawned(entity: Entity) {}
+    open fun onSummoned(entity: Entity) {}
 
     protected open fun calcNumSpawns(playerCount: Int): Int {
         return playerCount

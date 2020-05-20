@@ -3,7 +3,7 @@ package click.seichi.petra.stage
 import click.seichi.function.warning
 import click.seichi.game.IGame
 import click.seichi.petra.event.WaveEvent
-import click.seichi.petra.stage.spawn.SpawnProxy
+import click.seichi.petra.stage.summon.SummonProxy
 import click.seichi.petra.stage.wave.Wave
 import org.bukkit.Bukkit
 
@@ -13,7 +13,7 @@ import org.bukkit.Bukkit
 class Waver {
     private lateinit var game: IGame
     private lateinit var waveList: List<Wave>
-    private lateinit var spawnProxy: SpawnProxy
+    private lateinit var summonProxy: SummonProxy
 
 
     private var currentWaveIndex = -1
@@ -28,7 +28,7 @@ class Waver {
 
         this.game = game
         this.waveList = stage.waves.toList()
-        this.spawnProxy = stage.spawnProxy
+        this.summonProxy = stage.summonProxy
 
         currentWaveIndex = 0
         startWave(currentWaveIndex)
@@ -42,7 +42,7 @@ class Waver {
     private fun startWave(i: Int) {
         val wave = waveList[i]
         Bukkit.getPluginManager().callEvent(WaveEvent(i))
-        wave.start(i, game, spawnProxy)
+        wave.start(i, game, summonProxy)
         wave.endAsObservable()
                 .take(1)
                 .subscribe {

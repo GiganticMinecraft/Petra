@@ -6,9 +6,9 @@ import click.seichi.message.SoundMessage
 import click.seichi.message.TitleMessage
 import click.seichi.petra.stage.generator.RoundStageGenerator
 import click.seichi.petra.stage.raider.MultiEntity
-import click.seichi.petra.stage.raider.Raiders
-import click.seichi.petra.stage.spawn.RoundStageSpawner
-import click.seichi.petra.stage.wave.SpawnData
+import click.seichi.petra.stage.raider.Summoners
+import click.seichi.petra.stage.summon.RoundStageSummonProxy
+import click.seichi.petra.stage.wave.SummonData
 import click.seichi.petra.stage.wave.TimedWave
 import click.seichi.petra.stage.wave.Wave
 import click.seichi.petra.stage.wave.WaveData
@@ -89,14 +89,14 @@ object FirstLayer {
         }
     }
 
-    val SPAWN_PROXY = RoundStageSpawner(RADIUS, DANGER_ZONE_LENGTH)
+    val SPAWN_PROXY = RoundStageSummonProxy(RADIUS, DANGER_ZONE_LENGTH)
 
     val WAVES: Array<Wave> = arrayOf(
             TimedWave(
                     WaveData(mapOf(
-                            10 to SpawnData(
+                            10 to SummonData(
                                     MultiEntity(
-                                            Raiders.INFLAMMABLE_ZOMBIE to 5
+                                            Summoners.INFLAMMABLE_ZOMBIE to 5
                                     ),
                                     SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
                             )

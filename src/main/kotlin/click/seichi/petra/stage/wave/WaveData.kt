@@ -4,9 +4,9 @@ package click.seichi.petra.stage.wave
  * @author tar0ss
  */
 data class WaveData(
-        private val timingMap: Map<Int, SpawnData>
+        private val timingMap: Map<Int, SummonData>
 ) {
-    fun findSpawnData(timing: Int): SpawnData? {
+    fun findSpawnData(timing: Int): SummonData? {
         return timingMap[timing]
     }
 

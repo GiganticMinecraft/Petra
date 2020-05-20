@@ -1,4 +1,4 @@
-package click.seichi.petra.stage.spawn
+package click.seichi.petra.stage.summon
 
 import click.seichi.util.Random
 import org.bukkit.Location
@@ -10,13 +10,13 @@ import org.bukkit.util.Consumer
 /**
  * @author tar0ss
  */
-class RoundStageSpawner(
+class RoundStageSummonProxy(
         private val radius: Int,
         private val dangerZoneLength: Int
-) : SpawnProxy {
+) : SummonProxy {
     private val dangerZoneRadius = radius + dangerZoneLength
 
-    override fun spawn(world: World, entityType: EntityType, function: Consumer<Entity>?): Entity {
+    override fun summon(world: World, entityType: EntityType, function: Consumer<Entity>?): Entity {
         val xz = Random.nextDoughnutPoint(radius.toDouble(), (dangerZoneLength - 2).toDouble())
         val x = xz.first
         val z = xz.second

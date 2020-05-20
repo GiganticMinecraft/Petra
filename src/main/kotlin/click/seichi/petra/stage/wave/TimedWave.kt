@@ -3,7 +3,7 @@ package click.seichi.petra.stage.wave
 import click.seichi.game.IGame
 import click.seichi.message.Message
 import click.seichi.petra.TopBarConstants
-import click.seichi.petra.stage.spawn.SpawnProxy
+import click.seichi.petra.stage.summon.SummonProxy
 import click.seichi.util.Timer
 import click.seichi.util.TopBar
 import io.reactivex.Observable
@@ -32,7 +32,7 @@ class TimedWave(
 
     private val subject: Subject<Unit> = PublishSubject.create()
 
-    private lateinit var spawnProxy: SpawnProxy
+    private lateinit var summonProxy: SummonProxy
     private lateinit var world: World
     private lateinit var players: Set<UUID>
     private lateinit var topBar: TopBar
@@ -58,7 +58,7 @@ class TimedWave(
                 val spawnData = raidData.findSpawnData(elapsedSeconds) ?: return@Timer
                 if (hasNextSpawn) remainNextSpawnSeconds = _remainNextSpawnSeconds
                 else removeRaidBar()
-                spawn(spawnData)
+                summon(spawnData)
             },
             onComplete = {
                 removeBar()
@@ -67,13 +67,13 @@ class TimedWave(
             }
     )
 
-    private fun spawn(spawnData: SpawnData) {
-        entitySet.addAll(spawnData.entity.spawn(world, spawnProxy, players))
-        spawnData.message.broadcast()
+    private fun summon(summonData: SummonData) {
+        entitySet.addAll(summonData.summoner.summon(world, summonProxy, players))
+        summonData.message.broadcast()
     }
 
-    override fun start(index: Int, game: IGame, spawnProxy: SpawnProxy) {
-        this.spawnProxy = spawnProxy
+    override fun start(index: Int, game: IGame, summonProxy: SummonProxy) {
+        this.summonProxy = summonProxy
         this.world = game.world
         this.players = game.players
         this.index = index

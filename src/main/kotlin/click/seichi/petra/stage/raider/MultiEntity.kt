@@ -1,20 +1,20 @@
 package click.seichi.petra.stage.raider
 
-import click.seichi.petra.stage.spawn.SpawnProxy
+import click.seichi.petra.stage.summon.SummonProxy
 import org.bukkit.World
 import java.util.*
 
 /**
  * @author tar0ss
  */
-class MultiEntity(vararg pairs: Pair<Spawnable, Int>) : Spawnable {
+class MultiEntity(vararg pairs: Pair<ISummoner, Int>) : ISummoner {
 
     private val entityPairList = listOf(*pairs)
 
-    override fun spawn(world: World, spawnProxy: SpawnProxy, players: Set<UUID>): Set<UUID> {
+    override fun summon(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID> {
         return entityPairList.flatMap { (entity, n) ->
             (1..n).flatMap { _ ->
-                entity.spawn(world, spawnProxy, players)
+                entity.summon(world, summonProxy, players)
             }
         }.toSet()
     }

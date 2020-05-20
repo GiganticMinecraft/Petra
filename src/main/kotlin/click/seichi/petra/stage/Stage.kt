@@ -1,8 +1,8 @@
 package click.seichi.petra.stage
 
 import click.seichi.petra.stage.generator.StageGenerator
-import click.seichi.petra.stage.spawn.SpawnProxy
 import click.seichi.petra.stage.stages.FirstLayer
+import click.seichi.petra.stage.summon.SummonProxy
 import click.seichi.petra.stage.wave.Wave
 
 /**
@@ -11,7 +11,7 @@ import click.seichi.petra.stage.wave.Wave
 enum class Stage(
         val key: String,
         val generator: StageGenerator,
-        val spawnProxy: SpawnProxy,
+        val summonProxy: SummonProxy,
         val startTime: Long,
         vararg _waves: Wave
 ) {

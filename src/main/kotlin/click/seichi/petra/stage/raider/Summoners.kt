@@ -9,8 +9,8 @@ import java.util.*
 /**
  * @author tar0ss
  */
-object Raiders {
-    val INFLAMMABLE_ZOMBIE: Spawnable = object : StageEntity(EntityType.ZOMBIE), AutoTarget, Named {
+object Summoners {
+    val INFLAMMABLE_ZOMBIE: ISummoner = object : Summoner(EntityType.ZOMBIE), AutoTarget, Named {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val zombie = entity as Zombie
@@ -27,7 +27,7 @@ object Raiders {
         }
     }
 
-    val CAPPED_SKELETON: Spawnable = object : StageEntity(EntityType.SKELETON), AutoTarget, Named {
+    val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON), AutoTarget, Named {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val living = entity as Skeleton
