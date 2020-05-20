@@ -1,18 +1,16 @@
 package click.seichi.petra.stage.stages
 
 import click.seichi.extension.setRegion
-import click.seichi.generator.FlowerPopulator
-import click.seichi.generator.GrassPopulator
-import click.seichi.generator.LakePopulator
-import click.seichi.generator.TreePopulator
+import click.seichi.generator.*
 import click.seichi.message.SoundMessage
 import click.seichi.message.TitleMessage
 import click.seichi.petra.stage.generator.RoundStageGenerator
-import click.seichi.petra.stage.raider.InflammableZombie
 import click.seichi.petra.stage.raider.MultiEntity
+import click.seichi.petra.stage.raider.Raiders
 import click.seichi.petra.stage.spawn.RoundStageSpawner
 import click.seichi.petra.stage.wave.SpawnData
 import click.seichi.petra.stage.wave.TimedWave
+import click.seichi.petra.stage.wave.Wave
 import click.seichi.petra.stage.wave.WaveData
 import org.bukkit.*
 import org.bukkit.generator.BlockPopulator
@@ -79,19 +77,26 @@ object FirstLayer {
                     LakePopulator(),
                     TreePopulator(),
                     GrassPopulator(),
-                    FlowerPopulator(Material.DANDELION, Material.POPPY)
+                    FlowerPopulator(Material.DANDELION, Material.POPPY),
+                    OrePopulator(Material.COAL_ORE, 15, 0..62, 0.9),
+                    OrePopulator(Material.DIAMOND_ORE, 1, 0..15, 0.9),
+                    OrePopulator(Material.IRON_ORE, 18, 0..62, 0.84),
+                    OrePopulator(Material.GOLD_ORE, 8, 0..50, 0.84),
+                    OrePopulator(Material.LAPIS_ORE, 3, 0..40, 0.4),
+                    OrePopulator(Material.REDSTONE_ORE, 3, 0..40, 0.4),
+                    OrePopulator(Material.EMERALD_ORE, 1, 0..30, 0.1)
             )
         }
     }
 
     val SPAWN_PROXY = RoundStageSpawner(RADIUS, DANGER_ZONE_LENGTH)
 
-    val WAVES = arrayOf(
+    val WAVES: Array<Wave> = arrayOf(
             TimedWave(
                     WaveData(mapOf(
                             10 to SpawnData(
                                     MultiEntity(
-                                            InflammableZombie() to 5
+                                            Raiders.INFLAMMABLE_ZOMBIE to 5
                                     ),
                                     SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
                             )

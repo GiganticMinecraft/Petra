@@ -18,11 +18,13 @@ class LakePopulator : BlockPopulator() {
             val chunkZ: Int = chunk.z
             val X = chunkX * 16 + random.nextInt(15) - 8
             val Z = chunkZ * 16 + random.nextInt(15) - 8
-            var Y = world.getHighestBlockYAt(X, Z)
+            var Y = world.maxHeight - 1
+            while (world.getBlockAt(X, Y, Z).type.isAir) {
+                Y--
+            }
+            if (Y < 0 || 255 <= Y) return
             val surfaceBlock = world.getBlockAt(X, Y, Z)
             if (surfaceBlock.type != Material.GRASS_BLOCK) return
-            if (Y < 0 || 255 <= Y) return
-//            Y -= 7
             Y -= 7
             block = world.getBlockAt(X + 8, Y, Z + 8)
             if (random.nextInt(100) < 90) block.type = Material.WATER else block.type = Material.LAVA // The chance of spawing a water or lava lake
