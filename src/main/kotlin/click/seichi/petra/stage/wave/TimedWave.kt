@@ -40,8 +40,9 @@ class TimedWave(
     private var remainNextSpawnSeconds: Int? = 0
 
     private lateinit var bar: BossBar
-
     private lateinit var raidBar: BossBar
+
+    private val entitySet = mutableSetOf<UUID>()
 
     private val timer = Timer(
             seconds,
@@ -60,12 +61,14 @@ class TimedWave(
                 spawn(spawnData)
             },
             onComplete = {
+                removeBar()
+                removeAllEntities()
                 end()
             }
     )
 
     private fun spawn(spawnData: SpawnData) {
-        spawnData.entity.spawn(world, spawnProxy, players)
+        entitySet.addAll(spawnData.entity.spawn(world, spawnProxy, players))
         spawnData.message.broadcast()
     }
 
@@ -117,9 +120,17 @@ class TimedWave(
         topBar.removeBar(TopBarConstants.RAID_TIME)
     }
 
-    private fun end() {
+    private fun removeBar() {
         bar.isVisible = false
+    }
+
+    private fun end() {
         subject.onNext(Unit)
+    }
+
+    private fun removeAllEntities() {
+        entitySet.mapNotNull { world.getEntity(it) }
+                .forEach { it.remove() }
     }
 
     override fun endAsObservable(): Observable<Unit> = subject
