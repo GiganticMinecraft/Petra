@@ -8,9 +8,9 @@ import click.seichi.petra.stage.generator.RoundStageGenerator
 import click.seichi.petra.stage.raider.MultiEntity
 import click.seichi.petra.stage.raider.Summoners
 import click.seichi.petra.stage.summon.RoundStageSummonProxy
+import click.seichi.petra.stage.wave.IWave
 import click.seichi.petra.stage.wave.SummonData
 import click.seichi.petra.stage.wave.TimedWave
-import click.seichi.petra.stage.wave.Wave
 import click.seichi.petra.stage.wave.WaveData
 import org.bukkit.*
 import org.bukkit.generator.BlockPopulator
@@ -91,7 +91,7 @@ object FirstLayer {
 
     val SPAWN_PROXY = RoundStageSummonProxy(RADIUS, DANGER_ZONE_LENGTH)
 
-    val WAVES: Array<Wave> = arrayOf(
+    val WAVES: Array<IWave> = arrayOf(
             TimedWave(
                     WaveData(mapOf(
                             10 to SummonData(

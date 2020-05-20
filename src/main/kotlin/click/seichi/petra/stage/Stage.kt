@@ -3,7 +3,7 @@ package click.seichi.petra.stage
 import click.seichi.petra.stage.generator.StageGenerator
 import click.seichi.petra.stage.stages.FirstLayer
 import click.seichi.petra.stage.summon.SummonProxy
-import click.seichi.petra.stage.wave.Wave
+import click.seichi.petra.stage.wave.IWave
 
 /**
  * @author tar0ss
@@ -13,7 +13,7 @@ enum class Stage(
         val generator: StageGenerator,
         val summonProxy: SummonProxy,
         val startTime: Long,
-        vararg _waves: Wave
+        vararg _waves: IWave
 ) {
     PETRA_ONE(
             FirstLayer.KEY,

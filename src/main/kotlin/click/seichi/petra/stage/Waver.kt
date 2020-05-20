@@ -4,7 +4,7 @@ import click.seichi.function.warning
 import click.seichi.game.IGame
 import click.seichi.petra.event.WaveEvent
 import click.seichi.petra.stage.summon.SummonProxy
-import click.seichi.petra.stage.wave.Wave
+import click.seichi.petra.stage.wave.IWave
 import org.bukkit.Bukkit
 
 /**
@@ -12,7 +12,7 @@ import org.bukkit.Bukkit
  */
 class Waver {
     private lateinit var game: IGame
-    private lateinit var waveList: List<Wave>
+    private lateinit var waveList: List<IWave>
     private lateinit var summonProxy: SummonProxy
 
 

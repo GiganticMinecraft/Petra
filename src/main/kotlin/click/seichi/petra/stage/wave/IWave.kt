@@ -7,7 +7,7 @@ import io.reactivex.Observable
 /**
  * @author tar0ss
  */
-interface Wave {
+interface IWave {
     fun start(index: Int, game: IGame, summonProxy: SummonProxy)
     fun endAsObservable(): Observable<Unit>
 }

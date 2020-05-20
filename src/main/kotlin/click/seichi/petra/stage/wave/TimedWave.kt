@@ -28,7 +28,7 @@ class TimedWave(
         private val raidData: WaveData,
         private val seconds: Int,
         private val startMessage: Message
-) : Wave {
+) : IWave {
 
     private val subject: Subject<Unit> = PublishSubject.create()
 
