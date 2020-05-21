@@ -44,7 +44,7 @@ class Facilitator {
 
     private fun nextSection() {
         if (++current < sectionList.size) startSection(current)
-        else end(StageResult.WIN)
+        else subject.onNext(StageResult.WIN)
     }
 
     private fun startSection(i: Int) {
@@ -54,15 +54,8 @@ class Facilitator {
                 .endAsObservable()
                 .take(1)
                 .subscribe { result ->
-                    when (result) {
-                        StageResult.WIN -> nextSection()
-                        else -> end(result)
-                    }
+                    if (result == StageResult.WIN) nextSection()
+                    else subject.onNext(result)
                 }
     }
-
-    private fun end(result: StageResult) {
-        subject.onNext(result)
-    }
-
 }

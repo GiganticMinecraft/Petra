@@ -58,18 +58,14 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
         Facilitator().start(this, stage)
                 .endAsObservable()
                 .take(1)
-                .subscribe { result ->
-                    result(result)
-                }
+                .subscribe { result(it) }
     }
 
     private fun result(result: StageResult) {
-        ResultSender().start(result, 10, this)
+        ResultSender(10).start(result, this)
                 .endAsObservable()
                 .take(1)
-                .subscribe {
-                    end()
-                }
+                .subscribe { end() }
     }
 
     private fun end() {

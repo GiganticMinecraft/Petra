@@ -121,7 +121,6 @@ object FirstLayer {
                     ).add(
                             SoundMessage(Sound.ENTITY_ILLUSIONER_CAST_SPELL, SoundCategory.BLOCKS, 2.0f, 0.3f)
                     )
-            ),
-            BreakSection(10)
+            )
     )
 }
