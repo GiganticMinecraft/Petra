@@ -3,6 +3,7 @@ package click.seichi.util
 import click.seichi.function.createInvisibleBossBar
 import org.bukkit.boss.BossBar
 import org.bukkit.entity.Player
+import java.util.*
 
 /**
  * @author tar0ss
@@ -13,16 +14,23 @@ class TopBar {
 
     private val playerSet = mutableSetOf<Player>()
 
+    private val barStack = Stack<BossBar>()
+
     fun register(key: String): BossBar {
-        val bar = createInvisibleBossBar()
-        playerSet.forEach { bar.addPlayer(it) }
-        barMap[key] = bar
-        return bar
+        return if (barStack.isNotEmpty()) {
+            barStack.pop()
+        } else {
+            createInvisibleBossBar().apply {
+                playerSet.forEach { this.addPlayer(it) }
+                barMap[key] = this
+            }
+        }
     }
 
     fun removeBar(key: String) {
         val bar = findBar(key) ?: return
-        bar.removeAll()
+        bar.isVisible = false
+        barStack.push(bar)
     }
 
     fun findBar(key: String) = barMap[key]
