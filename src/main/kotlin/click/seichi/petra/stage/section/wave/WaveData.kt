@@ -1,4 +1,4 @@
-package click.seichi.petra.stage.wave
+package click.seichi.petra.stage.section.wave
 
 /**
  * @author tar0ss

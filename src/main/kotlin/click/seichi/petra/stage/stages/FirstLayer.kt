@@ -4,15 +4,20 @@ import click.seichi.extension.setRegion
 import click.seichi.generator.*
 import click.seichi.message.SoundMessage
 import click.seichi.message.TitleMessage
+import click.seichi.petra.GameMessage
+import click.seichi.petra.GameSound
 import click.seichi.petra.stage.generator.RoundStageGenerator
 import click.seichi.petra.stage.raider.MultiEntity
+import click.seichi.petra.stage.raider.Summoner
 import click.seichi.petra.stage.raider.Summoners
+import click.seichi.petra.stage.section.BreakSection
+import click.seichi.petra.stage.section.Section
+import click.seichi.petra.stage.section.wave.SummonData
+import click.seichi.petra.stage.section.wave.TimedWave
+import click.seichi.petra.stage.section.wave.WaveData
 import click.seichi.petra.stage.summon.RoundStageSummonProxy
-import click.seichi.petra.stage.wave.IWave
-import click.seichi.petra.stage.wave.SummonData
-import click.seichi.petra.stage.wave.TimedWave
-import click.seichi.petra.stage.wave.WaveData
 import org.bukkit.*
+import org.bukkit.entity.EntityType
 import org.bukkit.generator.BlockPopulator
 import org.bukkit.generator.ChunkGenerator
 import org.bukkit.util.noise.PerlinOctaveGenerator
@@ -91,20 +96,32 @@ object FirstLayer {
 
     val SPAWN_PROXY = RoundStageSummonProxy(RADIUS, DANGER_ZONE_LENGTH)
 
-    val WAVES: Array<IWave> = arrayOf(
-            TimedWave(
+    val SECTIONS: Array<Section> = arrayOf(
+            BreakSection(10, GameMessage.START.add(GameSound.START_GAME)),
+            TimedWave(1, 20,
                     WaveData(mapOf(
+                            0 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.ZOMBIE) to 10,
+                                            Summoners.INFLAMMABLE_ZOMBIE to 5,
+                                            Summoner(EntityType.CREEPER) to 2
+                                    ),
+                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
+                            ),
                             10 to SummonData(
                                     MultiEntity(
-                                            Summoners.INFLAMMABLE_ZOMBIE to 5
+                                            Summoner(EntityType.SKELETON) to 10,
+                                            Summoners.CAPPED_SKELETON to 5,
+                                            Summoner(EntityType.CREEPER) to 2
                                     ),
                                     SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
                             )
-                    )), 20,
+                    )),
                     TitleMessage("${ChatColor.WHITE}Wave1 ${ChatColor.RED}襲撃", "${ChatColor.AQUA}2分間生き延びろ"
                     ).add(
                             SoundMessage(Sound.ENTITY_ILLUSIONER_CAST_SPELL, SoundCategory.BLOCKS, 2.0f, 0.3f)
                     )
-            )
+            ),
+            BreakSection(10)
     )
 }

@@ -1,9 +1,9 @@
 package click.seichi.petra.stage
 
 import click.seichi.petra.stage.generator.StageGenerator
+import click.seichi.petra.stage.section.Section
 import click.seichi.petra.stage.stages.FirstLayer
 import click.seichi.petra.stage.summon.SummonProxy
-import click.seichi.petra.stage.wave.IWave
 
 /**
  * @author tar0ss
@@ -13,18 +13,18 @@ enum class Stage(
         val generator: StageGenerator,
         val summonProxy: SummonProxy,
         val startTime: Long,
-        vararg _waves: IWave
+        vararg _sections: Section
 ) {
     PETRA_ONE(
             FirstLayer.KEY,
             FirstLayer.GENERATOR,
             FirstLayer.SPAWN_PROXY,
             6000L,
-            *FirstLayer.WAVES
+            *FirstLayer.SECTIONS
     )
     ;
 
-    val waves = _waves
+    val sections = _sections
 
     companion object {
         val keyMap = values().map { it.key to it }.toMap()

@@ -1,4 +1,4 @@
-package click.seichi.petra.stage.wave
+package click.seichi.petra.stage.section.wave
 
 import click.seichi.message.Message
 import click.seichi.petra.stage.raider.ISummoner

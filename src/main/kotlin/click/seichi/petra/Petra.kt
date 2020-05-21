@@ -9,8 +9,8 @@ import click.seichi.game.command.ReadyCommand
 import click.seichi.game.listener.DebugListener
 import click.seichi.game.listener.PlayerConnectionListener
 import click.seichi.petra.game.PetraGame
-import click.seichi.petra.listener.MonsterListener
 import click.seichi.petra.listener.PlayerNavigator
+import click.seichi.petra.listener.SummonerListener
 import click.seichi.petra.listener.WorldListener
 import click.seichi.petra.stage.Stage
 import org.bukkit.command.CommandExecutor
@@ -47,7 +47,7 @@ class Petra : Plugin() {
                 game,
                 WorldListener(),
                 DebugListener(),
-                MonsterListener()
+                SummonerListener()
         )
     }
 

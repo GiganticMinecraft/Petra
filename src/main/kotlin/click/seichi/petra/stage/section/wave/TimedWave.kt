@@ -1,8 +1,10 @@
-package click.seichi.petra.stage.wave
+package click.seichi.petra.stage.section.wave
 
 import click.seichi.game.IGame
 import click.seichi.message.Message
 import click.seichi.petra.TopBarConstants
+import click.seichi.petra.stage.StageResult
+import click.seichi.petra.stage.section.Section
 import click.seichi.petra.stage.summon.SummonProxy
 import click.seichi.util.Timer
 import click.seichi.util.TopBar
@@ -20,23 +22,24 @@ import java.util.*
  * 時間制ウェーブ
  * @author tar0ss
  *
- * @param raidData
+ * @param waveNum ウェーブ数
  * @param seconds 終了時間
+ * @param raidData
  * @param startMessage
  */
-class TimedWave(
-        private val raidData: WaveData,
+open class TimedWave(
+        private val waveNum: Int,
         private val seconds: Int,
+        private val raidData: WaveData,
         private val startMessage: Message
-) : IWave {
+) : Section {
 
-    private val subject: Subject<Unit> = PublishSubject.create()
+    private val subject: Subject<StageResult> = PublishSubject.create()
 
     private lateinit var summonProxy: SummonProxy
     private lateinit var world: World
     private lateinit var players: Set<UUID>
     private lateinit var topBar: TopBar
-    private var index: Int = 0
     private var remainNextSpawnSeconds: Int? = 0
 
     private lateinit var bar: BossBar
@@ -57,13 +60,13 @@ class TimedWave(
 
                 val spawnData = raidData.findSpawnData(elapsedSeconds) ?: return@Timer
                 if (hasNextSpawn) remainNextSpawnSeconds = _remainNextSpawnSeconds
-                else removeRaidBar()
+                else topBar.removeBar(TopBarConstants.RAID_TIME)
                 summon(spawnData)
             },
             onComplete = {
-                removeBar()
+                topBar.removeBar(TopBarConstants.WAVE)
                 removeAllEntities()
-                end()
+                subject.onNext(StageResult.WIN)
             }
     )
 
@@ -72,13 +75,12 @@ class TimedWave(
         summonData.message.broadcast()
     }
 
-    override fun start(index: Int, game: IGame, summonProxy: SummonProxy) {
+    override fun start(game: IGame, summonProxy: SummonProxy) {
         this.summonProxy = summonProxy
         this.world = game.world
         this.players = game.players
-        this.index = index
         this.topBar = game.topBar
-        this.bar = topBar.findBar(TopBarConstants.WAVE)!!
+        this.bar = topBar.register(TopBarConstants.WAVE)
         remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(0)
         startMessage.broadcast()
         setupBar()
@@ -98,7 +100,7 @@ class TimedWave(
     }
 
     private fun updateBar(remainSeconds: Int) {
-        val title = "${ChatColor.WHITE}Wave${index.plus(1)} 残り時間 ${remainSeconds}秒"
+        val title = "${ChatColor.WHITE}Wave${waveNum} 残り時間 ${remainSeconds}秒"
         bar.setTitle(title)
         bar.progress = remainSeconds.toDouble() / seconds.toDouble()
     }
@@ -116,22 +118,10 @@ class TimedWave(
         raidBar.progress = remainSeconds.toDouble() / remainNextSpawnSeconds!!.toDouble()
     }
 
-    private fun removeRaidBar() {
-        topBar.removeBar(TopBarConstants.RAID_TIME)
-    }
-
-    private fun removeBar() {
-        bar.isVisible = false
-    }
-
-    private fun end() {
-        subject.onNext(Unit)
-    }
-
     private fun removeAllEntities() {
         entitySet.mapNotNull { world.getEntity(it) }
                 .forEach { it.remove() }
     }
 
-    override fun endAsObservable(): Observable<Unit> = subject
+    override fun endAsObservable(): Observable<StageResult> = subject
 }
