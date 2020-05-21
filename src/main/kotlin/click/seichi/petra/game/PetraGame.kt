@@ -6,7 +6,9 @@ import click.seichi.game.event.CountDownEvent
 import click.seichi.game.event.PrepareEvent
 import click.seichi.petra.event.StartGameEvent
 import click.seichi.petra.stage.Facilitator
+import click.seichi.petra.stage.ResultSender
 import click.seichi.petra.stage.Stage
+import click.seichi.petra.stage.StageResult
 import click.seichi.util.Random
 import click.seichi.util.Timer
 import click.seichi.util.TopBar
@@ -57,8 +59,24 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
                 .endAsObservable()
                 .take(1)
                 .subscribe { result ->
-                    // TODO
+                    result(result)
                 }
+    }
+
+    private fun result(result: StageResult) {
+        ResultSender().start(result, 10, this)
+                .endAsObservable()
+                .take(1)
+                .subscribe {
+                    end()
+                }
+    }
+
+    private fun end() {
+        Bukkit.getOnlinePlayers().forEach { player ->
+            player.kickPlayer("Thank you for playing!!")
+        }
+        Bukkit.getServer().shutdown()
     }
 
     @EventHandler(ignoreCancelled = true)

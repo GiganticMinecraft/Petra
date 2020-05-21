@@ -9,6 +9,6 @@ import io.reactivex.Observable
  * @author tar0ss
  */
 interface Section {
-    fun start(game: IGame, summonProxy: SummonProxy)
+    fun start(game: IGame, summonProxy: SummonProxy): Section
     fun endAsObservable(): Observable<StageResult>
 }

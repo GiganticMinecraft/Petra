@@ -11,6 +11,7 @@ import io.reactivex.subjects.Subject
 import org.bukkit.Bukkit
 
 /**
+ * ゲームの進行役
  * @author tar0ss
  */
 class Facilitator {
@@ -50,7 +51,7 @@ class Facilitator {
         val section = sectionList[i]
         Bukkit.getPluginManager().callEvent(WaveEvent(i))
         section.start(game, summonProxy)
-        section.endAsObservable()
+                .endAsObservable()
                 .take(1)
                 .subscribe { result ->
                     when (result) {

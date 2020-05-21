@@ -75,7 +75,7 @@ open class TimedWave(
         summonData.message.broadcast()
     }
 
-    override fun start(game: IGame, summonProxy: SummonProxy) {
+    override fun start(game: IGame, summonProxy: SummonProxy): Section {
         this.summonProxy = summonProxy
         this.world = game.world
         this.players = game.players
@@ -90,6 +90,7 @@ open class TimedWave(
         }
 
         timer.start()
+        return this
     }
 
     private fun setupBar() {
