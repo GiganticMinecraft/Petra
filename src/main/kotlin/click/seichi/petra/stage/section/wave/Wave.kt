@@ -37,7 +37,7 @@ open class Wave(
         private val raidData: WaveData
 ) : Section {
 
-    private val subject: Subject<StageResult> = PublishSubject.create()
+    protected val subject: Subject<StageResult> = PublishSubject.create()
     override fun endAsObservable(): Observable<StageResult> = subject.doOnDispose {
         timer.cancel()
     }
@@ -49,11 +49,12 @@ open class Wave(
     protected lateinit var players: Set<UUID>
     protected lateinit var topBar: TopBar
     private var remainNextSpawnSeconds: Int? = 0
+    protected var hasNextSpawn = true
 
     protected lateinit var bar: BossBar
     protected lateinit var raidBar: BossBar
 
-    private val entitySet = mutableSetOf<UUID>()
+    protected val entitySet = mutableSetOf<UUID>()
 
     private val timer = Timer(
             seconds,
@@ -62,7 +63,7 @@ open class Wave(
             onNext = { remainSeconds ->
                 updateBar(remainSeconds)
                 val elapsedSeconds = seconds - remainSeconds
-                val hasNextSpawn = raidData.hasNextSpawn(elapsedSeconds)
+                hasNextSpawn = raidData.hasNextSpawn(elapsedSeconds)
                 val _remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(elapsedSeconds)
                 if (hasNextSpawn) updateRaidBar(_remainNextSpawnSeconds!!)
 
@@ -74,7 +75,7 @@ open class Wave(
             onComplete = {
                 topBar.removeBar(TopBarConstants.WAVE)
                 removeAllEntities()
-                subject.onNext(StageResult.WIN)
+                onTimeUp()
             },
             onCancelled = {
                 topBar.removeBar(TopBarConstants.WAVE)
@@ -82,6 +83,10 @@ open class Wave(
                 removeAllEntities()
             }
     )
+
+    open fun onTimeUp() {
+        subject.onNext(StageResult.WIN)
+    }
 
     private fun summon(summonData: SummonData) {
         val summonedSet = summonData.summoner.summon(world, summonProxy, players)
