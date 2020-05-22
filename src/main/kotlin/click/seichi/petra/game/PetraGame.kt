@@ -89,12 +89,12 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
     private fun shouldChanged(loc: Location): Boolean {
         return when {
             // 準備中
-            !isStarted -> true
+            !isStarted -> false
             // ゲーム終了
-            isfinished -> true
+            isfinished -> false
             // セーフゾーン以外
-            !stage.generator.isSafeZone(loc.blockX, loc.blockY, loc.blockZ) -> true
-            else -> false
+            !stage.generator.isSafeZone(loc.blockX, loc.blockY, loc.blockZ) -> false
+            else -> true
         }
     }
 

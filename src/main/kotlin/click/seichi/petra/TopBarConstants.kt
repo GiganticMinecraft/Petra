@@ -6,4 +6,5 @@ package click.seichi.petra
 object TopBarConstants {
     val WAVE = "wave"
     val RAID_TIME = "raid_time"
+    val ENEMY_COUNT = "enemy_count"
 }

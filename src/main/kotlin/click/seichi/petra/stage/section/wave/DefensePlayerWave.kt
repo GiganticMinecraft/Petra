@@ -58,6 +58,7 @@ class DefensePlayerWave(
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onDeath(event: PlayerDeathEvent) {
+        if (!isStarted) return
         if (event.entity.uniqueId == target.uniqueId) {
             subject.onNext(StageResult.DEATH_TARGET_ENTITY)
         }

@@ -49,7 +49,6 @@ open class Wave(
     protected lateinit var players: Set<UUID>
     protected lateinit var topBar: TopBar
     private var remainNextSpawnSeconds: Int? = 0
-    protected var hasNextSpawn = true
 
     protected lateinit var bar: BossBar
     protected lateinit var raidBar: BossBar
@@ -63,7 +62,7 @@ open class Wave(
             onNext = { remainSeconds ->
                 updateBar(remainSeconds)
                 val elapsedSeconds = seconds - remainSeconds
-                hasNextSpawn = raidData.hasNextSpawn(elapsedSeconds)
+                val hasNextSpawn = raidData.hasNextSpawn(elapsedSeconds)
                 val _remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(elapsedSeconds)
                 if (hasNextSpawn) updateRaidBar(_remainNextSpawnSeconds!!)
 
@@ -84,16 +83,18 @@ open class Wave(
             }
     )
 
+    protected val isStarted
+        get() = timer.isStarted
+
     open fun onTimeUp() {
         subject.onNext(StageResult.WIN)
     }
 
     private fun summon(summonData: SummonData) {
         val summonedSet = summonData.summoner.summon(world, summonProxy, players)
+        entitySet.addAll(summonedSet)
         summonedSet.mapNotNull { Bukkit.getServer().getEntity(it) }
                 .forEach { onSummoned(it) }
-
-        entitySet.addAll(summonedSet)
         summonData.message.broadcast()
     }
 

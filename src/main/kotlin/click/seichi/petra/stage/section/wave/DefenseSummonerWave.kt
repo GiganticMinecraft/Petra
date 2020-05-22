@@ -63,6 +63,7 @@ class DefenseSummonerWave(
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onDeath(event: EntityDeathEvent) {
+        if (!isStarted) return
         if (event.entity.uniqueId == target.uniqueId) {
             subject.onNext(StageResult.DEATH_TARGET_ENTITY)
         }

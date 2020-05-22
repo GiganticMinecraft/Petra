@@ -53,16 +53,15 @@ class DefeatSummonerWave(
     }
 
     override fun onTimeUp() {
+        if (defeatedNum == targetSet.size) subject.onNext(StageResult.WIN)
         subject.onNext(StageResult.OVER_THE_TIME_LIMIT)
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onDeath(event: EntityDeathEvent) {
+        if (!isStarted) return
         if (targetSet.contains(event.entity.uniqueId)) {
             defeatedNum++
-        }
-        if (defeatedNum == targetSet.size) {
-            subject.onNext(StageResult.WIN)
         }
     }
 }
