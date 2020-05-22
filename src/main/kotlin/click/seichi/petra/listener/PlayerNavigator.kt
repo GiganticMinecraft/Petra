@@ -7,6 +7,7 @@ import click.seichi.game.event.PlayerJoinGameEvent
 import click.seichi.game.event.PlayerReadyEvent
 import click.seichi.petra.GameMessage
 import click.seichi.petra.GameSound
+import click.seichi.petra.event.StartGameEvent
 import click.seichi.util.TopBar
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
@@ -64,5 +65,10 @@ class PlayerNavigator(
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onQuitInGame(event: PlayerQuitEvent) {
         bar.removePlayer(event.player)
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onStartGame(event: StartGameEvent) {
+        GameMessage.START.add(GameSound.START_GAME).broadcast()
     }
 }
