@@ -6,8 +6,9 @@ import click.seichi.message.SoundMessage
 import click.seichi.petra.stage.generator.RoundStageGenerator
 import click.seichi.petra.stage.section.BreakSection
 import click.seichi.petra.stage.section.Section
+import click.seichi.petra.stage.section.wave.DefensePlayerWave
+import click.seichi.petra.stage.section.wave.DefenseSummonerWave
 import click.seichi.petra.stage.section.wave.SummonData
-import click.seichi.petra.stage.section.wave.Wave
 import click.seichi.petra.stage.section.wave.WaveData
 import click.seichi.petra.stage.summon.RoundStageSummonProxy
 import click.seichi.petra.stage.summoner.MultiEntity
@@ -98,7 +99,19 @@ object FirstLayer {
 
     val SECTIONS: Array<Section> = arrayOf(
             BreakSection(10),
-            Wave(1, 5,
+            DefenseSummonerWave(1, 1,
+                    WaveData(mapOf(
+                            30 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.ZOMBIE) to 10,
+                                            Summoners.INFLAMMABLE_ZOMBIE to 5,
+                                            Summoner(EntityType.CREEPER) to 2
+                                    ),
+                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
+                            )
+                    )), Summoner(EntityType.VILLAGER, Summoner.SummonCase.CENTER)
+            ), BreakSection(10),
+            DefensePlayerWave(1, 1,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
@@ -118,5 +131,25 @@ object FirstLayer {
                             )
                     ))
             )
+//            Wave(1, 1,
+//                    WaveData(mapOf(
+//                            0 to SummonData(
+//                                    MultiEntity(
+//                                            Summoner(EntityType.ZOMBIE) to 10,
+//                                            Summoners.INFLAMMABLE_ZOMBIE to 5,
+//                                            Summoner(EntityType.CREEPER) to 2
+//                                    ),
+//                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
+//                            ),
+//                            10 to SummonData(
+//                                    MultiEntity(
+//                                            Summoner(EntityType.SKELETON) to 10,
+//                                            Summoners.CAPPED_SKELETON to 5,
+//                                            Summoner(EntityType.CREEPER) to 2
+//                                    ),
+//                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
+//                            )
+//                    ))
+//            )
     )
 }

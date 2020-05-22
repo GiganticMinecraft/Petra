@@ -25,4 +25,13 @@ class RoundStageSummonProxy(
         return if (function == null) world.spawnEntity(loc, entityType)
         else world.spawn(loc, entityType.entityClass as Class<Entity>, function)
     }
+
+    override fun summonToCenter(world: World, entityType: EntityType, function: Consumer<Entity>?): Entity {
+        val x = 0.0
+        val z = 0.0
+        val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
+        val loc = Location(world, x, (highestHeight + 2).toDouble(), z)
+        return if (function == null) world.spawnEntity(loc, entityType)
+        else world.spawn(loc, entityType.entityClass as Class<Entity>, function)
+    }
 }

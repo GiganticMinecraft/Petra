@@ -10,4 +10,5 @@ import org.bukkit.util.Consumer
  */
 interface SummonProxy {
     fun summon(world: World, entityType: EntityType, function: Consumer<Entity>? = null): Entity
+    fun summonToCenter(world: World, entityType: EntityType, function: Consumer<Entity>? = null): Entity
 }
