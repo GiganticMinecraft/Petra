@@ -98,7 +98,7 @@ object FirstLayer {
 
     val SECTIONS: Array<Section> = arrayOf(
             BreakSection(10),
-            Wave(1, 20,
+            Wave(1, 5,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
