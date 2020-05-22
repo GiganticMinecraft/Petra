@@ -6,6 +6,7 @@ import click.seichi.petra.event.WaveEvent
 import click.seichi.petra.stage.section.Section
 import click.seichi.petra.stage.summon.SummonProxy
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import org.bukkit.Bukkit
@@ -17,7 +18,9 @@ import org.bukkit.Bukkit
 class Facilitator {
     private val subject: Subject<StageResult> = PublishSubject.create()
 
-    fun endAsObservable(): Observable<StageResult> = subject
+    fun endAsObservable(): Observable<StageResult> = subject.doOnDispose {
+        disposable.dispose()
+    }
 
     private lateinit var game: IGame
     private lateinit var sectionList: List<Section>
@@ -25,6 +28,8 @@ class Facilitator {
 
     private var current = -1
     private var isStarted = false
+
+    private lateinit var disposable: Disposable
 
     fun start(game: IGame, stage: Stage): Facilitator {
         if (isStarted) {
@@ -50,7 +55,7 @@ class Facilitator {
     private fun startSection(i: Int) {
         val section = sectionList[i]
         Bukkit.getPluginManager().callEvent(WaveEvent(i))
-        section.start(game, summonProxy)
+        disposable = section.start(game, summonProxy)
                 .endAsObservable()
                 .take(1)
                 .subscribe { result ->

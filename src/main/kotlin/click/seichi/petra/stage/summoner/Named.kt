@@ -1,4 +1,4 @@
-package click.seichi.petra.stage.raider
+package click.seichi.petra.stage.summoner
 
 /**
  * @author tar0ss

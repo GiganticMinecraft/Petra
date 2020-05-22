@@ -2,7 +2,6 @@ package click.seichi.petra.stage
 
 import click.seichi.game.IGame
 import click.seichi.message.ActionMessage
-import click.seichi.message.TitleMessage
 import click.seichi.util.Timer
 import click.seichi.util.TopBar
 import io.reactivex.Observable
@@ -56,7 +55,7 @@ class ResultSender(private val seconds: Int) {
 //        this.bar = topBar.register(TopBarConstants.WAVE)
         this.result = result
 
-        TitleMessage("終了!!", "").broadcast()
+        result.message.broadcast()
 
         timer.start()
         return this

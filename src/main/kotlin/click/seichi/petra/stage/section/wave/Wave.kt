@@ -1,7 +1,10 @@
 package click.seichi.petra.stage.section.wave
 
+import click.seichi.function.getNearestPlayer
 import click.seichi.game.IGame
 import click.seichi.message.Message
+import click.seichi.message.SoundMessage
+import click.seichi.message.TitleMessage
 import click.seichi.petra.TopBarConstants
 import click.seichi.petra.stage.StageResult
 import click.seichi.petra.stage.section.Section
@@ -11,39 +14,44 @@ import click.seichi.util.TopBar
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import org.bukkit.ChatColor
-import org.bukkit.World
+import org.bukkit.*
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
 import org.bukkit.boss.BossBar
+import org.bukkit.entity.Entity
+import org.bukkit.entity.Mob
 import java.util.*
 
 /**
  * 時間制ウェーブ
+ * 〇分間生き延びろ
  * @author tar0ss
  *
  * @param waveNum ウェーブ数
- * @param seconds 終了時間
+ * @param minutes 終了時間
  * @param raidData
- * @param startMessage
  */
-open class TimedWave(
+open class Wave(
         private val waveNum: Int,
-        private val seconds: Int,
-        private val raidData: WaveData,
-        private val startMessage: Message
+        private val minutes: Int,
+        private val raidData: WaveData
 ) : Section {
 
     private val subject: Subject<StageResult> = PublishSubject.create()
+    override fun endAsObservable(): Observable<StageResult> = subject.doOnDispose {
+        timer.cancel()
+    }
 
-    private lateinit var summonProxy: SummonProxy
-    private lateinit var world: World
-    private lateinit var players: Set<UUID>
-    private lateinit var topBar: TopBar
+    protected val seconds = minutes * 60
+
+    protected lateinit var summonProxy: SummonProxy
+    protected lateinit var world: World
+    protected lateinit var players: Set<UUID>
+    protected lateinit var topBar: TopBar
     private var remainNextSpawnSeconds: Int? = 0
 
-    private lateinit var bar: BossBar
-    private lateinit var raidBar: BossBar
+    protected lateinit var bar: BossBar
+    protected lateinit var raidBar: BossBar
 
     private val entitySet = mutableSetOf<UUID>()
 
@@ -67,12 +75,27 @@ open class TimedWave(
                 topBar.removeBar(TopBarConstants.WAVE)
                 removeAllEntities()
                 subject.onNext(StageResult.WIN)
+            },
+            onCancelled = {
+                topBar.removeBar(TopBarConstants.WAVE)
+                topBar.removeBar(TopBarConstants.RAID_TIME)
+                removeAllEntities()
             }
     )
 
     private fun summon(summonData: SummonData) {
-        entitySet.addAll(summonData.summoner.summon(world, summonProxy, players))
+        val summonedSet = summonData.summoner.summon(world, summonProxy, players)
+        summonedSet.mapNotNull { Bukkit.getServer().getEntity(it) }
+                .forEach { onSummoned(it) }
+
+        entitySet.addAll(summonedSet)
         summonData.message.broadcast()
+    }
+
+    protected open fun onSummoned(entity: Entity) {
+        if (entity is Mob) {
+            entity.target = entity.getNearestPlayer(players)
+        }
     }
 
     override fun start(game: IGame, summonProxy: SummonProxy): Section {
@@ -81,8 +104,11 @@ open class TimedWave(
         this.players = game.players
         this.topBar = game.topBar
         this.bar = topBar.register(TopBarConstants.WAVE)
+
+        onStart()
+
         remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(0)
-        startMessage.broadcast()
+        getStartMessage().broadcast()
         setupBar()
         if (raidData.hasNextSpawn(0)) {
             this.raidBar = topBar.register(TopBarConstants.RAID_TIME)
@@ -93,27 +119,44 @@ open class TimedWave(
         return this
     }
 
-    private fun setupBar() {
+    protected open fun onStart() {
+    }
+
+    protected open fun getStartMessage(): Message {
+        return TitleMessage(
+                "${ChatColor.WHITE}Wave$waveNum ${ChatColor.RED}襲撃",
+                "${ChatColor.AQUA}${minutes}分間生き延びろ"
+        ).add(
+                SoundMessage(
+                        Sound.ENTITY_ILLUSIONER_CAST_SPELL,
+                        SoundCategory.BLOCKS,
+                        2.0f,
+                        0.3f
+                )
+        )
+    }
+
+    protected open fun setupBar() {
         bar.style = BarStyle.SEGMENTED_20
         bar.color = BarColor.WHITE
         updateBar(seconds)
         bar.isVisible = true
     }
 
-    private fun updateBar(remainSeconds: Int) {
+    protected open fun updateBar(remainSeconds: Int) {
         val title = "${ChatColor.WHITE}Wave${waveNum} 残り時間 ${remainSeconds}秒"
         bar.setTitle(title)
         bar.progress = remainSeconds.toDouble() / seconds.toDouble()
     }
 
-    private fun setupRaidBar() {
+    protected open fun setupRaidBar() {
         raidBar.style = BarStyle.SEGMENTED_20
         raidBar.color = BarColor.RED
         updateRaidBar(remainNextSpawnSeconds!!)
         raidBar.isVisible = true
     }
 
-    private fun updateRaidBar(remainSeconds: Int) {
+    protected open fun updateRaidBar(remainSeconds: Int) {
         val title = "${ChatColor.RED}次の襲撃まで ${remainSeconds}秒"
         raidBar.setTitle(title)
         raidBar.progress = remainSeconds.toDouble() / remainNextSpawnSeconds!!.toDouble()
@@ -124,5 +167,4 @@ open class TimedWave(
                 .forEach { it.remove() }
     }
 
-    override fun endAsObservable(): Observable<StageResult> = subject
 }

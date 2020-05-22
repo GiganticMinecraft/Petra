@@ -1,16 +1,17 @@
-package click.seichi.petra.stage.raider
+package click.seichi.petra.stage.summoner
 
-import click.seichi.function.getNearestPlayer
 import org.bukkit.Material
-import org.bukkit.entity.*
+import org.bukkit.entity.Entity
+import org.bukkit.entity.EntityType
+import org.bukkit.entity.Skeleton
+import org.bukkit.entity.Zombie
 import org.bukkit.inventory.ItemStack
-import java.util.*
 
 /**
  * @author tar0ss
  */
 object Summoners {
-    val INFLAMMABLE_ZOMBIE: ISummoner = object : Summoner(EntityType.ZOMBIE), AutoTarget, Named {
+    val INFLAMMABLE_ZOMBIE: ISummoner = object : Summoner(EntityType.ZOMBIE), Named {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val zombie = entity as Zombie
@@ -18,16 +19,12 @@ object Summoners {
             zombie.setShouldBurnInDay(false)
         }
 
-        override fun findTarget(self: LivingEntity, players: Set<UUID>): LivingEntity? {
-            return self.getNearestPlayer(players)
-        }
-
         override fun getName(): String {
             return "アウトドア派ゾンビ"
         }
     }
 
-    val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON), AutoTarget, Named {
+    val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON), Named {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val living = entity as Skeleton
@@ -35,10 +32,6 @@ object Summoners {
                 it.helmetDropChance = 0F
                 it.helmet = ItemStack(Material.LEATHER_HELMET)
             }
-        }
-
-        override fun findTarget(self: LivingEntity, players: Set<UUID>): LivingEntity? {
-            return self.getNearestPlayer(players)
         }
 
         override fun getName(): String {

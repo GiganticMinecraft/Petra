@@ -1,7 +1,6 @@
 package click.seichi.petra.stage.section
 
 import click.seichi.game.IGame
-import click.seichi.message.Message
 import click.seichi.petra.TopBarConstants
 import click.seichi.petra.stage.StageResult
 import click.seichi.petra.stage.summon.SummonProxy
@@ -19,11 +18,14 @@ import org.bukkit.boss.BossBar
  * @author tar0ss
  */
 class BreakSection(
-        private val seconds: Int,
-        private val startMessage: Message? = null
+        private val seconds: Int
 ) : Section {
 
     private val subject: Subject<StageResult> = PublishSubject.create()
+
+    override fun endAsObservable(): Observable<StageResult> = subject.doOnDispose {
+        timer.cancel()
+    }
 
     private lateinit var topBar: TopBar
     private lateinit var bar: BossBar
@@ -38,6 +40,9 @@ class BreakSection(
             onComplete = {
                 topBar.removeBar(TopBarConstants.WAVE)
                 subject.onNext(StageResult.WIN)
+            },
+            onCancelled = {
+                topBar.removeBar(TopBarConstants.WAVE)
             }
     )
 
@@ -58,10 +63,7 @@ class BreakSection(
         this.topBar = game.topBar
         this.bar = topBar.register(TopBarConstants.WAVE)
         setupBar()
-        startMessage?.broadcast()
         timer.start()
         return this
     }
-
-    override fun endAsObservable(): Observable<StageResult> = subject
 }

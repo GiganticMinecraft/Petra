@@ -56,9 +56,6 @@ class PlayerLocator(
             if (players.contains(player.uniqueId)) {
                 leftPlayers.add(player.uniqueId)
                 players.remove(player.uniqueId)
-                if (preparator.isReady(player) && !isStarted) {
-                    preparator.cancelReady(player)
-                }
                 Bukkit.getPluginManager().callEvent(PlayerQuitInGameEvent(player))
                 return "${player.name} が退場しました"
             } else {
@@ -69,6 +66,9 @@ class PlayerLocator(
             }
         } else {
             // キャンセル
+            if (preparator.isReady(player) && !isStarted) {
+                preparator.cancelReady(player)
+            }
             players.remove(player.uniqueId)
             Bukkit.getPluginManager().callEvent(PlayerQuitGameEvent(player))
             return "${player.name} が退場しました"

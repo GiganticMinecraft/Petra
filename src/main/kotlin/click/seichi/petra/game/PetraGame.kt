@@ -1,9 +1,7 @@
 package click.seichi.petra.game
 
 import click.seichi.game.IGame
-import click.seichi.game.event.CancelPrepareEvent
-import click.seichi.game.event.CountDownEvent
-import click.seichi.game.event.PrepareEvent
+import click.seichi.game.event.*
 import click.seichi.petra.event.StartGameEvent
 import click.seichi.petra.stage.Facilitator
 import click.seichi.petra.stage.ResultSender
@@ -13,7 +11,10 @@ import click.seichi.util.Random
 import click.seichi.util.Timer
 import click.seichi.util.TopBar
 import com.destroystokyo.paper.event.block.BlockDestroyEvent
+import io.reactivex.disposables.Disposable
 import org.bukkit.Bukkit
+import org.bukkit.GameMode
+import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -32,6 +33,8 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
     override var isStarted = false
         private set
+    var isfinished = false
+        private set
 
     override val players = mutableSetOf<UUID>()
 
@@ -42,6 +45,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
     override val topBar: TopBar = TopBar()
 
     private val count = 5
+    private lateinit var disposable: Disposable
 
     private val timer = Timer(count,
             onNext = { remainSeconds ->
@@ -54,14 +58,21 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
         Bukkit.getPluginManager().callEvent(StartGameEvent())
         world.time = stage.startTime
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a[gamemode=survival] *")
-        Facilitator().start(this, stage)
+        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a *")
+        disposable = Facilitator().start(this, stage)
                 .endAsObservable()
                 .take(1)
                 .subscribe { result(it) }
     }
 
     private fun result(result: StageResult) {
+        disposable.dispose()
+        isfinished = true
+        players.mapNotNull { Bukkit.getServer().getPlayer(it) }
+                .forEach {
+                    it.teleport(stage.generator.getFixedSpawnLocation(world, Random.generator)!!)
+                }
+
         ResultSender(10).start(result, this)
                 .endAsObservable()
                 .take(1)
@@ -75,28 +86,34 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
         Bukkit.getServer().shutdown()
     }
 
-    @EventHandler(ignoreCancelled = true)
-    fun onBlockBreak(event: BlockBreakEvent) {
-        val block = event.block
-        event.isCancelled = when {
+    private fun shouldChanged(loc: Location): Boolean {
+        return when {
             // 準備中
             !isStarted -> true
+            // ゲーム終了
+            isfinished -> true
             // セーフゾーン以外
-            !stage.generator.isSafeZone(block.x, block.y, block.z) -> true
+            !stage.generator.isSafeZone(loc.blockX, loc.blockY, loc.blockZ) -> true
             else -> false
         }
     }
 
     @EventHandler(ignoreCancelled = true)
+    fun onBlockBreak(event: BlockBreakEvent) {
+        val block = event.block
+        event.isCancelled = !shouldChanged(block.location)
+    }
+
+    @EventHandler(ignoreCancelled = true)
     fun onBlockDestroy(event: BlockDestroyEvent) {
         val block = event.block
-        event.isCancelled = !stage.generator.isSafeZone(block.x, block.y, block.z)
+        event.isCancelled = !shouldChanged(block.location)
     }
 
     @EventHandler(ignoreCancelled = true)
     fun onEntityChangeBlock(event: EntityChangeBlockEvent) {
         val block = event.block
-        event.isCancelled = !stage.generator.isSafeZone(block.x, block.y, block.z)
+        event.isCancelled = !shouldChanged(block.location)
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -105,7 +122,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
         val iterator = blockList.iterator()
         while (iterator.hasNext()) {
             val block = iterator.next()
-            if (!stage.generator.isSafeZone(block.x, block.y, block.z)) {
+            if (!shouldChanged(block.location)) {
                 iterator.remove()
             }
         }
@@ -132,5 +149,24 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
     fun onRespawn(event: PlayerRespawnEvent) {
         val player = event.player
         event.respawnLocation = stage.generator.getFixedSpawnLocation(player.world, Random.generator)!!
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
+        val player = event.player
+        player.gameMode = GameMode.SURVIVAL
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onSpectatorJoin(event: SpectatorJoinEvent) {
+        val player = event.player
+        player.gameMode = GameMode.SPECTATOR
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onPlayerQuitInGame(event: PlayerQuitInGameEvent) {
+        if (players.size == 0) {
+            result(StageResult.DEATH_ALL_PLAYERS)
+        }
     }
 }

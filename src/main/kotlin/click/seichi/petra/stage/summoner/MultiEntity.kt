@@ -1,4 +1,4 @@
-package click.seichi.petra.stage.raider
+package click.seichi.petra.stage.summoner
 
 import click.seichi.petra.stage.summon.SummonProxy
 import org.bukkit.World
