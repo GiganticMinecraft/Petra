@@ -3,6 +3,7 @@ package click.seichi.petra.stage.section.wave
 import click.seichi.message.Message
 import click.seichi.message.SoundMessage
 import click.seichi.message.TitleMessage
+import click.seichi.petra.stage.StageResult
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Sound
@@ -10,19 +11,23 @@ import org.bukkit.SoundCategory
 import org.bukkit.entity.Entity
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Mob
+import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
+import org.bukkit.event.Listener
+import org.bukkit.event.entity.PlayerDeathEvent
 
 /**
  * @author tar0ss
  */
-class DefenseWave(
+class DefensePlayerWave(
         private val waveNum: Int,
         private val minutes: Int,
-        private val raidData: WaveData
+        raidData: WaveData
 ) : Wave(
         waveNum,
         minutes,
         raidData
-) {
+), Listener {
 
     private lateinit var target: LivingEntity
 
@@ -30,13 +35,8 @@ class DefenseWave(
         target = players.mapNotNull { Bukkit.getServer().getPlayer(it) }.first { it.isValid }
     }
 
-    override fun updateBar(remainSeconds: Int) {
-        val title = "${ChatColor.WHITE}Wave${waveNum} 残り時間 ${remainSeconds}秒"
-        bar.setTitle(title)
-        bar.progress = remainSeconds.toDouble() / seconds.toDouble()
-    }
-
     override fun onSummoned(entity: Entity) {
+        if (!target.isValid) return
         if (entity is Mob) {
             entity.target = target
         }
@@ -54,5 +54,12 @@ class DefenseWave(
                         0.3f
                 )
         )
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onDeath(event: PlayerDeathEvent) {
+        if (event.entity.uniqueId == target.uniqueId) {
+            subject.onNext(StageResult.DEATH_TARGET_ENTITY)
+        }
     }
 }
