@@ -38,5 +38,17 @@ object GameSound {
             pitch = 1.6F
     )
 
+    val WIN = SoundMessage(
+            Sound.UI_TOAST_CHALLENGE_COMPLETE,
+            SoundCategory.BLOCKS,
+            pitch = 1.4F
+    )
+
+    val LOSE = SoundMessage(
+            Sound.ENTITY_VILLAGER_NO,
+            SoundCategory.BLOCKS,
+            pitch = 1.3F
+    )
+
 
 }
