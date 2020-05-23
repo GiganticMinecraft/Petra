@@ -9,4 +9,5 @@ import java.util.*
  */
 interface ISummoner {
     fun summon(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID>
+    fun summonOnly(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID>
 }

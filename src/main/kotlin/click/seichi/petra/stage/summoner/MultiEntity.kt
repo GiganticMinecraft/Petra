@@ -19,4 +19,8 @@ class MultiEntity(vararg pairs: Pair<ISummoner, Int>) : ISummoner {
         }.toSet()
     }
 
+    override fun summonOnly(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID> {
+        throw RuntimeException("can't summon only one on MultiEntity")
+    }
+
 }

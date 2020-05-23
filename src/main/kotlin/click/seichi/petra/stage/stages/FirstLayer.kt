@@ -95,7 +95,7 @@ object FirstLayer {
     val SPAWN_PROXY = RoundStageSummonProxy(RADIUS, DANGER_ZONE_LENGTH)
 
     val SECTIONS: Array<Section> = arrayOf(
-            BreakSection(10),
+            BreakSection(5, null),
             AnnihilationWave(1, 1,
                     WaveData(mapOf(
                             30 to SummonData(
@@ -105,7 +105,7 @@ object FirstLayer {
                                     SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
                             )
                     ))
-            ), BreakSection(10),
+            ), BreakSection(5),
             DefeatSummonerWave(2, 1,
                     WaveData(mapOf(
                             30 to SummonData(
@@ -115,7 +115,7 @@ object FirstLayer {
                                     SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
                             )
                     )), Summoners.INFLAMMABLE_ZOMBIE
-            ), BreakSection(10),
+            ), BreakSection(5),
             DefenseSummonerWave(3, 1,
                     WaveData(mapOf(
                             30 to SummonData(
@@ -125,7 +125,7 @@ object FirstLayer {
                                     SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
                             )
                     )), Summoner(EntityType.VILLAGER, Summoner.SummonCase.CENTER)
-            ), BreakSection(10),
+            ), BreakSection(5),
             DefensePlayerWave(4, 1,
                     WaveData(mapOf(
                             0 to SummonData(

@@ -1,39 +1,26 @@
 package click.seichi.util
 
 import click.seichi.function.createInvisibleBossBar
+import click.seichi.petra.TopBarType
 import org.bukkit.boss.BossBar
 import org.bukkit.entity.Player
-import java.util.*
 
 /**
  * @author tar0ss
  */
 class TopBar {
 
-    private val barMap = mutableMapOf<String, BossBar>()
+    private val barMap = mutableMapOf<TopBarType, BossBar>()
 
     private val playerSet = mutableSetOf<Player>()
 
-    private val barStack = Stack<BossBar>()
-
-    fun register(key: String): BossBar {
-        return if (barStack.isNotEmpty()) {
-            barStack.pop()
-        } else {
-            createInvisibleBossBar().apply {
-                playerSet.forEach { this.addPlayer(it) }
-                barMap[key] = this
-            }
+    fun init() {
+        TopBarType.values().toList().sortedBy { it.priority }.forEach {
+            barMap[it] = createInvisibleBossBar()
         }
     }
 
-    fun removeBar(key: String) {
-        val bar = findBar(key) ?: return
-        bar.isVisible = false
-        barStack.push(bar)
-    }
-
-    fun findBar(key: String) = barMap[key]
+    fun get(type: TopBarType) = barMap[type]!!
 
     fun addPlayer(player: Player) {
         playerSet.add(player)

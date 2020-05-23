@@ -42,7 +42,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
 
     override val world: World by lazy { Bukkit.getServer().getWorld("world")!! }
 
-    override val topBar: TopBar = TopBar()
+    override val topBar: TopBar = TopBar().apply { this.init() }
 
     private val count = 5
     private lateinit var disposable: Disposable

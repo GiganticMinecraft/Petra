@@ -41,6 +41,25 @@ open class Summoner(
         }.toSet()
     }
 
+    override fun summonOnly(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID> {
+        val consumer: Consumer<Entity> = Consumer {
+            val livingEntity = it as LivingEntity
+            livingEntity.removeWhenFarAway = false
+            onCreate(it)
+        }
+        val entity = when (case) {
+            SummonCase.DANGER_ZONE -> summonProxy.summon(world, entityType, consumer)
+            SummonCase.CENTER -> summonProxy.summonToCenter(world, entityType, consumer)
+        }
+        if (this is Named) {
+            // カーソル合わせた時に見えればよい
+            entity.isCustomNameVisible = false
+            entity.customName = getName()
+        }
+        onSummoned(entity)
+        return setOf(entity.uniqueId)
+    }
+
     open fun onCreate(entity: Entity) {}
     open fun onSummoned(entity: Entity) {}
 }

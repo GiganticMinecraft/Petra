@@ -3,9 +3,9 @@ package click.seichi.petra.stage.section.wave
 import click.seichi.function.getNearestPlayer
 import click.seichi.game.IGame
 import click.seichi.message.Message
-import click.seichi.message.SoundMessage
 import click.seichi.message.TitleMessage
-import click.seichi.petra.TopBarConstants
+import click.seichi.petra.GameSound
+import click.seichi.petra.TopBarType
 import click.seichi.petra.stage.StageResult
 import click.seichi.petra.stage.section.Section
 import click.seichi.petra.stage.summon.SummonProxy
@@ -14,7 +14,9 @@ import click.seichi.util.TopBar
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import org.bukkit.*
+import org.bukkit.Bukkit
+import org.bukkit.ChatColor
+import org.bukkit.World
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
 import org.bukkit.boss.BossBar
@@ -49,9 +51,10 @@ open class Wave(
     protected lateinit var players: Set<UUID>
     protected lateinit var topBar: TopBar
     private var remainNextSpawnSeconds: Int? = 0
+    protected var hasNextSpawn = true
 
     protected lateinit var bar: BossBar
-    protected lateinit var raidBar: BossBar
+    protected var raidBar: BossBar? = null
 
     protected val entitySet = mutableSetOf<UUID>()
 
@@ -68,18 +71,20 @@ open class Wave(
 
                 val spawnData = raidData.findSpawnData(elapsedSeconds) ?: return@Timer
                 if (hasNextSpawn) remainNextSpawnSeconds = _remainNextSpawnSeconds
-                else topBar.removeBar(TopBarConstants.RAID_TIME)
+                else raidBar?.isVisible = false
                 summon(spawnData)
             },
             onComplete = {
-                topBar.removeBar(TopBarConstants.WAVE)
+                bar.isVisible = false
                 removeAllEntities()
                 onTimeUp()
+                onEnd()
             },
             onCancelled = {
-                topBar.removeBar(TopBarConstants.WAVE)
-                topBar.removeBar(TopBarConstants.RAID_TIME)
+                bar.isVisible = false
+                raidBar?.isVisible = false
                 removeAllEntities()
+                onEnd()
             }
     )
 
@@ -88,6 +93,9 @@ open class Wave(
 
     open fun onTimeUp() {
         subject.onNext(StageResult.WIN)
+    }
+
+    open fun onEnd() {
     }
 
     private fun summon(summonData: SummonData) {
@@ -109,18 +117,18 @@ open class Wave(
         this.world = game.world
         this.players = game.players
         this.topBar = game.topBar
-        this.bar = topBar.register(TopBarConstants.WAVE)
+        this.bar = topBar.get(TopBarType.WAVE)
 
-        onStart()
-
-        remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(0)
-        getStartMessage().broadcast()
         setupBar()
         if (raidData.hasNextSpawn(0)) {
-            this.raidBar = topBar.register(TopBarConstants.RAID_TIME)
+            this.raidBar = topBar.get(TopBarType.RAID_TIME)
+            remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(0)
             setupRaidBar()
         }
 
+        onStart()
+
+        getStartMessage().broadcast()
         timer.start()
         return this
     }
@@ -133,12 +141,7 @@ open class Wave(
                 "${ChatColor.WHITE}Wave$waveNum ${ChatColor.RED}襲撃",
                 "${ChatColor.AQUA}${minutes}分間生き延びろ"
         ).add(
-                SoundMessage(
-                        Sound.ENTITY_ILLUSIONER_CAST_SPELL,
-                        SoundCategory.BLOCKS,
-                        2.0f,
-                        0.3f
-                )
+                GameSound.START_WAVE
         )
     }
 
@@ -156,16 +159,16 @@ open class Wave(
     }
 
     protected open fun setupRaidBar() {
-        raidBar.style = BarStyle.SEGMENTED_20
-        raidBar.color = BarColor.RED
+        raidBar?.style = BarStyle.SEGMENTED_20
+        raidBar?.color = BarColor.RED
         updateRaidBar(remainNextSpawnSeconds!!)
-        raidBar.isVisible = true
+        raidBar?.isVisible = true
     }
 
     protected open fun updateRaidBar(remainSeconds: Int) {
         val title = "${ChatColor.RED}次の襲撃まで ${remainSeconds}秒"
-        raidBar.setTitle(title)
-        raidBar.progress = remainSeconds.toDouble() / remainNextSpawnSeconds!!.toDouble()
+        raidBar?.setTitle(title)
+        raidBar?.progress = remainSeconds.toDouble() / remainNextSpawnSeconds!!.toDouble()
     }
 
     private fun removeAllEntities() {
