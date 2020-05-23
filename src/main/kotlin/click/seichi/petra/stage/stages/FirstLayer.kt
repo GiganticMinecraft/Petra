@@ -97,25 +97,25 @@ object FirstLayer {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { it.times(0.2).toInt() }) to 4,
-                                            Summoner(EntityType.SKELETON, { it.times(0.2).toInt() }) to 2,
+                                            Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 4,
+                                            Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 2,
                                             Summoners.RAIN_BRAIN to 1
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { it.times(0.5).toInt() }) to 6,
-                                            Summoner(EntityType.SKELETON, { it.times(0.5).toInt() }) to 4,
-                                            Summoner(EntityType.STRAY, { it.times(0.5).toInt() }) to 4,
-                                            Summoner(EntityType.HUSK, { it.times(0.5).toInt() }) to 2
+                                            Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 6,
+                                            Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 4,
+                                            Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
+                                            Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 2
                                     )
                             ),
                             120 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { it.times(0.8).toInt() }) to 10,
-                                            Summoner(EntityType.SKELETON, { it.times(0.8).toInt() }) to 6,
-                                            Summoner(EntityType.HUSK, { it.times(0.8).toInt() }) to 2,
-                                            Summoner(EntityType.STRAY, { it.times(0.8).toInt() }) to 4,
+                                            Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 10,
+                                            Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 6,
+                                            Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
                                             Summoners.RAIN_BRAIN to 1
                                     )
                             )
@@ -126,37 +126,37 @@ object FirstLayer {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoners.RAIN_BRAIN to 1,
-                                            Summoner(EntityType.CREEPER, { it.times(0.1).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
                                     )
                             ),
                             10 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { it.times(0.2).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
                                     )
                             ),
                             20 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { it.times(0.3).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
                                     )
                             ),
                             30 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { it.times(0.4).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
                                     )
                             ),
                             40 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { it.times(0.5).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
                                     )
                             ),
                             50 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { it.times(0.6).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { it.times(0.7).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
                                     )
                             )
                     )), Summoners.HONEBUTO
@@ -165,17 +165,9 @@ object FirstLayer {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.VINDICATOR) to 2,
-                                            Summoner(EntityType.ILLUSIONER) to 2,
-                                            Summoner(EntityType.EVOKER, {
-                                                1
-//                                                when (it) {
-//                                                    1 -> 1
-//                                                    in 2..5 -> 2
-//                                                    in 5..10 -> 3
-//                                                    else -> 4
-//                                                }
-                                            }) to 1
+                                            Summoner(EntityType.VINDICATOR, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoner(EntityType.EVOKER, { sqrt(it.toDouble()).toInt() }) to 1
 
                                     )
                             )
@@ -186,22 +178,14 @@ object FirstLayer {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoners.RAIN_BRAIN to 1,
-                                            Summoner(EntityType.CREEPER) to 1,
-                                            Summoner(EntityType.ZOMBIE) to 4,
-                                            Summoner(EntityType.SKELETON) to 2,
-                                            Summoner(EntityType.HUSK) to 6,
-                                            Summoner(EntityType.STRAY) to 4,
-                                            Summoner(EntityType.VINDICATOR) to 2,
-                                            Summoner(EntityType.ILLUSIONER) to 2,
-                                            Summoner(EntityType.EVOKER, {
-                                                1
-//                                                when (it) {
-//                                                    1 -> 1
-//                                                    in 2..5 -> 2
-//                                                    in 5..10 -> 3
-//                                                    else -> 4
-//                                                }
-                                            }) to 1
+                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 1,
+                                            Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 4,
+                                            Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 6,
+                                            Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
+                                            Summoner(EntityType.VINDICATOR, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoner(EntityType.EVOKER, { sqrt(it.toDouble()).toInt() }) to 1
                                     )
                             )
                     )), "unchama"
