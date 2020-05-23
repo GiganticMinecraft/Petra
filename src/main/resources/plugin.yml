@@ -7,13 +7,19 @@ load: STARTUP
 
 commands:
   ready:
-    description: Ready to the game
     usage: /ready
     aliases: [r]
     permission: petra.ready
+    permission-message: You don't have <permission>
+  start:
+    usage: /start
+    permission: petra.start
     permission-message: You don't have <permission>
 
 permissions:
   petra.ready:
     description: Ready to the game
     default: true
+  petra.start:
+    description: Start the game force
+    default: op

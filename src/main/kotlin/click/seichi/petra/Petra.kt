@@ -6,6 +6,7 @@ import click.seichi.game.PlayerLocator
 import click.seichi.game.Preparator
 import click.seichi.game.SimplePreparator
 import click.seichi.game.command.ReadyCommand
+import click.seichi.game.command.StartCommand
 import click.seichi.game.listener.DebugListener
 import click.seichi.game.listener.PlayerConnectionListener
 import click.seichi.petra.game.PetraGame
@@ -55,7 +56,8 @@ class Petra : Plugin() {
     override fun bindCommands(vararg commands: Pair<String, CommandExecutor>) {
         super.bindCommands(
                 *commands,
-                "ready" to ReadyCommand(game, preparator)
+                "ready" to ReadyCommand(game, preparator),
+                "start" to StartCommand(game, preparator)
         )
     }
 

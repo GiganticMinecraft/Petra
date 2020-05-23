@@ -17,7 +17,7 @@ class SimplePreparator(
     private val readyPlayerSet = game.readyPlayers
     private var isPrepared = false
 
-    private fun prepare() {
+    override fun prepare() {
         if (isPrepared) {
             warning("Already complete preparation")
             return
