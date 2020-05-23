@@ -7,6 +7,7 @@ import click.seichi.petra.TopBarType
 import click.seichi.petra.stage.StageResult
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.GameMode
 import org.bukkit.attribute.Attribute
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
@@ -43,6 +44,9 @@ class DefensePlayerWave(
         var t: Player? = null
         if (playerName != null) {
             t = Bukkit.getServer().getPlayer(playerName)
+            if (t?.gameMode != GameMode.SURVIVAL) {
+                t = null
+            }
         }
         target = t ?: players.mapNotNull { Bukkit.getServer().getPlayer(it) }.first { it.isValid }
         target.isGlowing = true
