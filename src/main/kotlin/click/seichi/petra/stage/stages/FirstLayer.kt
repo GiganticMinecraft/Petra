@@ -176,7 +176,7 @@ object FirstLayer {
                                     MultiEntity(
                                             Summoner(EntityType.VINDICATOR, { sqrt(it.toDouble()).toInt() }) to 2,
                                             Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoner(EntityType.EVOKER, { sqrt(it.toDouble()).toInt() }) to 1
+                                            Summoner(EntityType.EVOKER, { sqrt(sqrt(it.toDouble())).toInt() }) to 1
 
                                     )
                             )
