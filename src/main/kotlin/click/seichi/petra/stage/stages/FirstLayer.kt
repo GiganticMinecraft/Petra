@@ -2,7 +2,6 @@ package click.seichi.petra.stage.stages
 
 import click.seichi.extension.setRegion
 import click.seichi.generator.*
-import click.seichi.message.SoundMessage
 import click.seichi.petra.stage.generator.RoundStageGenerator
 import click.seichi.petra.stage.section.BreakSection
 import click.seichi.petra.stage.section.Section
@@ -12,8 +11,6 @@ import click.seichi.petra.stage.summoner.MultiEntity
 import click.seichi.petra.stage.summoner.Summoner
 import click.seichi.petra.stage.summoner.Summoners
 import org.bukkit.Material
-import org.bukkit.Sound
-import org.bukkit.SoundCategory
 import org.bukkit.World
 import org.bukkit.entity.EntityType
 import org.bukkit.generator.BlockPopulator
@@ -95,66 +92,118 @@ object FirstLayer {
     val SPAWN_PROXY = RoundStageSummonProxy(RADIUS, DANGER_ZONE_LENGTH)
 
     val SECTIONS: Array<Section> = arrayOf(
-            BreakSection(5, null),
-            AnnihilationWave(1, 1,
+            BreakSection(60, null),
+            AnnihilationWave(1, 5,
                     WaveData(mapOf(
-                            30 to SummonData(
+                            0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE) to 2
-                                    ),
-                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
+                                            Summoner(EntityType.ZOMBIE) to 4,
+                                            Summoner(EntityType.SKELETON) to 2,
+                                            Summoners.RAIN_BRAIN to 1
+                                    )
+                            ),
+                            60 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.ZOMBIE) to 6,
+                                            Summoner(EntityType.SKELETON) to 4,
+                                            Summoner(EntityType.STRAY) to 4,
+                                            Summoner(EntityType.HUSK) to 2
+                                    )
+                            ),
+                            120 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.ZOMBIE) to 10,
+                                            Summoner(EntityType.SKELETON) to 6,
+                                            Summoner(EntityType.HUSK) to 4,
+                                            Summoner(EntityType.STRAY) to 4
+                                    )
                             )
                     ))
-            ), BreakSection(5),
-            DefeatSummonerWave(2, 1,
+            ), BreakSection(60),
+            DefeatSummonerWave(2, 3,
                     WaveData(mapOf(
+                            0 to SummonData(
+                                    MultiEntity(
+                                            Summoners.RAIN_BRAIN to 1,
+                                            Summoner(EntityType.CREEPER) to 5
+                                    )
+                            ),
+                            10 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER) to 5
+                                    )
+                            ),
+                            20 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER) to 5
+                                    )
+                            ),
                             30 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 2
-                                    ),
-                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
+                                            Summoner(EntityType.CREEPER) to 5
+                                    )
+                            ),
+                            40 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER) to 5
+                                    )
+                            ),
+                            50 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER) to 5
+                                    )
+                            ),
+                            60 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER) to 5
+                                    )
                             )
-                    )), Summoners.INFLAMMABLE_ZOMBIE
-            ), BreakSection(5),
+                    )), Summoners.HONEBUTO
+            ), BreakSection(60),
             DefenseSummonerWave(3, 1,
                     WaveData(mapOf(
-                            30 to SummonData(
+                            0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 2
-                                    ),
-                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
+                                            Summoner(EntityType.VINDICATOR) to 2,
+                                            Summoner(EntityType.ILLUSIONER) to 2,
+                                            Summoner(EntityType.EVOKER, {
+                                                1
+//                                                when (it) {
+//                                                    1 -> 1
+//                                                    in 2..5 -> 2
+//                                                    in 5..10 -> 3
+//                                                    else -> 4
+//                                                }
+                                            }) to 1
+
+                                    )
                             )
-                    )), Summoner(EntityType.VILLAGER, Summoner.SummonCase.CENTER)
-            ), BreakSection(5),
+                    )), Summoner(EntityType.VILLAGER, case = Summoner.SummonCase.CENTER)
+            ), BreakSection(120),
             DefensePlayerWave(4, 1,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 2
-                                    ),
-                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
+                                            Summoners.RAIN_BRAIN to 1,
+                                            Summoner(EntityType.CREEPER) to 1,
+                                            Summoner(EntityType.ZOMBIE) to 4,
+                                            Summoner(EntityType.SKELETON) to 2,
+                                            Summoner(EntityType.HUSK) to 6,
+                                            Summoner(EntityType.STRAY) to 4,
+                                            Summoner(EntityType.VINDICATOR) to 2,
+                                            Summoner(EntityType.ILLUSIONER) to 2,
+                                            Summoner(EntityType.EVOKER, {
+                                                1
+//                                                when (it) {
+//                                                    1 -> 1
+//                                                    in 2..5 -> 2
+//                                                    in 5..10 -> 3
+//                                                    else -> 4
+//                                                }
+                                            }) to 1
+                                    )
                             )
                     ))
             )
-//            Wave(1, 1,
-//                    WaveData(mapOf(
-//                            0 to SummonData(
-//                                    MultiEntity(
-//                                            Summoner(EntityType.ZOMBIE) to 10,
-//                                            Summoners.INFLAMMABLE_ZOMBIE to 5,
-//                                            Summoner(EntityType.CREEPER) to 2
-//                                    ),
-//                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
-//                            ),
-//                            10 to SummonData(
-//                                    MultiEntity(
-//                                            Summoner(EntityType.SKELETON) to 10,
-//                                            Summoners.CAPPED_SKELETON to 5,
-//                                            Summoner(EntityType.CREEPER) to 2
-//                                    ),
-//                                    SoundMessage(Sound.BLOCK_BEACON_POWER_SELECT, SoundCategory.BLOCKS, 2.0f, 2.0f)
-//                            )
-//                    ))
-//            )
     )
 }

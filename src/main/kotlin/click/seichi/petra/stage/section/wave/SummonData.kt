@@ -1,6 +1,7 @@
 package click.seichi.petra.stage.section.wave
 
 import click.seichi.message.Message
+import click.seichi.petra.GameSound
 import click.seichi.petra.stage.summoner.ISummoner
 
 /**
@@ -8,5 +9,5 @@ import click.seichi.petra.stage.summoner.ISummoner
  */
 data class SummonData(
         val summoner: ISummoner,
-        val message: Message
+        val message: Message = GameSound.SUMMON_WAVE
 )

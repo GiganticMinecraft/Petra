@@ -63,5 +63,12 @@ object GameSound {
             pitch = 1.4F
     )
 
+    val SUMMON_WAVE = SoundMessage(
+            Sound.BLOCK_BEACON_POWER_SELECT,
+            SoundCategory.BLOCKS,
+            2.0f,
+            2.0f
+    )
+
 
 }

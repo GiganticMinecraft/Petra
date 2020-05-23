@@ -2,6 +2,7 @@ package click.seichi.petra.game
 
 import click.seichi.game.IGame
 import click.seichi.game.event.*
+import click.seichi.petra.GameSound
 import click.seichi.petra.event.StartGameEvent
 import click.seichi.petra.stage.Facilitator
 import click.seichi.petra.stage.ResultSender
@@ -71,6 +72,7 @@ class PetraGame(private val stage: Stage) : Listener, IGame {
         players.mapNotNull { Bukkit.getServer().getPlayer(it) }
                 .forEach {
                     it.teleport(stage.generator.getFixedSpawnLocation(world, Random.generator)!!)
+                    GameSound.TELEPORT.sendTo(it)
                 }
 
         ResultSender(10).start(result, this)

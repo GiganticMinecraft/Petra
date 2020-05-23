@@ -13,6 +13,7 @@ import java.util.*
  */
 open class Summoner(
         private val entityType: EntityType,
+        private val num: (Int) -> Int = { it },
         private val case: SummonCase = SummonCase.DANGER_ZONE
 ) : ISummoner {
     enum class SummonCase {
@@ -21,7 +22,7 @@ open class Summoner(
     }
 
     override fun summon(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID> {
-        return (1..players.count()).map { _ ->
+        return (1..num(players.size)).map { _ ->
             val consumer: Consumer<Entity> = Consumer {
                 val livingEntity = it as LivingEntity
                 livingEntity.removeWhenFarAway = false

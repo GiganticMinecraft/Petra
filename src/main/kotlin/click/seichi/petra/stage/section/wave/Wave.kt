@@ -22,6 +22,7 @@ import org.bukkit.boss.BarStyle
 import org.bukkit.boss.BossBar
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Mob
+import org.bukkit.entity.Player
 import java.util.*
 
 /**
@@ -65,7 +66,7 @@ open class Wave(
             onNext = { remainSeconds ->
                 updateBar(remainSeconds)
                 val elapsedSeconds = seconds - remainSeconds
-                val hasNextSpawn = raidData.hasNextSpawn(elapsedSeconds)
+                hasNextSpawn = raidData.hasNextSpawn(elapsedSeconds)
                 val _remainNextSpawnSeconds = raidData.calcRemainNextSpawnSeconds(elapsedSeconds)
                 if (hasNextSpawn) updateRaidBar(_remainNextSpawnSeconds!!)
 
@@ -172,8 +173,12 @@ open class Wave(
     }
 
     private fun removeAllEntities() {
-        entitySet.mapNotNull { world.getEntity(it) }
-                .forEach { it.remove() }
+        world.entities.filterNotNull()
+                .filter { it !is Player }
+                .filterIsInstance<Mob>()
+                .forEach {
+                    it.health = 0.0
+                }
     }
 
 }
