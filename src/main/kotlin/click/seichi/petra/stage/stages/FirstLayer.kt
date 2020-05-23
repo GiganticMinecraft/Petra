@@ -78,9 +78,9 @@ object FirstLayer {
                     TreePopulator(),
                     GrassPopulator(),
                     FlowerPopulator(Material.DANDELION, Material.POPPY),
-                    OrePopulator(Material.COAL_ORE, 30, 0..62, 1.0),
+                    OrePopulator(Material.COAL_ORE, 35, 0..62, 1.0),
                     OrePopulator(Material.DIAMOND_ORE, 1, 0..15, 0.9),
-                    OrePopulator(Material.IRON_ORE, 25, 0..62, 0.95),
+                    OrePopulator(Material.IRON_ORE, 30, 0..62, 0.95),
                     OrePopulator(Material.GOLD_ORE, 8, 0..50, 0.84),
                     OrePopulator(Material.LAPIS_ORE, 3, 0..40, 0.4),
                     OrePopulator(Material.REDSTONE_ORE, 3, 0..40, 0.4),
@@ -99,6 +99,9 @@ object FirstLayer {
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 4,
                                             Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 4,
+                                            Summoners.ZOMBIE_IMITATED_SKELETON to 1,
+                                            Summoners.CAPPED_SKELETON to 1,
                                             Summoners.RAIN_BRAIN to 1
                                     )
                             ),
@@ -107,7 +110,10 @@ object FirstLayer {
                                             Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 6,
                                             Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 4,
                                             Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
-                                            Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 2
+                                            Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 4,
+                                            Summoners.ZOMBIE_IMITATED_SKELETON to 1,
+                                            Summoners.CAPPED_SKELETON to 1
                                     )
                             ),
                             120 to SummonData(
@@ -116,6 +122,9 @@ object FirstLayer {
                                             Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 6,
                                             Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 2,
                                             Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
+                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 4,
+                                            Summoners.ZOMBIE_IMITATED_SKELETON to 1,
+                                            Summoners.CAPPED_SKELETON to 1,
                                             Summoners.RAIN_BRAIN to 1
                                     )
                             )

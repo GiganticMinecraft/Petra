@@ -14,13 +14,14 @@ import org.bukkit.inventory.meta.Damageable
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import kotlin.math.sqrt
 
 /**
  * @author tar0ss
  */
 object Summoners {
     //region zombie
-    val INFLAMMABLE_ZOMBIE: ISummoner = object : Summoner(EntityType.ZOMBIE), Named {
+    val INFLAMMABLE_ZOMBIE: ISummoner = object : Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }), Named {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val zombie = entity as Zombie
@@ -33,7 +34,7 @@ object Summoners {
         }
     }
 
-    val ZOMBIE_IMITATED_SKELETON: ISummoner = object : Summoner(EntityType.ZOMBIE), Named {
+    val ZOMBIE_IMITATED_SKELETON: ISummoner = object : Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }), Named {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val zombie = entity as Zombie
@@ -65,46 +66,51 @@ object Summoners {
         }
     }
 
-    val ZOMBIE_IMITATED_PLAYER: ISummoner = object : Summoner(EntityType.ZOMBIE), Named {
-        private lateinit var name: String
-        override fun onCreate(entity: Entity) {
-            super.onCreate(entity)
-
-            val player = Bukkit.getServer().onlinePlayers
-                    .filterNotNull()
-                    .filter { it.gameMode == GameMode.SURVIVAL }
-                    .random()
-            name = player.name
-            val playerEquip = player.equipment
-            val zombie = entity as Zombie
-            zombie.isBaby = false
-            zombie.equipment?.apply {
-                this.helmet = ItemStack(Material.PLAYER_HEAD).apply {
-                    val skullMeta = itemMeta as SkullMeta
-                    skullMeta.owningPlayer = player
+    val ZOMBIE_IMITATED_PLAYER: (String?) -> ISummoner = { target: String? ->
+        object : Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }), Named {
+            private lateinit var name: String
+            override fun onCreate(entity: Entity) {
+                super.onCreate(entity)
+                var targetPlayer: Player? = null
+                if (target != null) {
+                    targetPlayer = Bukkit.getServer().getPlayer(target)
                 }
-                this.helmetDropChance = 1.0F
-                playerEquip?.chestplate?.type?.let {
-                    this.chestplate = ItemStack(it)
-                    this.chestplateDropChance = 0.0F
-                }
-                playerEquip?.leggings?.type?.let {
-                    this.leggings = ItemStack(it)
-                    this.leggingsDropChance = 0.0F
-                }
-                playerEquip?.boots?.type?.let {
-                    this.boots = ItemStack(it)
-                    this.bootsDropChance = 0.0F
-                }
-                playerEquip?.itemInMainHand?.type?.let {
-                    this.setItemInMainHand(ItemStack(it))
-                    this.itemInMainHandDropChance = 0.0F
+                val player = targetPlayer ?: Bukkit.getServer().onlinePlayers
+                        .filterNotNull()
+                        .filter { it.gameMode == GameMode.SURVIVAL }
+                        .random()
+                name = player.name
+                val playerEquip = player.equipment
+                val zombie = entity as Zombie
+                zombie.isBaby = false
+                zombie.equipment?.apply {
+                    this.helmet = ItemStack(Material.PLAYER_HEAD).apply {
+                        val skullMeta = itemMeta as SkullMeta
+                        skullMeta.owningPlayer = player
+                    }
+                    this.helmetDropChance = 1.0F
+                    playerEquip?.chestplate?.type?.let {
+                        this.chestplate = ItemStack(it)
+                        this.chestplateDropChance = 0.0F
+                    }
+                    playerEquip?.leggings?.type?.let {
+                        this.leggings = ItemStack(it)
+                        this.leggingsDropChance = 0.0F
+                    }
+                    playerEquip?.boots?.type?.let {
+                        this.boots = ItemStack(it)
+                        this.bootsDropChance = 0.0F
+                    }
+                    playerEquip?.itemInMainHand?.type?.let {
+                        this.setItemInMainHand(ItemStack(it))
+                        this.itemInMainHandDropChance = 0.0F
+                    }
                 }
             }
-        }
 
-        override fun getName(): String {
-            return name
+            override fun getName(): String {
+                return name
+            }
         }
     }
     //endregion
@@ -133,7 +139,7 @@ object Summoners {
     }
 
 
-    val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON), Named {
+    val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }), Named {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val living = entity as Skeleton
