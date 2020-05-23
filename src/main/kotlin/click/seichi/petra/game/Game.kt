@@ -7,7 +7,7 @@ import java.util.*
 /**
  * @author tar0ss
  */
-interface IGame {
+interface Game {
     val isStarted: Boolean
     val players: MutableSet<UUID>
     val readyPlayers: MutableSet<UUID>

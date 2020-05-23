@@ -1,6 +1,6 @@
 package click.seichi.petra.stage
 
-import click.seichi.petra.game.IGame
+import click.seichi.petra.game.Game
 import click.seichi.petra.message.ActionMessage
 import click.seichi.petra.util.Timer
 import click.seichi.petra.util.TopBar
@@ -50,7 +50,7 @@ class ResultSender(private val seconds: Int) {
         bar.progress = remainSeconds.toDouble() / seconds.toDouble()
     }
 
-    fun start(result: StageResult, game: IGame): ResultSender {
+    fun start(result: StageResult, game: Game): ResultSender {
 //        this.topBar = game.topBar
 //        this.bar = topBar.register(TopBarConstants.WAVE)
         this.result = result

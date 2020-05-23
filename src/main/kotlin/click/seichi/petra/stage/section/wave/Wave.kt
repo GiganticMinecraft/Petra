@@ -3,7 +3,7 @@ package click.seichi.petra.stage.section.wave
 import click.seichi.petra.GameSound
 import click.seichi.petra.TopBarType
 import click.seichi.petra.function.getNearestPlayer
-import click.seichi.petra.game.IGame
+import click.seichi.petra.game.Game
 import click.seichi.petra.message.Message
 import click.seichi.petra.message.TitleMessage
 import click.seichi.petra.stage.StageResult
@@ -113,7 +113,7 @@ open class Wave(
         }
     }
 
-    override fun start(game: IGame, summonProxy: SummonProxy): Section {
+    override fun start(game: Game, summonProxy: SummonProxy): Section {
         this.summonProxy = summonProxy
         this.world = game.world
         this.players = game.players

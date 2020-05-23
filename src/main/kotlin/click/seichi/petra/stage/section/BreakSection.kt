@@ -2,7 +2,7 @@ package click.seichi.petra.stage.section
 
 import click.seichi.petra.GameSound
 import click.seichi.petra.TopBarType
-import click.seichi.petra.game.IGame
+import click.seichi.petra.game.Game
 import click.seichi.petra.message.Message
 import click.seichi.petra.stage.StageResult
 import click.seichi.petra.stage.summon.SummonProxy
@@ -62,7 +62,7 @@ class BreakSection(
         bar.progress = remainSeconds.toDouble() / seconds.toDouble()
     }
 
-    override fun start(game: IGame, summonProxy: SummonProxy): Section {
+    override fun start(game: Game, summonProxy: SummonProxy): Section {
         this.topBar = game.topBar
         this.bar = topBar.get(TopBarType.WAVE)
         startMessage?.broadcast()

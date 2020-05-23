@@ -29,7 +29,7 @@ import java.util.*
 /**
  * @author tar0ss
  */
-class PetraGame(private val stage: Stage) : Listener, IGame {
+class PetraGame(private val stage: Stage) : Listener, Game {
 
     override var isStarted = false
         private set

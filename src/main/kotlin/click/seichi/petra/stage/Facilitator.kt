@@ -2,7 +2,7 @@ package click.seichi.petra.stage
 
 import click.seichi.petra.event.WaveEvent
 import click.seichi.petra.function.warning
-import click.seichi.petra.game.IGame
+import click.seichi.petra.game.Game
 import click.seichi.petra.stage.section.Section
 import click.seichi.petra.stage.summon.SummonProxy
 import io.reactivex.Observable
@@ -22,7 +22,7 @@ class Facilitator {
         disposable.dispose()
     }
 
-    private lateinit var game: IGame
+    private lateinit var game: Game
     private lateinit var sectionList: List<Section>
     private lateinit var summonProxy: SummonProxy
 
@@ -31,7 +31,7 @@ class Facilitator {
 
     private lateinit var disposable: Disposable
 
-    fun start(game: IGame, stage: Stage): Facilitator {
+    fun start(game: Game, stage: Stage): Facilitator {
         if (isStarted) {
             warning("wave is already started.")
             return this

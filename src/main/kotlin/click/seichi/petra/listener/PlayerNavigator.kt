@@ -3,7 +3,7 @@ package click.seichi.petra.listener
 import click.seichi.petra.GameMessage
 import click.seichi.petra.GameSound
 import click.seichi.petra.event.StartGameEvent
-import click.seichi.petra.game.IGame
+import click.seichi.petra.game.Game
 import click.seichi.petra.game.event.CountDownEvent
 import click.seichi.petra.game.event.PlayerCancelReadyEvent
 import click.seichi.petra.game.event.PlayerJoinGameEvent
@@ -21,7 +21,7 @@ import java.util.*
  * @author tar0ss
  */
 class PlayerNavigator(
-        game: IGame
+        game: Game
 ) : Listener {
     private val players: Set<UUID> = game.players
     private val readyPlayers: Set<UUID> = game.readyPlayers

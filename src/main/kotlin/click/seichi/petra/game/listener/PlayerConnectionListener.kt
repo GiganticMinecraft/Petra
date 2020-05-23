@@ -16,7 +16,7 @@ class PlayerConnectionListener(
 ) : Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onPlayerLogin(event: PlayerLoginEvent) {
-        if (locator.isLeft(event.player)) {
+        if (locator.allowsToJoin(event.player)) {
             event.allow()
         }
     }

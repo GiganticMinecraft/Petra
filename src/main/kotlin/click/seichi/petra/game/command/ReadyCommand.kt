@@ -1,6 +1,6 @@
 package click.seichi.petra.game.command
 
-import click.seichi.petra.game.IGame
+import click.seichi.petra.game.Game
 import click.seichi.petra.game.Preparator
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
  * @author tar0ss
  */
 class ReadyCommand(
-        private val game: IGame,
+        private val game: Game,
         private val preparator: Preparator
 ) : TabExecutor {
 

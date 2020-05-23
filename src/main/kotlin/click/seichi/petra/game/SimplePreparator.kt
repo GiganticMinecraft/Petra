@@ -10,7 +10,7 @@ import org.bukkit.entity.Player
 import java.util.*
 
 class SimplePreparator(
-        game: IGame
+        game: Game
 ) : Preparator {
 
     private val players: Set<UUID> = game.players
