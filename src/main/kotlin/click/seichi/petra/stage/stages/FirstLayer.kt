@@ -92,7 +92,7 @@ object FirstLayer {
     val SPAWN_PROXY = RoundStageSummonProxy(RADIUS, DANGER_ZONE_LENGTH)
 
     val SECTIONS: Array<Section> = arrayOf(
-            BreakSection(60, null),
+            BreakSection(120, null),
             AnnihilationWave(1, 5,
                     WaveData(mapOf(
                             0 to SummonData(
@@ -114,13 +114,13 @@ object FirstLayer {
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE) to 10,
                                             Summoner(EntityType.SKELETON) to 6,
-                                            Summoner(EntityType.HUSK) to 4,
+                                            Summoner(EntityType.HUSK) to 2,
                                             Summoner(EntityType.STRAY) to 4
                                     )
                             )
                     ))
             ), BreakSection(60),
-            DefeatSummonerWave(2, 3,
+            DefeatSummonerWave(2, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
