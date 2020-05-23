@@ -184,9 +184,8 @@ object FirstLayer {
             ), BreakSection(60),
             DefensePlayerWave(4, 2,
                     WaveData(mapOf(
-                            30 to SummonData(
+                            0 to SummonData(
                                     MultiEntity(
-                                            Summoners.RAIN_BRAIN to 1,
                                             Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 1,
                                             Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 4,
                                             Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 2,
