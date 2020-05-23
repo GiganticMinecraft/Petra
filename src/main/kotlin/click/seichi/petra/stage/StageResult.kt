@@ -1,8 +1,8 @@
 package click.seichi.petra.stage
 
-import click.seichi.message.Message
-import click.seichi.message.TitleMessage
 import click.seichi.petra.GameSound
+import click.seichi.petra.message.Message
+import click.seichi.petra.message.TitleMessage
 
 /**
  * @author tar0ss

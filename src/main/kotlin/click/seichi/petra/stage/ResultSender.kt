@@ -1,9 +1,9 @@
 package click.seichi.petra.stage
 
-import click.seichi.game.IGame
-import click.seichi.message.ActionMessage
-import click.seichi.util.Timer
-import click.seichi.util.TopBar
+import click.seichi.petra.game.IGame
+import click.seichi.petra.message.ActionMessage
+import click.seichi.petra.util.Timer
+import click.seichi.petra.util.TopBar
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject

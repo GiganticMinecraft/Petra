@@ -1,13 +1,13 @@
 package click.seichi.petra.stage.section
 
-import click.seichi.game.IGame
-import click.seichi.message.Message
 import click.seichi.petra.GameSound
 import click.seichi.petra.TopBarType
+import click.seichi.petra.game.IGame
+import click.seichi.petra.message.Message
 import click.seichi.petra.stage.StageResult
 import click.seichi.petra.stage.summon.SummonProxy
-import click.seichi.util.Timer
-import click.seichi.util.TopBar
+import click.seichi.petra.util.Timer
+import click.seichi.petra.util.TopBar
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject

@@ -1,6 +1,6 @@
 package click.seichi.petra
 
-import click.seichi.message.SoundMessage
+import click.seichi.petra.message.SoundMessage
 import org.bukkit.Sound
 import org.bukkit.SoundCategory
 

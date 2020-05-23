@@ -1,7 +1,7 @@
 package click.seichi.petra.stage.stages
 
-import click.seichi.extension.setRegion
-import click.seichi.generator.*
+import click.seichi.petra.extension.setRegion
+import click.seichi.petra.generator.*
 import click.seichi.petra.stage.generator.RoundStageGenerator
 import click.seichi.petra.stage.section.BreakSection
 import click.seichi.petra.stage.section.Section

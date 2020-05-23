@@ -1,8 +1,8 @@
 package click.seichi.petra
 
-import click.seichi.message.Message
-import click.seichi.message.TitleMessage
-import click.seichi.util.Random
+import click.seichi.petra.message.Message
+import click.seichi.petra.message.TitleMessage
+import click.seichi.petra.util.Random
 import org.bukkit.ChatColor
 
 /**

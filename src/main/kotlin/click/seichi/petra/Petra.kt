@@ -1,15 +1,14 @@
 package click.seichi.petra
 
-import click.seichi.Plugin
-import click.seichi.config.Config
-import click.seichi.game.PlayerLocator
-import click.seichi.game.Preparator
-import click.seichi.game.SimplePreparator
-import click.seichi.game.command.ReadyCommand
-import click.seichi.game.command.StartCommand
-import click.seichi.game.listener.DebugListener
-import click.seichi.game.listener.PlayerConnectionListener
+import click.seichi.petra.config.Config
 import click.seichi.petra.game.PetraGame
+import click.seichi.petra.game.PlayerLocator
+import click.seichi.petra.game.Preparator
+import click.seichi.petra.game.SimplePreparator
+import click.seichi.petra.game.command.ReadyCommand
+import click.seichi.petra.game.command.StartCommand
+import click.seichi.petra.game.listener.DebugListener
+import click.seichi.petra.game.listener.PlayerConnectionListener
 import click.seichi.petra.listener.PlayerNavigator
 import click.seichi.petra.listener.SummonerListener
 import click.seichi.petra.listener.WorldListener

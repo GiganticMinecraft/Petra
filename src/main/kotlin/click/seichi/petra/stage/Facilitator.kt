@@ -1,8 +1,8 @@
 package click.seichi.petra.stage
 
-import click.seichi.function.warning
-import click.seichi.game.IGame
 import click.seichi.petra.event.WaveEvent
+import click.seichi.petra.function.warning
+import click.seichi.petra.game.IGame
 import click.seichi.petra.stage.section.Section
 import click.seichi.petra.stage.summon.SummonProxy
 import io.reactivex.Observable

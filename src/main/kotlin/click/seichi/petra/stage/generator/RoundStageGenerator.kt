@@ -1,6 +1,6 @@
 package click.seichi.petra.stage.generator
 
-import click.seichi.util.Random
+import click.seichi.petra.util.Random
 import org.bukkit.Location
 import org.bukkit.World
 import kotlin.math.sqrt

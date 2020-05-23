@@ -1,6 +1,6 @@
 package click.seichi.petra
 
-import click.seichi.config.Config
+import click.seichi.petra.config.Config
 
 /**
  * @author tar0ss

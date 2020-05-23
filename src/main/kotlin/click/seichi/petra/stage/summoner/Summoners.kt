@@ -1,8 +1,8 @@
 package click.seichi.petra.stage.summoner
 
-import click.seichi.function.sync
-import click.seichi.message.ChatMessage
-import click.seichi.util.Random
+import click.seichi.petra.function.sync
+import click.seichi.petra.message.ChatMessage
+import click.seichi.petra.util.Random
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.GameMode

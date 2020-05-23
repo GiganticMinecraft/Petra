@@ -1,6 +1,6 @@
 package click.seichi.petra.stage.section
 
-import click.seichi.game.IGame
+import click.seichi.petra.game.IGame
 import click.seichi.petra.stage.StageResult
 import click.seichi.petra.stage.summon.SummonProxy
 import io.reactivex.Observable
