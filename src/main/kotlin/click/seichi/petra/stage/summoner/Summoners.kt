@@ -155,6 +155,9 @@ object Summoners {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val spider = entity as Spider
+
+            spider.addPotionEffect(PotionEffect(PotionEffectType.INVISIBILITY, 10000, 1, true, true))
+
             val spiderUniqueId = spider.uniqueId
             val world = spider.world
             if (world.hasStorm()) return
