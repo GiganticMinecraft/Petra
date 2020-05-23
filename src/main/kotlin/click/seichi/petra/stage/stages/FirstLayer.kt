@@ -97,25 +97,25 @@ object FirstLayer {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE) to 4,
-                                            Summoner(EntityType.SKELETON) to 2,
+                                            Summoner(EntityType.ZOMBIE, { it.times(0.2).toInt() }) to 4,
+                                            Summoner(EntityType.SKELETON, { it.times(0.2).toInt() }) to 2,
                                             Summoners.RAIN_BRAIN to 1
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE) to 6,
-                                            Summoner(EntityType.SKELETON) to 4,
-                                            Summoner(EntityType.STRAY) to 4,
-                                            Summoner(EntityType.HUSK) to 2
+                                            Summoner(EntityType.ZOMBIE, { it.times(0.5).toInt() }) to 6,
+                                            Summoner(EntityType.SKELETON, { it.times(0.5).toInt() }) to 4,
+                                            Summoner(EntityType.STRAY, { it.times(0.5).toInt() }) to 4,
+                                            Summoner(EntityType.HUSK, { it.times(0.5).toInt() }) to 2
                                     )
                             ),
                             120 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE) to 10,
-                                            Summoner(EntityType.SKELETON) to 6,
-                                            Summoner(EntityType.HUSK) to 2,
-                                            Summoner(EntityType.STRAY) to 4
+                                            Summoner(EntityType.ZOMBIE, { it.times(0.8).toInt() }) to 10,
+                                            Summoner(EntityType.SKELETON, { it.times(0.8).toInt() }) to 6,
+                                            Summoner(EntityType.HUSK, { it.times(0.8).toInt() }) to 2,
+                                            Summoner(EntityType.STRAY, { it.times(0.8).toInt() }) to 4
                                     )
                             )
                     ))
@@ -125,37 +125,37 @@ object FirstLayer {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoners.RAIN_BRAIN to 1,
-                                            Summoner(EntityType.CREEPER) to 5
+                                            Summoner(EntityType.CREEPER, { it.times(0.1).toInt() }) to 5
                                     )
                             ),
                             10 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 5
+                                            Summoner(EntityType.CREEPER, { it.times(0.2).toInt() }) to 5
                                     )
                             ),
                             20 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 5
+                                            Summoner(EntityType.CREEPER, { it.times(0.3).toInt() }) to 5
                                     )
                             ),
                             30 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 5
+                                            Summoner(EntityType.CREEPER, { it.times(0.4).toInt() }) to 5
                                     )
                             ),
                             40 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 5
+                                            Summoner(EntityType.CREEPER, { it.times(0.5).toInt() }) to 5
                                     )
                             ),
                             50 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 5
+                                            Summoner(EntityType.CREEPER, { it.times(0.6).toInt() }) to 5
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER) to 5
+                                            Summoner(EntityType.CREEPER, { it.times(0.7).toInt() }) to 5
                                     )
                             )
                     )), Summoners.HONEBUTO

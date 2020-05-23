@@ -161,7 +161,7 @@ object Summoners {
             ChatMessage("${ChatColor.BLUE}嵐の予感..").broadcast()
             world.setStorm(true)
             world.isThundering = true
-            world.thunderDuration = 10 * 20
+            world.thunderDuration = 2 * 20
             sync(0L, 100L) {
                 val e = Bukkit.getServer().getEntity(spiderUniqueId)
                 if (e != null && e.isValid && !e.isDead) return@sync true
