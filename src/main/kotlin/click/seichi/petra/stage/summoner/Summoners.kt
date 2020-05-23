@@ -89,6 +89,7 @@ object Summoners {
                         skullMeta.owningPlayer = player
                         this.itemMeta = skullMeta
                     }
+                    // TODO 鎧着せたい
                     this.helmetDropChance = 1.0F
                     playerEquip?.chestplate?.type?.let {
                         this.chestplate = ItemStack(it)
