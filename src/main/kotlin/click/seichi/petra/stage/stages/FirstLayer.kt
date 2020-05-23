@@ -178,13 +178,19 @@ object FirstLayer {
                                             Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
                                             Summoner(EntityType.EVOKER, { sqrt(it.toDouble()).toInt() }) to 1
 
-                                            )
+                                    )
                             )
                     )), Summoner(EntityType.VILLAGER, case = Summoner.SummonCase.CENTER)
-            ), BreakSection(120),
-            DefensePlayerWave(4, 1,
+            ), BreakSection(60),
+            DefensePlayerWave(4, 2,
                     WaveData(mapOf(
                             0 to SummonData(
+                                    MultiEntity(
+                                            Summoners.RAIN_BRAIN to 1,
+                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 20
+                                    )
+                            ),
+                            30 to SummonData(
                                     MultiEntity(
                                             Summoners.RAIN_BRAIN to 1,
                                             Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 1,
