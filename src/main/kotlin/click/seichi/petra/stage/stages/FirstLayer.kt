@@ -178,7 +178,7 @@ object FirstLayer {
                                             Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
                                             Summoner(EntityType.EVOKER, { sqrt(it.toDouble()).toInt() }) to 1
 
-                                    )
+                                            )
                             )
                     )), Summoner(EntityType.VILLAGER, case = Summoner.SummonCase.CENTER)
             ), BreakSection(120),
@@ -194,7 +194,8 @@ object FirstLayer {
                                             Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
                                             Summoner(EntityType.VINDICATOR, { sqrt(it.toDouble()).toInt() }) to 2,
                                             Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoner(EntityType.EVOKER, { sqrt(it.toDouble()).toInt() }) to 1
+                                            Summoner(EntityType.EVOKER, { sqrt(it.toDouble()).toInt() }) to 1,
+                                            Summoner(EntityType.VEX, { 2 }) to 1
                                     )
                             )
                     )), "unchama"
