@@ -176,11 +176,11 @@ object FirstLayer {
                                     MultiEntity(
                                             Summoner(EntityType.VINDICATOR, { sqrt(it.toDouble()).toInt() }) to 2,
                                             Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoner(EntityType.EVOKER, { sqrt(sqrt(it.toDouble())).toInt() }) to 1
+                                            Summoner(EntityType.EVOKER, { 1 }) to 1
 
                                     )
                             )
-                    )), Summoner(EntityType.VILLAGER, case = Summoner.SummonCase.CENTER)
+                    )), Summoners.YOUJO("unchama")
             ), BreakSection(60),
             DefensePlayerWave(4, 2,
                     WaveData(mapOf(
