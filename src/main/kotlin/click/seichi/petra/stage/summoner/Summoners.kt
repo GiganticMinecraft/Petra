@@ -164,7 +164,8 @@ object Summoners {
             val spider = entity as Spider
 
             spider.addPotionEffect(PotionEffect(PotionEffectType.INVISIBILITY, 10000, 1, true, true))
-
+            spider.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10000, 4, true, true))
+            spider.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000, 3, true, true))
             val spiderUniqueId = spider.uniqueId
             val world = spider.world
             if (world.hasStorm()) return
