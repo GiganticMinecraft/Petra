@@ -34,6 +34,7 @@ class WorldListener : Listener {
         world.setGameRule(GameRule.NATURAL_REGENERATION, true)
         world.setGameRule(GameRule.MOB_GRIEFING, true)
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
+        world.setGameRule(GameRule.KEEP_INVENTORY, true)
         world.keepSpawnInMemory = true
         world.fullTime = 0
         world.time = 0
