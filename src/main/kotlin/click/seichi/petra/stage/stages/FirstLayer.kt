@@ -168,7 +168,7 @@ object FirstLayer {
                                             Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
                                     )
                             )
-                    )), Summoners.HONEBUTO
+                    )), Summoners.HONEBUTO_KURO
             ), BreakSection(60),
             DefenseSummonerWave(3, 1,
                     WaveData(mapOf(

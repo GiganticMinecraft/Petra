@@ -139,6 +139,30 @@ object Summoners {
         }
     }
 
+    val HONEBUTO_KURO: ISummoner = object : Summoner(EntityType.WITHER_SKELETON), Named {
+        override fun onCreate(entity: Entity) {
+            super.onCreate(entity)
+            val wSkeleton = entity as WitherSkeleton
+            wSkeleton.equipment?.let {
+                val sword = ItemStack(Material.DIAMOND_SWORD)
+                sword.addEnchantment(Enchantment.FIRE_ASPECT, 1)
+                sword.addEnchantment(Enchantment.KNOCKBACK, 2)
+                sword.addEnchantment(Enchantment.DAMAGE_ALL, 4)
+                it.itemInMainHandDropChance = 1.0F
+                it.setItemInMainHand(sword)
+            }
+
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000, 3, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST, 10000, 3, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10000, 4, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 10000, 1, false, false, false))
+        }
+
+        override fun getName(): String {
+            return "ほねぶと(黒)"
+        }
+    }
+
 
     val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }), Named {
         override fun onCreate(entity: Entity) {
