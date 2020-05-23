@@ -229,7 +229,7 @@ object Summoners {
                         .filterNotNull()
                         .filter { it.gameMode == GameMode.SURVIVAL }
                         .random()
-                name = "ょぅι゛ょ(っょぃ)"
+                name = "ょぅι゛ょ"
                 val vi = entity as Villager
                 vi.setBaby()
                 vi.equipment?.apply {
