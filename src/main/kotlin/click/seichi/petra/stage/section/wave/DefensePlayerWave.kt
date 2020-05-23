@@ -14,6 +14,7 @@ import org.bukkit.boss.BossBar
 import org.bukkit.entity.Entity
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Mob
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -26,7 +27,8 @@ import org.bukkit.event.entity.PlayerDeathEvent
 class DefensePlayerWave(
         private val waveNum: Int,
         private val minutes: Int,
-        raidData: WaveData
+        raidData: WaveData,
+        private val playerName: String? = null
 ) : Wave(
         waveNum,
         minutes,
@@ -38,8 +40,13 @@ class DefensePlayerWave(
     private lateinit var playerHpBar: BossBar
 
     override fun onStart() {
-        target = players.mapNotNull { Bukkit.getServer().getPlayer(it) }.first { it.isValid }
+        var t: Player? = null
+        if (playerName != null) {
+            t = Bukkit.getServer().getPlayer(playerName)
+        }
+        target = t ?: players.mapNotNull { Bukkit.getServer().getPlayer(it) }.first { it.isValid }
         target.isGlowing = true
+        (target as Player).setPlayerListName("${ChatColor.YELLOW}${target.name}")
         playerHpBar = topBar.get(TopBarType.ENEMY_COUNT)
         playerHpBar.color = BarColor.YELLOW
         playerHpBar.style = BarStyle.SOLID
@@ -58,6 +65,7 @@ class DefensePlayerWave(
     override fun onEnd() {
         playerHpBar.isVisible = false
         target.isGlowing = false
+        (target as Player).setPlayerListName(target.name)
         super.onEnd()
     }
 
