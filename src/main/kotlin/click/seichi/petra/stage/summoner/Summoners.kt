@@ -87,6 +87,7 @@ object Summoners {
                     this.helmet = ItemStack(Material.PLAYER_HEAD).apply {
                         val skullMeta = itemMeta as SkullMeta
                         skullMeta.owningPlayer = player
+                        this.itemMeta = skullMeta
                     }
                     this.helmetDropChance = 1.0F
                     playerEquip?.chestplate?.type?.let {
