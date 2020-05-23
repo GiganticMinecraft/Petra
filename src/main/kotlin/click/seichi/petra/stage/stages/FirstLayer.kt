@@ -115,7 +115,8 @@ object FirstLayer {
                                             Summoner(EntityType.ZOMBIE, { it.times(0.8).toInt() }) to 10,
                                             Summoner(EntityType.SKELETON, { it.times(0.8).toInt() }) to 6,
                                             Summoner(EntityType.HUSK, { it.times(0.8).toInt() }) to 2,
-                                            Summoner(EntityType.STRAY, { it.times(0.8).toInt() }) to 4
+                                            Summoner(EntityType.STRAY, { it.times(0.8).toInt() }) to 4,
+                                            Summoners.RAIN_BRAIN to 1
                                     )
                             )
                     ))
