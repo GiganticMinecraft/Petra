@@ -1,6 +1,6 @@
 Petra Plugin
 ======
-Petra Plugin（以下、当プラグイン）は、[ギガンティック☆整地鯖][seichi.click]（以下、当サーバ）のPaperMCプラグインです。<br />
+Petra Plugin（以下、当プラグイン）は、[ギガンティック☆整地鯖](https://seichi.click)（以下、当サーバ）のPaperMCプラグインです。<br />
 
 Description
 ---
