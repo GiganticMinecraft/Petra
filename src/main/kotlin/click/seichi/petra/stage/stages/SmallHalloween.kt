@@ -115,7 +115,7 @@ object SmallHalloween {
                                     )
                             )
                     )
-                    ), listOf(ItemStack(Material.COAL_ORE, 10))
+                    ), listOf(ItemStack(Material.COAL, 10))
             ),
             BonusWave(
                     SummonData(
@@ -163,7 +163,7 @@ object SmallHalloween {
                                     )
                             )
                     )), Summoners.KIMETSU_TEONI
-                    , listOf(ItemStack(Material.IRON_ORE, 30))
+                    , listOf(ItemStack(Material.IRON_INGOT, 30))
             ), BreakSection(60),
             DefenseSummonerWave(3, 1,
                     WaveData(mapOf(
@@ -181,7 +181,7 @@ object SmallHalloween {
                     ItemStack(Material.FLINT, 16)
             )
             ), BreakSection(60),
-            AnnihilationWave(4, 2,
+            DefeatSummonerWave(4, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
@@ -202,7 +202,8 @@ object SmallHalloween {
                                     )
                             )
                     )
-                    ), listOf(ItemStack(Material.COAL_ORE, 10))
+                    ), Summoners.KIMETSU_RUI
+                    , listOf(ItemStack(Material.DIAMOND, 3))
             ),
             DefensePlayerWave(5, 2,
                     WaveData(mapOf(

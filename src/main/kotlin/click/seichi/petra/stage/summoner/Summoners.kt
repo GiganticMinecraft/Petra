@@ -239,6 +239,30 @@ object Summoners {
         }
     }
 
+    val KIMETSU_RUI: ISummoner = object : Summoner(EntityType.SPIDER, { 1 }), Named {
+        override fun onCreate(entity: Entity) {
+            super.onCreate(entity)
+            val spider = entity as Spider
+            spider.addPotionEffect(PotionEffect(PotionEffectType.INVISIBILITY, 10000, 1, true, true))
+            spider.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10000, 4, true, true))
+            spider.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000, 3, true, true))
+            val spiderUniqueId = spider.uniqueId
+            ChatMessage("${ChatColor.LIGHT_PURPLE}僕たち家族の静かな暮らしを邪魔するな").broadcast()
+            sync(0L, 100L) {
+                val e = Bukkit.getServer().getEntity(spiderUniqueId)
+                if (e != null && e.isValid && !e.isDead) return@sync true
+                else {
+                    ChatMessage("${ChatColor.RED}バカな...糸が焼き切れた").broadcast()
+                    return@sync false
+                }
+            }
+        }
+
+        override fun getName(): String {
+            return "十二鬼月 下弦の伍 累"
+        }
+    }
+
     //endregion
 
     val YOUJO: (String?) -> ISummoner = { target: String? ->
