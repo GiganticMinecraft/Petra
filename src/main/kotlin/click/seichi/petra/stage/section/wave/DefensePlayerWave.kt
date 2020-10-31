@@ -65,8 +65,8 @@ class DefensePlayerWave(
         val title = "${ChatColor.YELLOW}残りHP"
 
         playerHpBar.setTitle(title)
-
         playerHpBar.progress = remain
+        playerHpBar.isVisible = true
     }
 
     override fun onEnd() {
