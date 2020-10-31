@@ -184,7 +184,7 @@ object Summoners {
         }
 
         override fun getName(): String {
-            return "手鬼"
+            return "テオニー"
         }
     }
 
@@ -259,7 +259,7 @@ object Summoners {
         }
 
         override fun getName(): String {
-            return "十二鬼月 下弦の伍 累"
+            return "ルイ"
         }
     }
 
@@ -321,7 +321,7 @@ object Summoners {
                         .filterNotNull()
                         .filter { it.gameMode == GameMode.SURVIVAL }
                         .random()
-                name = "禰豆子"
+                name = "ネズーコ"
                 val vi = entity as Villager
                 vi.setBaby()
                 vi.equipment?.apply {
