@@ -177,10 +177,11 @@ object Summoners {
                 it.setItemInMainHand(sword)
             }
 
-            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000, 3, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000, 5, false, false, false))
             wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST, 10000, 3, false, false, false))
             wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10000, 4, false, false, false))
             wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 10000, 1, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 10000, 1, false, false, false))
         }
 
         override fun getName(): String {
