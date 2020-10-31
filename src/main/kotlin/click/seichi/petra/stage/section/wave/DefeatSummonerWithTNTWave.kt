@@ -48,7 +48,6 @@ class DefeatSummonerWithTNTWave(
     override fun onStart() {
         target = targetSummoner.summonOnly(world, summonProxy, players).first()
                 .let { Bukkit.getServer().getEntity(it) as Mob }
-        target.isGlowing = true
         onSummoned(target)
         entitySet.add(target.uniqueId)
 
@@ -101,8 +100,12 @@ class DefeatSummonerWithTNTWave(
         if (!isStarted) return
         val entity = event.entity
         if (entity !is LivingEntity) return
-        if (entity.uniqueId == target.uniqueId) {
-            updateHpBar(entity.health.coerceAtLeast(0.0) / maxHealth)
+        if (entity.uniqueId != target.uniqueId) return
+        if (event.cause != EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+            GameSound.KIIN.sendAt(entity.location)
+            event.isCancelled = true
+            return
         }
+        updateHpBar(entity.health.coerceAtLeast(0.0) / maxHealth)
     }
 }

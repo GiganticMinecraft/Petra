@@ -181,7 +181,7 @@ object SmallHalloween {
                     ItemStack(Material.FLINT, 16)
             )
             ), BreakSection(60),
-            DefeatSummonerWave(4, 2,
+            DefeatSummonerWithTNTWave(4, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
