@@ -204,7 +204,7 @@ object SmallHalloween {
                     )
                     ), listOf(ItemStack(Material.COAL_ORE, 10))
             ),
-            DefensePlayerWave(4, 2,
+            DefensePlayerWave(5, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
