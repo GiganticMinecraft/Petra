@@ -253,7 +253,7 @@ object Summoners {
                 val e = Bukkit.getServer().getEntity(spiderUniqueId)
                 if (e != null && e.isValid && !e.isDead) return@sync true
                 else {
-                    ChatMessage("${ChatColor.RED}バカな...糸が焼き切れた").broadcast()
+                    ChatMessage("${ChatColor.RED}バカな...糸が焼き切れた!?").broadcast()
                     return@sync false
                 }
             }
