@@ -3,6 +3,7 @@ package click.seichi.petra.game
 import click.seichi.petra.GameSound
 import click.seichi.petra.event.StartGameEvent
 import click.seichi.petra.function.async
+import click.seichi.petra.function.sync
 import click.seichi.petra.game.event.*
 import click.seichi.petra.stage.Facilitator
 import click.seichi.petra.stage.ResultSender
@@ -154,13 +155,16 @@ class PetraGame(private val stage: Stage) : Listener, Game {
         val player = event.player
         event.respawnLocation = stage.generator.getFixedSpawnLocation(player.world, Random.generator)!!
 
+        val uuid = player.uniqueId
         async(5L) {
-            player.addPotionEffects(
-                    mutableListOf(
-                            PotionEffect(PotionEffectType.WEAKNESS, 5 * 20, 1, true, true),
-                            PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 5 * 20, 5, true, true)
-                    )
-            )
+            sync {
+                Bukkit.getServer().getPlayer(uuid)?.addPotionEffects(
+                        mutableListOf(
+                                PotionEffect(PotionEffectType.WEAKNESS, 5 * 20, 1, true, true),
+                                PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 5 * 20, 3, true, true)
+                        )
+                )
+            }
         }
     }
 
