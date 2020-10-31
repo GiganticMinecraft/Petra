@@ -27,7 +27,7 @@ import java.util.*
 class BonusWave(
         private val summonData: SummonData,
         private val seconds: Int,
-        private val startMessage: Message? = GameSound.START_BREAK_SECTION.add(
+        private val startMessage: Message? = GameSound.START_BREAK_SECTION.copy().add(
                 TitleMessage("", "ボーナスタイム")
         )
 ) : Section {
