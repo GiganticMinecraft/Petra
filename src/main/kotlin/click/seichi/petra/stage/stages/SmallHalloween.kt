@@ -178,9 +178,32 @@ object SmallHalloween {
                     , listOf(
                     ItemStack(Material.GUNPOWDER, 32),
                     ItemStack(Material.SAND, 32),
-                    ItemStack(Material.FLINT, 1)
+                    ItemStack(Material.FLINT, 16)
             )
             ), BreakSection(60),
+            AnnihilationWave(4, 2,
+                    WaveData(mapOf(
+                            0 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.SPIDER, { 1 }) to 4,
+                                            Summoner(EntityType.CAVE_SPIDER, { 1 }) to 2
+                                    )
+                            ),
+                            30 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.SPIDER, { 1 }) to 4,
+                                            Summoner(EntityType.CAVE_SPIDER, { 1 }) to 2
+                                    )
+                            ),
+                            60 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.SPIDER, { 1 }) to 4,
+                                            Summoner(EntityType.CAVE_SPIDER, { 1 }) to 2
+                                    )
+                            )
+                    )
+                    ), listOf(ItemStack(Material.COAL_ORE, 10))
+            ),
             DefensePlayerWave(4, 2,
                     WaveData(mapOf(
                             0 to SummonData(

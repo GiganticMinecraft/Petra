@@ -48,6 +48,7 @@ open class Wave(
     override fun endAsObservable(): Observable<StageResult> = subject.doOnDispose {
         timer.cancel()
     }.doOnNext {
+        if (it != StageResult.WIN) return@doOnNext
         ChatMessage("${ChatColor.GOLD}報酬獲得!!").broadcast()
         players.mapNotNull { Bukkit.getServer().getPlayer(it) }.forEach { p ->
             p.inventory.addItem(*rewards.toTypedArray()).map { it.value }.forEach {
