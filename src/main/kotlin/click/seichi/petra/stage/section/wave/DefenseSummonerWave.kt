@@ -99,8 +99,7 @@ class DefenseSummonerWave(
         val entity = event.entity
         if (entity !is LivingEntity) return
         if (entity.uniqueId == target.uniqueId) {
-            val remainHealth = entity.health - event.finalDamage
-            updateHpBar(remainHealth.coerceAtLeast(0.0) / maxHealth)
+            updateHpBar(entity.health.coerceAtLeast(0.0) / maxHealth)
         }
     }
 }

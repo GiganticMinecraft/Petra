@@ -106,8 +106,7 @@ class DefensePlayerWave(
         val entity = event.entity
         if (entity !is LivingEntity) return
         if (entity.uniqueId == target.uniqueId) {
-            val remainHealth = entity.health - event.finalDamage
-            updateHpBar(remainHealth.coerceAtLeast(0.0) / (entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value
+            updateHpBar(entity.health.coerceAtLeast(0.0) / (entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value
                     ?: 10.0))
         }
     }
