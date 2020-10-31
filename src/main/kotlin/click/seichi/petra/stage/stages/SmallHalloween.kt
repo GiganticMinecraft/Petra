@@ -98,32 +98,19 @@ object SmallHalloween {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 4,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 2,
-                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 1,
-                                            Summoners.ZOMBIE_IMITATED_SKELETON to 1,
-                                            Summoners.CAPPED_SKELETON to 1
+                                            Summoner(EntityType.SKELETON, { 1 }) to 2
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 3,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 2,
-                                            Summoner(EntityType.STRAY, { 1 }) to 2,
-                                            Summoner(EntityType.HUSK, { 1 }) to 2,
-                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 1,
-                                            Summoners.ZOMBIE_IMITATED_SKELETON to 1,
-                                            Summoners.CAPPED_SKELETON to 1
+                                            Summoner(EntityType.SKELETON, { 1 }) to 2
                                     )
                             ),
                             120 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 5,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 3,
-                                            Summoner(EntityType.HUSK, { 1 }) to 2,
-                                            Summoner(EntityType.STRAY, { 1 }) to 2,
-                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 1,
-                                            Summoners.ZOMBIE_IMITATED_SKELETON to 1,
-                                            Summoners.CAPPED_SKELETON to 1
+                                            Summoner(EntityType.SKELETON, { 1 }) to 3
                                     )
                             )
                     ))
@@ -133,37 +120,37 @@ object SmallHalloween {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoners.RAIN_BRAIN to 1,
-                                            Summoner(EntityType.CREEPER, { 1 }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             ),
                             10 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             ),
                             20 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             ),
                             30 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             ),
                             40 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             ),
                             50 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             )
                     )), Summoners.HONEBUTO_KURO
