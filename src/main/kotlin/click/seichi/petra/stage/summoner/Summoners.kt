@@ -164,6 +164,30 @@ object Summoners {
         }
     }
 
+    val KIMETSU_TEONI: ISummoner = object : Summoner(EntityType.WITHER_SKELETON), Named {
+        override fun onCreate(entity: Entity) {
+            super.onCreate(entity)
+            val wSkeleton = entity as WitherSkeleton
+            wSkeleton.equipment?.let {
+                val sword = ItemStack(Material.DIAMOND_SWORD)
+                sword.addEnchantment(Enchantment.FIRE_ASPECT, 1)
+                sword.addEnchantment(Enchantment.KNOCKBACK, 2)
+                sword.addEnchantment(Enchantment.DAMAGE_ALL, 4)
+                it.itemInMainHandDropChance = 1.0F
+                it.setItemInMainHand(sword)
+            }
+
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000, 3, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST, 10000, 3, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10000, 4, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 10000, 1, false, false, false))
+        }
+
+        override fun getName(): String {
+            return "手鬼"
+        }
+    }
+
 
     val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }), Named {
         override fun onCreate(entity: Entity) {
@@ -231,6 +255,49 @@ object Summoners {
                         .filter { it.gameMode == GameMode.SURVIVAL }
                         .random()
                 name = "ょぅι゛ょ"
+                val vi = entity as Villager
+                vi.setBaby()
+                vi.equipment?.apply {
+                    this.helmet = ItemStack(Material.PLAYER_HEAD).apply {
+                        val skullMeta = itemMeta as SkullMeta
+                        skullMeta.owningPlayer = player
+                        this.itemMeta = skullMeta
+                    }
+                    this.helmetDropChance = 0.0F
+                    this.chestplate = ItemStack(Material.IRON_CHESTPLATE)
+                    this.chestplateDropChance = 0.0F
+                    this.leggings = ItemStack(Material.IRON_LEGGINGS)
+                    this.leggingsDropChance = 0.0F
+                    this.boots = ItemStack(Material.IRON_BOOTS)
+                    this.bootsDropChance = 0.0F
+                }
+
+                vi.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000, 2, false, false, false))
+                vi.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST, 10000, 3, false, false, false))
+                vi.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 10000, 3, false, false, false))
+                vi.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 10000, 1, false, false, false))
+            }
+
+            override fun getName(): String {
+                return name
+            }
+        }
+    }
+
+    val KIMETSU_NEZUKO: (String?) -> ISummoner = { target: String? ->
+        object : Summoner(EntityType.VILLAGER, { sqrt(it.toDouble()).toInt() }, SummonCase.CENTER), Named {
+            private lateinit var name: String
+            override fun onCreate(entity: Entity) {
+                super.onCreate(entity)
+                var targetPlayer: Player? = null
+                if (target != null) {
+                    targetPlayer = Bukkit.getServer().getPlayer(target)
+                }
+                val player = targetPlayer ?: Bukkit.getServer().onlinePlayers
+                        .filterNotNull()
+                        .filter { it.gameMode == GameMode.SURVIVAL }
+                        .random()
+                name = "禰豆子"
                 val vi = entity as Villager
                 vi.setBaby()
                 vi.equipment?.apply {

@@ -9,7 +9,6 @@ import click.seichi.petra.stage.summoner.ISummoner
 import click.seichi.petra.stage.summoner.Named
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
-import org.bukkit.attribute.Attribute
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
 import org.bukkit.boss.BossBar
@@ -42,6 +41,8 @@ class DefeatSummonerWave(
     private val targetName = (targetSummoner as Named).getName()
     private var isDefeat = false
 
+    private var maxHealth = Double.MAX_VALUE
+
     private lateinit var enemyHpBar: BossBar
 
     override fun onStart() {
@@ -56,6 +57,7 @@ class DefeatSummonerWave(
         enemyHpBar.style = BarStyle.SOLID
         updateHpBar(1.0)
         enemyHpBar.isVisible = true
+        maxHealth = target.health
     }
 
     private fun updateHpBar(remain: Double) {
@@ -63,7 +65,7 @@ class DefeatSummonerWave(
         else "${ChatColor.LIGHT_PURPLE}残りHP"
         enemyHpBar.setTitle(title)
 
-        enemyHpBar.progress = remain
+        enemyHpBar.progress = remain.coerceAtMost(1.0)
     }
 
     override fun getStartMessage(): Message {
@@ -100,9 +102,7 @@ class DefeatSummonerWave(
         val entity = event.entity
         if (entity !is LivingEntity) return
         if (entity.uniqueId == target.uniqueId) {
-            val remainHealth = entity.health - event.finalDamage
-            updateHpBar(remainHealth.coerceAtLeast(0.0) / (entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value
-                    ?: 10.0))
+            updateHpBar(entity.health.coerceAtLeast(0.0) / maxHealth)
         }
     }
 }

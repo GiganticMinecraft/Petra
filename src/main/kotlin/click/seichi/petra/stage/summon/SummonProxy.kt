@@ -9,6 +9,7 @@ import org.bukkit.util.Consumer
  * @author tar0ss
  */
 interface SummonProxy {
-    fun summon(world: World, entityType: EntityType, function: Consumer<Entity>? = null): Entity
+    fun summonAtDangerZone(world: World, entityType: EntityType, function: Consumer<Entity>? = null): Entity
+    fun summonAtSafeZone(world: World, entityType: EntityType, function: Consumer<Entity>? = null): Entity
     fun summonToCenter(world: World, entityType: EntityType, function: Consumer<Entity>? = null): Entity
 }

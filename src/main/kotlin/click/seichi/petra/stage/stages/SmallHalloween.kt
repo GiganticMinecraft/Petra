@@ -94,7 +94,7 @@ object SmallHalloween {
 
     val SECTIONS: Array<Section> = arrayOf(
             BreakSection(120, null),
-            AnnihilationWave(1, 5,
+            AnnihilationWave(1, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
@@ -102,21 +102,29 @@ object SmallHalloween {
                                             Summoner(EntityType.SKELETON, { 1 }) to 2
                                     )
                             ),
-                            60 to SummonData(
+                            30 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 3,
                                             Summoner(EntityType.SKELETON, { 1 }) to 2
                                     )
                             ),
-                            120 to SummonData(
+                            60 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 5,
                                             Summoner(EntityType.SKELETON, { 1 }) to 3
                                     )
                             )
                     )
-                    ), listOf(ItemStack(Material.IRON_ORE, 30))
-            ), BreakSection(60),
+                    ), listOf(ItemStack(Material.COAL_ORE, 10))
+            ),
+            BonusWave(
+                    SummonData(
+                            MultiEntity(
+                                    Summoner(EntityType.CHICKEN, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 10,
+                                    Summoner(EntityType.PIG, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 5
+                            )
+                    ), 60
+            ),
             DefeatSummonerWave(2, 2,
                     WaveData(mapOf(
                             0 to SummonData(
@@ -154,34 +162,39 @@ object SmallHalloween {
                                             Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             )
-                    )), Summoners.HONEBUTO_KURO
+                    )), Summoners.KIMETSU_TEONI
+                    , listOf(ItemStack(Material.IRON_ORE, 30))
             ), BreakSection(60),
             DefenseSummonerWave(3, 1,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
-                                            Summoner(EntityType.ILLUSIONER, { 1 }) to 2,
+                                            Summoner(EntityType.HUSK, { 3 }) to 1,
+                                            Summoner(EntityType.VINDICATOR, { 2 }) to 1,
                                             Summoner(EntityType.EVOKER, { 1 }) to 1
-
                                     )
                             )
-                    )), Summoners.YOUJO("unchama")
+                    )), Summoners.KIMETSU_NEZUKO("unchama")
+                    , listOf(
+                    ItemStack(Material.GUNPOWDER, 32),
+                    ItemStack(Material.SAND, 32),
+                    ItemStack(Material.FLINT, 1)
+            )
             ), BreakSection(60),
             DefensePlayerWave(4, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }) to 1,
+                                            Summoner(EntityType.CREEPER, { 1 }) to 4,
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 4,
                                             Summoner(EntityType.SKELETON, { 1 }) to 2,
-                                            Summoner(EntityType.HUSK, { 1 }) to 6,
-                                            Summoner(EntityType.STRAY, { 1 }) to 4,
-                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
-                                            Summoner(EntityType.ILLUSIONER, { 1 }) to 2,
+                                            Summoner(EntityType.HUSK, { 1 }) to 2,
+                                            Summoner(EntityType.STRAY, { 1 }) to 2,
+                                            Summoner(EntityType.VINDICATOR, { 1 }) to 1,
+                                            Summoner(EntityType.ILLUSIONER, { 1 }) to 1,
                                             Summoner(EntityType.EVOKER, { 1 }) to 1,
                                             Summoner(EntityType.VEX, { 2 }) to 1,
-                                            Summoner(EntityType.ENDERMAN, { 1 }) to 3
+                                            Summoner(EntityType.ENDERMAN, { 1 }) to 1
                                     )
                             )
                     )), "unchama"

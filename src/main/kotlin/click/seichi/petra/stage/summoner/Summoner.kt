@@ -18,7 +18,8 @@ open class Summoner(
 ) : ISummoner {
     enum class SummonCase {
         DANGER_ZONE,
-        CENTER
+        CENTER,
+        SAFE_ZONE
     }
 
     override fun summon(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID> {
@@ -29,8 +30,9 @@ open class Summoner(
                 onCreate(it)
             }
             val entity = when (case) {
-                SummonCase.DANGER_ZONE -> summonProxy.summon(world, entityType, consumer)
+                SummonCase.DANGER_ZONE -> summonProxy.summonAtDangerZone(world, entityType, consumer)
                 SummonCase.CENTER -> summonProxy.summonToCenter(world, entityType, consumer)
+                SummonCase.SAFE_ZONE -> summonProxy.summonAtSafeZone(world, entityType, consumer)
             }
             if (this is Named) {
                 // カーソル合わせた時に見えればよい
@@ -49,8 +51,9 @@ open class Summoner(
             onCreate(it)
         }
         val entity = when (case) {
-            SummonCase.DANGER_ZONE -> summonProxy.summon(world, entityType, consumer)
+            SummonCase.DANGER_ZONE -> summonProxy.summonAtDangerZone(world, entityType, consumer)
             SummonCase.CENTER -> summonProxy.summonToCenter(world, entityType, consumer)
+            SummonCase.SAFE_ZONE -> summonProxy.summonAtSafeZone(world, entityType, consumer)
         }
         if (this is Named) {
             // カーソル合わせた時に見えればよい

@@ -16,8 +16,18 @@ class RoundStageSummonProxy(
 ) : SummonProxy {
     private val dangerZoneRadius = radius + dangerZoneLength
 
-    override fun summon(world: World, entityType: EntityType, function: Consumer<Entity>?): Entity {
+    override fun summonAtDangerZone(world: World, entityType: EntityType, function: Consumer<Entity>?): Entity {
         val xz = Random.nextDoughnutPoint(radius.toDouble(), (dangerZoneLength - 2).toDouble())
+        val x = xz.first
+        val z = xz.second
+        val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
+        val loc = Location(world, x, (highestHeight + 2).toDouble(), z)
+        return if (function == null) world.spawnEntity(loc, entityType)
+        else world.spawn(loc, entityType.entityClass as Class<Entity>, function)
+    }
+
+    override fun summonAtSafeZone(world: World, entityType: EntityType, function: Consumer<Entity>?): Entity {
+        val xz = Random.nextRoundPoint(radius.toDouble())
         val x = xz.first
         val z = xz.second
         val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
