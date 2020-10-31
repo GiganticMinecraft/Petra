@@ -158,12 +158,15 @@ class PetraGame(private val stage: Stage) : Listener, Game {
         val uuid = player.uniqueId
         async(5L) {
             sync {
-                Bukkit.getServer().getPlayer(uuid)?.addPotionEffects(
-                        mutableListOf(
-                                PotionEffect(PotionEffectType.WEAKNESS, 5 * 20, 1, true, true),
-                                PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 5 * 20, 3, true, true)
-                        )
-                )
+                Bukkit.getServer().getPlayer(uuid)?.apply {
+                    addPotionEffects(
+                            mutableListOf(
+                                    PotionEffect(PotionEffectType.WEAKNESS, 10 * 20, 1, true, true),
+                                    PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10 * 20, 3, true, true),
+                                    PotionEffect(PotionEffectType.HUNGER, 30 * 20, 1, true, true)
+                            )
+                    )
+                }
             }
         }
     }
