@@ -9,7 +9,6 @@ import click.seichi.petra.stage.StageResult
 import click.seichi.petra.stage.summoner.ISummoner
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
-import org.bukkit.attribute.Attribute
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
 import org.bukkit.boss.BossBar
@@ -41,6 +40,7 @@ class DefenseSummonerWave(
 
     private lateinit var target: Mob
     private lateinit var enemyHpBar: BossBar
+    private var maxHealth = Double.MAX_VALUE
 
     override fun onStart() {
         target = targetSummoner.summonOnly(world, summonProxy, players).first().let {
@@ -100,8 +100,7 @@ class DefenseSummonerWave(
         if (entity !is LivingEntity) return
         if (entity.uniqueId == target.uniqueId) {
             val remainHealth = entity.health - event.finalDamage
-            updateHpBar(remainHealth.coerceAtLeast(0.0) / (entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value
-                    ?: 10.0))
+            updateHpBar(remainHealth.coerceAtLeast(0.0) / maxHealth)
         }
     }
 }

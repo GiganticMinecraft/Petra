@@ -99,19 +99,19 @@ object SmallHalloween {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 4,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 2
+                                            Summoner(EntityType.SKELETON, { 1 }) to 4
                                     )
                             ),
                             30 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 3,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 2
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 5,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 3
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 8,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 8
                                     )
                             )
                     )
@@ -169,8 +169,8 @@ object SmallHalloween {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.HUSK, { 3 }) to 1,
-                                            Summoner(EntityType.VINDICATOR, { 2 }) to 1,
+                                            Summoner(EntityType.HUSK, { 1 }) to 6,
+                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
                                             Summoner(EntityType.EVOKER, { 1 }) to 1
                                     )
                             )
@@ -210,11 +210,11 @@ object SmallHalloween {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.CREEPER, { 1 }) to 4,
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 4,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 2,
-                                            Summoner(EntityType.HUSK, { 1 }) to 2,
-                                            Summoner(EntityType.STRAY, { 1 }) to 2,
-                                            Summoner(EntityType.VINDICATOR, { 1 }) to 1,
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 8,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
+                                            Summoner(EntityType.HUSK, { 1 }) to 4,
+                                            Summoner(EntityType.STRAY, { 1 }) to 4,
+                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
                                             Summoner(EntityType.ILLUSIONER, { 1 }) to 1,
                                             Summoner(EntityType.EVOKER, { 1 }) to 1,
                                             Summoner(EntityType.VEX, { 2 }) to 1,
