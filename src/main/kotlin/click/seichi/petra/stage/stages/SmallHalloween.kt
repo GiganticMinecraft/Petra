@@ -106,9 +106,9 @@ object SmallHalloween {
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 4,
-                                            Summoner(EntityType.STRAY, { 1 }) to 4,
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 3,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 2,
+                                            Summoner(EntityType.STRAY, { 1 }) to 2,
                                             Summoner(EntityType.HUSK, { 1 }) to 2,
                                             Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 1,
                                             Summoners.ZOMBIE_IMITATED_SKELETON to 1,
@@ -117,14 +117,13 @@ object SmallHalloween {
                             ),
                             120 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 10,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 5,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 3,
                                             Summoner(EntityType.HUSK, { 1 }) to 2,
-                                            Summoner(EntityType.STRAY, { 1 }) to 4,
-                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 4,
+                                            Summoner(EntityType.STRAY, { 1 }) to 2,
+                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 1,
                                             Summoners.ZOMBIE_IMITATED_SKELETON to 1,
-                                            Summoners.CAPPED_SKELETON to 1,
-                                            Summoners.RAIN_BRAIN to 1
+                                            Summoners.CAPPED_SKELETON to 1
                                     )
                             )
                     ))
