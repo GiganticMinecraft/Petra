@@ -189,7 +189,7 @@ object Summoners {
     }
 
 
-    val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }), Named {
+    val CAPPED_SKELETON: ISummoner = object : Summoner(EntityType.SKELETON, { 1 }), Named {
         override fun onCreate(entity: Entity) {
             super.onCreate(entity)
             val living = entity as Skeleton
