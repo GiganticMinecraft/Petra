@@ -97,31 +97,30 @@ object SmallHalloween {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 4,
-                                            Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 4,
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 4,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 2,
+                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 1,
                                             Summoners.ZOMBIE_IMITATED_SKELETON to 1,
-                                            Summoners.CAPPED_SKELETON to 1,
-                                            Summoners.RAIN_BRAIN to 1
+                                            Summoners.CAPPED_SKELETON to 1
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 6,
-                                            Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 4,
-                                            Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
-                                            Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 4,
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 4,
+                                            Summoner(EntityType.STRAY, { 1 }) to 4,
+                                            Summoner(EntityType.HUSK, { 1 }) to 2,
+                                            Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 1,
                                             Summoners.ZOMBIE_IMITATED_SKELETON to 1,
                                             Summoners.CAPPED_SKELETON to 1
                                     )
                             ),
                             120 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 10,
-                                            Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 6,
-                                            Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 10,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
+                                            Summoner(EntityType.HUSK, { 1 }) to 2,
+                                            Summoner(EntityType.STRAY, { 1 }) to 4,
                                             Summoners.ZOMBIE_IMITATED_PLAYER("unchama") to 4,
                                             Summoners.ZOMBIE_IMITATED_SKELETON to 1,
                                             Summoners.CAPPED_SKELETON to 1,
@@ -135,37 +134,37 @@ object SmallHalloween {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoners.RAIN_BRAIN to 1,
-                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 5
                                     )
                             ),
                             10 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 5
                                     )
                             ),
                             20 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 5
                                     )
                             ),
                             30 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 5
                                     )
                             ),
                             40 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 5
                                     )
                             ),
                             50 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 5
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 5
+                                            Summoner(EntityType.CREEPER, { 1 }) to 5
                                     )
                             )
                     )), Summoners.HONEBUTO_KURO
@@ -174,8 +173,8 @@ object SmallHalloween {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.VINDICATOR, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
+                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
+                                            Summoner(EntityType.ILLUSIONER, { 1 }) to 2,
                                             Summoner(EntityType.EVOKER, { 1 }) to 1
 
                                     )
@@ -186,16 +185,16 @@ object SmallHalloween {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { sqrt(it.toDouble()).toInt() }) to 1,
-                                            Summoner(EntityType.ZOMBIE, { sqrt(it.toDouble()).toInt() }) to 4,
-                                            Summoner(EntityType.SKELETON, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoner(EntityType.HUSK, { sqrt(it.toDouble()).toInt() }) to 6,
-                                            Summoner(EntityType.STRAY, { sqrt(it.toDouble()).toInt() }) to 4,
-                                            Summoner(EntityType.VINDICATOR, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoner(EntityType.ILLUSIONER, { sqrt(it.toDouble()).toInt() }) to 2,
-                                            Summoner(EntityType.EVOKER, { sqrt(it.toDouble()).toInt() }) to 1,
+                                            Summoner(EntityType.CREEPER, { 1 }) to 1,
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 4,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 2,
+                                            Summoner(EntityType.HUSK, { 1 }) to 6,
+                                            Summoner(EntityType.STRAY, { 1 }) to 4,
+                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
+                                            Summoner(EntityType.ILLUSIONER, { 1 }) to 2,
+                                            Summoner(EntityType.EVOKER, { 1 }) to 1,
                                             Summoner(EntityType.VEX, { 2 }) to 1,
-                                            Summoner(EntityType.ENDERMAN, { sqrt(it.toDouble()).toInt() }) to 3
+                                            Summoner(EntityType.ENDERMAN, { 1 }) to 3
                                     )
                             )
                     )), "unchama"
