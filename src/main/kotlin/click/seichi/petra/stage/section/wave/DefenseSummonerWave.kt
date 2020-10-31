@@ -55,6 +55,7 @@ class DefenseSummonerWave(
         enemyHpBar.style = BarStyle.SOLID
         updateHpBar(1.0)
         enemyHpBar.isVisible = true
+        maxHealth = target.health
     }
 
     private fun updateHpBar(remain: Double) {
@@ -62,6 +63,7 @@ class DefenseSummonerWave(
         enemyHpBar.setTitle(title)
 
         enemyHpBar.progress = remain
+        enemyHpBar.isVisible = true
     }
 
     override fun onEnd() {

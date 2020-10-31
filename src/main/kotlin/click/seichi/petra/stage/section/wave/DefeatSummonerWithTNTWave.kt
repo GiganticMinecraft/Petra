@@ -65,6 +65,8 @@ class DefeatSummonerWithTNTWave(
         enemyHpBar.setTitle(title)
 
         enemyHpBar.progress = remain.coerceAtMost(1.0)
+
+        enemyHpBar.isVisible = true
     }
 
     override fun getStartMessage(): Message {
