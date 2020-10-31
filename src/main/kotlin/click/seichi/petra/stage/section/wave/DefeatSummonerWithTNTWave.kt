@@ -101,7 +101,7 @@ class DefeatSummonerWithTNTWave(
         val entity = event.entity
         if (entity !is LivingEntity) return
         if (entity.uniqueId != target.uniqueId) return
-        if (event.cause != EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+        if (event.cause != EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
             GameSound.KIIN.sendAt(entity.location)
             event.isCancelled = true
             return
