@@ -24,6 +24,8 @@ import org.bukkit.event.entity.EntityChangeBlockEvent
 import org.bukkit.event.entity.EntityExplodeEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.event.world.TimeSkipEvent
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import java.util.*
 
 /**
@@ -150,6 +152,12 @@ class PetraGame(private val stage: Stage) : Listener, Game {
     fun onRespawn(event: PlayerRespawnEvent) {
         val player = event.player
         event.respawnLocation = stage.generator.getFixedSpawnLocation(player.world, Random.generator)!!
+        player.addPotionEffects(
+                mutableListOf(
+                        PotionEffect(PotionEffectType.WEAKNESS, 5 * 20, 1, true, true),
+                        PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 5 * 20, 5, true, true)
+                )
+        )
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
