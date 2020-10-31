@@ -181,7 +181,7 @@ object Summoners {
             wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST, 10000, 5, false, false, false))
             wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10000, 4, false, false, false))
             wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 10000, 1, false, false, false))
-            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 10000, 3, false, false, false))
+            wSkeleton.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 10000, 3, false, true, false))
         }
 
         override fun getName(): String {
@@ -248,12 +248,15 @@ object Summoners {
             spider.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10000, 4, true, true))
             spider.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000, 3, true, true))
             val spiderUniqueId = spider.uniqueId
-            ChatMessage("${ChatColor.LIGHT_PURPLE}僕たち家族の静かな暮らしを邪魔するな").broadcast()
+            ChatMessage("${ChatColor.RED}僕たち家族の静かな暮らしを邪魔するな").broadcast()
             sync(0L, 100L) {
                 val e = Bukkit.getServer().getEntity(spiderUniqueId)
                 if (e != null && e.isValid && !e.isDead) return@sync true
                 else {
-                    ChatMessage("${ChatColor.RED}バカな...糸が焼き切れた!?").broadcast()
+                    ChatMessage("${ChatColor.LIGHT_PURPLE}爆血!!").broadcast()
+                    sync(5L) {
+                        ChatMessage("${ChatColor.RED}バカな...糸が焼き切れた!?").broadcast()
+                    }
                     return@sync false
                 }
             }
