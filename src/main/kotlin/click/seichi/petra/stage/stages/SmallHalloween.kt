@@ -206,7 +206,7 @@ object SmallHalloween {
                             )
                     )
                     ), Summoners.KIMETSU_RUI
-                    , listOf(ItemStack(Material.DIAMOND, 3))
+                    , listOf(ItemStack(Material.STRING, 64))
             ),
             DefensePlayerWave(5, 2,
                     WaveData(mapOf(
