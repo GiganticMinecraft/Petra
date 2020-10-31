@@ -226,5 +226,6 @@ object SmallHalloween {
                             )
                     )), "unchama"
             )
+    // TODO 殲滅
     )
 }

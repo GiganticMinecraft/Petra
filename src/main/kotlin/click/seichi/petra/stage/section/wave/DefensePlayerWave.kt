@@ -53,12 +53,12 @@ class DefensePlayerWave(
         }
         target = t ?: players.mapNotNull { Bukkit.getServer().getPlayer(it) }.first { it.isValid }
         target.isGlowing = true
-        (target as Player).setPlayerListName("${ChatColor.YELLOW}${target.name}")
         playerHpBar = topBar.get(TopBarType.ENEMY_COUNT)
         playerHpBar.color = BarColor.YELLOW
         playerHpBar.style = BarStyle.SOLID
-        updateHpBar(target.health / (target.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value ?: 10.0))
         playerHpBar.isVisible = true
+        updateHpBar(target.health / (target.getAttribute(Attribute.GENERIC_MAX_HEALTH)?.value ?: 10.0))
+        (target as Player).setPlayerListName("${ChatColor.YELLOW}${target.name}")
     }
 
     private fun updateHpBar(remain: Double) {
