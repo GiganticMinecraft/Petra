@@ -15,6 +15,7 @@ import org.bukkit.World
 import org.bukkit.entity.EntityType
 import org.bukkit.generator.BlockPopulator
 import org.bukkit.generator.ChunkGenerator
+import org.bukkit.inventory.ItemStack
 import org.bukkit.util.noise.PerlinOctaveGenerator
 import java.util.*
 import kotlin.math.sqrt
@@ -113,13 +114,13 @@ object SmallHalloween {
                                             Summoner(EntityType.SKELETON, { 1 }) to 3
                                     )
                             )
-                    ))
+                    )
+                    ), listOf(ItemStack(Material.IRON_ORE, 30))
             ), BreakSection(60),
             DefeatSummonerWave(2, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoners.RAIN_BRAIN to 1,
                                             Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             ),

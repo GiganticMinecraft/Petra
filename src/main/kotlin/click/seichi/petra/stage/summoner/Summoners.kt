@@ -216,6 +216,7 @@ object Summoners {
     }
 
     //endregion
+
     val YOUJO: (String?) -> ISummoner = { target: String? ->
         object : Summoner(EntityType.VILLAGER, { sqrt(it.toDouble()).toInt() }, SummonCase.CENTER), Named {
             private lateinit var name: String

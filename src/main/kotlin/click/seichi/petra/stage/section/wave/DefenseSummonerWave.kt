@@ -21,6 +21,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDeathEvent
+import org.bukkit.inventory.ItemStack
 
 /**
  * @author tar0ss
@@ -29,11 +30,13 @@ class DefenseSummonerWave(
         private val waveNum: Int,
         private val minutes: Int,
         raidData: WaveData,
-        private val targetSummoner: ISummoner
+        private val targetSummoner: ISummoner,
+        rewards: List<ItemStack> = listOf()
 ) : Wave(
         waveNum,
         minutes,
-        raidData
+        raidData,
+        rewards
 ), Listener {
 
     private lateinit var target: Mob

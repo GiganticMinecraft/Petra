@@ -4,6 +4,7 @@ import click.seichi.petra.GameSound
 import click.seichi.petra.TopBarType
 import click.seichi.petra.function.getNearestPlayer
 import click.seichi.petra.game.Game
+import click.seichi.petra.message.ChatMessage
 import click.seichi.petra.message.Message
 import click.seichi.petra.message.TitleMessage
 import click.seichi.petra.stage.StageResult
@@ -23,6 +24,7 @@ import org.bukkit.boss.BossBar
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Mob
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 import java.util.*
 
 /**
@@ -33,16 +35,25 @@ import java.util.*
  * @param waveNum ウェーブ数
  * @param minutes 終了時間
  * @param raidData
+ * @param rewards
  */
 open class Wave(
         private val waveNum: Int,
         private val minutes: Int,
-        private val raidData: WaveData
+        private val raidData: WaveData,
+        private val rewards: List<ItemStack>
 ) : Section {
 
     protected val subject: Subject<StageResult> = PublishSubject.create()
     override fun endAsObservable(): Observable<StageResult> = subject.doOnDispose {
         timer.cancel()
+    }.doOnNext {
+        ChatMessage("${ChatColor.GOLD}報酬獲得!!").broadcast()
+        players.mapNotNull { Bukkit.getServer().getPlayer(it) }.forEach { p ->
+            p.inventory.addItem(*rewards.toTypedArray()).map { it.value }.forEach {
+                p.world.dropItemNaturally(p.location, it)
+            }
+        }
     }
 
     protected val seconds = minutes * 60

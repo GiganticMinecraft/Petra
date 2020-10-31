@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
+import org.bukkit.inventory.ItemStack
 
 /**
  * @author tar0ss
@@ -21,11 +22,13 @@ import org.bukkit.event.entity.EntityDeathEvent
 class AnnihilationWave(
         private val waveNum: Int,
         minutes: Int,
-        raidData: WaveData
+        raidData: WaveData,
+        rewards: List<ItemStack> = listOf()
 ) : Wave(
         waveNum,
         minutes,
-        raidData
+        raidData,
+        rewards
 ), Listener {
 
     private var defeatedNum: Int = 0
