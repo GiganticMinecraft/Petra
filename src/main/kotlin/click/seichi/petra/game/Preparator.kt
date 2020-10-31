@@ -7,7 +7,9 @@ import org.bukkit.entity.Player
  */
 interface Preparator {
     fun prepare()
+    fun canPrepare(): Boolean
     fun ready(player: Player)
+    fun canReady(): Boolean
     fun cancelReady(player: Player)
     fun isReady(player: Player): Boolean
 }

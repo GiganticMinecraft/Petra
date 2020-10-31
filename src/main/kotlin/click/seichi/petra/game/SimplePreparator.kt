@@ -10,12 +10,18 @@ import org.bukkit.entity.Player
 import java.util.*
 
 class SimplePreparator(
-        game: Game
+        game: Game,
+        private val playerRange: IntRange
 ) : Preparator {
 
     private val players: Set<UUID> = game.players
     private val readyPlayerSet = game.readyPlayers
     private var isPrepared = false
+
+    override fun canPrepare(): Boolean {
+        return (readyPlayerSet.count() in playerRange && readyPlayerSet.count() == players.count())
+                || readyPlayerSet.count() == playerRange.last
+    }
 
     override fun prepare() {
         if (isPrepared) {
@@ -24,6 +30,10 @@ class SimplePreparator(
         }
         isPrepared = true
         Bukkit.getPluginManager().callEvent(PrepareEvent(players))
+    }
+
+    override fun canReady(): Boolean {
+        return players.count() < playerRange.last
     }
 
     override fun ready(player: Player) {
@@ -36,7 +46,7 @@ class SimplePreparator(
                 players.count()
         ))
 
-        if (players.count() == readyPlayerSet.count()) prepare()
+        if (canPrepare()) prepare()
     }
 
     override fun cancelReady(player: Player) {

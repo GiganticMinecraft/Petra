@@ -35,7 +35,7 @@ class Petra : Plugin() {
         stage = Stage.find(PetraConfig.STAGE_NAME)!!
         logger.fine("Load Stage \"${stage.key}\"")
         game = PetraGame(stage)
-        preparator = SimplePreparator(game)
+        preparator = SimplePreparator(game, stage.playerRange)
         playerLocator = PlayerLocator(game, preparator)
     }
 

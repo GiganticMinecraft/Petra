@@ -43,7 +43,10 @@ class StartCommand(
             sender.sendMessage("You are not op.")
             return true
         }
-
+        if (!preparator.canPrepare()) {
+            sender.sendMessage("指定人数に達していません")
+            return true
+        }
         preparator.prepare()
         return true
     }

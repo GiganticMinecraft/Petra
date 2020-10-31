@@ -14,6 +14,7 @@ enum class Stage(
         val generator: StageGenerator,
         val summonProxy: SummonProxy,
         val startTime: Long,
+        val playerRange: IntRange,
         vararg _sections: Section
 ) {
     PETRA_ONE(
@@ -21,6 +22,7 @@ enum class Stage(
             FirstLayer.GENERATOR,
             FirstLayer.SPAWN_PROXY,
             6000L,
+            1..32,
             *FirstLayer.SECTIONS
     ),
     SMALL_HALLOWEEN(
@@ -28,6 +30,7 @@ enum class Stage(
             SmallHalloween.GENERATOR,
             SmallHalloween.SPAWN_PROXY,
             6000L,
+            4..4,
             *SmallHalloween.SECTIONS
     )
     ;
