@@ -2,6 +2,7 @@ package click.seichi.petra.game
 
 import click.seichi.petra.GameSound
 import click.seichi.petra.event.StartGameEvent
+import click.seichi.petra.function.async
 import click.seichi.petra.game.event.*
 import click.seichi.petra.stage.Facilitator
 import click.seichi.petra.stage.ResultSender
@@ -152,13 +153,17 @@ class PetraGame(private val stage: Stage) : Listener, Game {
     fun onRespawn(event: PlayerRespawnEvent) {
         val player = event.player
         event.respawnLocation = stage.generator.getFixedSpawnLocation(player.world, Random.generator)!!
-        player.addPotionEffects(
-                mutableListOf(
-                        PotionEffect(PotionEffectType.WEAKNESS, 5 * 20, 1, true, true),
-                        PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 5 * 20, 5, true, true)
-                )
-        )
+
+        async(5L) {
+            player.addPotionEffects(
+                    mutableListOf(
+                            PotionEffect(PotionEffectType.WEAKNESS, 5 * 20, 1, true, true),
+                            PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 5 * 20, 5, true, true)
+                    )
+            )
+        }
     }
+
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
