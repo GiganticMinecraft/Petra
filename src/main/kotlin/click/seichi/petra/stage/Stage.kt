@@ -3,6 +3,7 @@ package click.seichi.petra.stage
 import click.seichi.petra.stage.generator.StageGenerator
 import click.seichi.petra.stage.section.Section
 import click.seichi.petra.stage.stages.FirstLayer
+import click.seichi.petra.stage.stages.SmallHalloween
 import click.seichi.petra.stage.summon.SummonProxy
 
 /**
@@ -21,6 +22,13 @@ enum class Stage(
             FirstLayer.SPAWN_PROXY,
             6000L,
             *FirstLayer.SECTIONS
+    ),
+    SMALL_HALLOWEEN(
+            SmallHalloween.KEY,
+            SmallHalloween.GENERATOR,
+            SmallHalloween.SPAWN_PROXY,
+            6000L,
+            *SmallHalloween.SECTIONS
     )
     ;
 
