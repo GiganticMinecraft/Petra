@@ -9,18 +9,25 @@ import org.bukkit.ChatColor
  * @author tar0ss
  */
 object GameMessage {
+
+    val JOIN = TitleMessage(
+            "",
+            "${ChatColor.AQUA}/ready で参加",
+            stay = 20 * 60
+    )
+
     val READY: (Int, Int) -> Message = { ready: Int, all: Int ->
         TitleMessage(
-                "${ChatColor.WHITE}スタートまで",
-                "${ChatColor.AQUA}$ready / $all",
+                "${ChatColor.WHITE}$ready / $all",
+                "${ChatColor.AQUA}/ready で参加",
                 stay = 20 * 60
         )
     }
 
     val CANCEL_READY: (Int, Int) -> Message = { ready: Int, all: Int ->
         TitleMessage(
-                "${ChatColor.WHITE}スタートまで",
-                "${ChatColor.AQUA}$ready / $all",
+                "${ChatColor.WHITE}$ready / $all",
+                "${ChatColor.AQUA}/ready でキャンセル",
                 stay = 20 * 60
         )
     }

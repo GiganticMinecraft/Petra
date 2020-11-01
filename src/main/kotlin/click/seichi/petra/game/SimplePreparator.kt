@@ -14,12 +14,23 @@ class SimplePreparator(
         private val playerRange: IntRange
 ) : Preparator {
 
-    private val players: Set<UUID> = game.players
-    private val readyPlayerSet = game.readyPlayers
+    private val onlinePlayerCount: Int
+        get() = Bukkit.getServer().onlinePlayers.count()
+    private val readyPlayerSet = mutableSetOf<UUID>()
     private var isPrepared = false
 
+    private val startableCount: Int
+        get() {
+            val readyCount = readyPlayerSet.count()
+            return when {
+                readyCount in playerRange -> readyCount
+                readyCount < playerRange.first -> playerRange.first
+                else -> playerRange.last
+            }
+        }
+
     override fun canPrepare(): Boolean {
-        return (readyPlayerSet.count() in playerRange && readyPlayerSet.count() == players.count())
+        return (readyPlayerSet.count() in playerRange && readyPlayerSet.count() == onlinePlayerCount)
                 || readyPlayerSet.count() == playerRange.last
     }
 
@@ -29,21 +40,22 @@ class SimplePreparator(
             return
         }
         isPrepared = true
-        Bukkit.getPluginManager().callEvent(PrepareEvent(players))
+        Bukkit.getPluginManager().callEvent(PrepareEvent(readyPlayerSet.toSet()))
     }
 
     override fun canReady(): Boolean {
-        return players.count() < playerRange.last
+        return readyPlayerSet.count() < playerRange.last
     }
 
     override fun ready(player: Player) {
-        if (!players.contains(player.uniqueId)) return
         readyPlayerSet.add(player.uniqueId)
+
+        val readyCount = readyPlayerSet.count()
 
         Bukkit.getPluginManager().callEvent(PlayerReadyEvent(
                 player,
-                readyPlayerSet.count(),
-                players.count()
+                readyCount,
+                startableCount
         ))
 
         if (canPrepare()) prepare()
@@ -58,7 +70,7 @@ class SimplePreparator(
         Bukkit.getPluginManager().callEvent(PlayerCancelReadyEvent(
                 player,
                 readyPlayerSet.count(),
-                players.count()))
+                startableCount))
     }
 
     override fun isReady(player: Player): Boolean {

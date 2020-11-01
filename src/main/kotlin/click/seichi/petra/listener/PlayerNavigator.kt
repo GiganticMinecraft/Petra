@@ -3,7 +3,6 @@ package click.seichi.petra.listener
 import click.seichi.petra.GameMessage
 import click.seichi.petra.GameSound
 import click.seichi.petra.event.StartGameEvent
-import click.seichi.petra.game.Game
 import click.seichi.petra.game.event.CountDownEvent
 import click.seichi.petra.game.event.PlayerCancelReadyEvent
 import click.seichi.petra.game.event.PlayerJoinGameEvent
@@ -15,30 +14,26 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
-import java.util.*
 
 /**
  * @author tar0ss
  */
 class PlayerNavigator(
-        game: Game
+        private val bar: TopBar
 ) : Listener {
-    private val players: Set<UUID> = game.players
-    private val readyPlayers: Set<UUID> = game.readyPlayers
-    private val bar: TopBar = game.topBar
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.WHITE}${player.name}")
-        GameMessage.READY(readyPlayers.count(), players.count()).broadcast()
+        GameMessage.JOIN.broadcast()
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerReady(event: PlayerReadyEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.GREEN}${player.name}")
-        GameMessage.CANCEL_READY(event.ready, event.all).broadcast()
+        GameMessage.CANCEL_READY(event.ready, event.startableCount).broadcast()
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

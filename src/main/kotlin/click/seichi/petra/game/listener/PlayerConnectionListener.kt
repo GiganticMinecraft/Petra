@@ -5,7 +5,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerLoginEvent
 import org.bukkit.event.player.PlayerQuitEvent
 
 /**
@@ -14,12 +13,6 @@ import org.bukkit.event.player.PlayerQuitEvent
 class PlayerConnectionListener(
         private val locator: IPlayerLocator
 ) : Listener {
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    fun onPlayerLogin(event: PlayerLoginEvent) {
-        if (locator.allowsToJoin(event.player)) {
-            event.allow()
-        }
-    }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onPlayerJoin(event: PlayerJoinEvent) {

@@ -42,8 +42,11 @@ class ReadyCommand(
         if (preparator.isReady(sender)) {
             preparator.cancelReady(sender)
             return true
-        } else {
+        } else if (preparator.canReady()) {
             preparator.ready(sender)
+            return true
+        } else {
+            sender.sendMessage("満員のため参加できません")
             return true
         }
     }

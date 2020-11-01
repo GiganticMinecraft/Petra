@@ -9,5 +9,5 @@ import org.bukkit.entity.Player
 class PlayerReadyEvent(
         val player: Player,
         val ready: Int,
-        val all: Int
+        val startableCount: Int
 ) : CustomEvent()

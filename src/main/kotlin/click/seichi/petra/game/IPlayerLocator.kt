@@ -7,8 +7,6 @@ import org.bukkit.entity.Player
  */
 interface IPlayerLocator {
 
-    fun allowsToJoin(player: Player): Boolean
-
     fun join(player: Player): String?
 
     fun leave(player: Player): String?

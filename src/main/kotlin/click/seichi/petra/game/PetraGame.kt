@@ -42,8 +42,6 @@ class PetraGame(private val stage: Stage) : Listener, Game {
 
     override val players = mutableSetOf<UUID>()
 
-    override val readyPlayers = mutableSetOf<UUID>()
-
     override val world: World by lazy { Bukkit.getServer().getWorld("world")!! }
 
     override val topBar: TopBar = TopBar().apply { this.init() }
@@ -57,11 +55,23 @@ class PetraGame(private val stage: Stage) : Listener, Game {
                 else Bukkit.getPluginManager().callEvent(CountDownEvent(remainSeconds, count))
             })
 
+
+    private var readyPlayers = setOf<UUID>()
     private fun start() {
         isStarted = true
 
-        Bukkit.getPluginManager().callEvent(StartGameEvent())
+        players.clear()
+        players.addAll(readyPlayers)
+
+        // 参加者以外はspectatorに
+        val spectators = Bukkit.getServer().onlinePlayers.mapNotNull { it }
+                .filter { !players.contains(it.uniqueId) }
+                .toSet()
+        spectators.forEach { it.gameMode = GameMode.SPECTATOR }
+
         world.time = stage.startTime
+
+        Bukkit.getPluginManager().callEvent(StartGameEvent(players.toSet()))
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "recipe give @a *")
         disposable = Facilitator().start(this, stage)
                 .endAsObservable()
@@ -142,6 +152,7 @@ class PetraGame(private val stage: Stage) : Listener, Game {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPrepare(event: PrepareEvent) {
+        readyPlayers = event.players
         timer.start()
     }
 
