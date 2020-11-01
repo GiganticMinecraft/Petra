@@ -1,6 +1,8 @@
 package click.seichi.petra.game
 
 import click.seichi.petra.GameSound
+import click.seichi.petra.config.PetraConfig
+import click.seichi.petra.config.WinnerConfig
 import click.seichi.petra.event.StartGameEvent
 import click.seichi.petra.function.async
 import click.seichi.petra.function.sync
@@ -82,11 +84,14 @@ class PetraGame(private val stage: Stage) : Listener, Game {
     private fun result(result: StageResult) {
         disposable.dispose()
         isfinished = true
-        players.mapNotNull { Bukkit.getServer().getPlayer(it) }
-                .forEach {
-                    it.teleport(stage.generator.getFixedSpawnLocation(world, Random.generator)!!)
-                    GameSound.TELEPORT.sendTo(it)
-                }
+        val playerList = players.mapNotNull { Bukkit.getServer().getPlayer(it) }
+        playerList.forEach {
+            it.teleport(stage.generator.getFixedSpawnLocation(world, Random.generator)!!)
+            GameSound.TELEPORT.sendTo(it)
+        }
+        if (result == StageResult.WIN && PetraConfig.SAVE_WINNER) {
+            WinnerConfig.addWinners(playerList)
+        }
 
         ResultSender(10).start(result, this)
                 .endAsObservable()

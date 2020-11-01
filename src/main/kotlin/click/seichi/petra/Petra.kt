@@ -1,6 +1,8 @@
 package click.seichi.petra
 
 import click.seichi.petra.config.Config
+import click.seichi.petra.config.PetraConfig
+import click.seichi.petra.config.WinnerConfig
 import click.seichi.petra.game.PetraGame
 import click.seichi.petra.game.PlayerLocator
 import click.seichi.petra.game.Preparator
@@ -30,7 +32,8 @@ class Petra : Plugin() {
     override fun loadConfiguration(vararg configurations: Config) {
         super.loadConfiguration(
                 *configurations,
-                PetraConfig
+                PetraConfig,
+                WinnerConfig
         )
         stage = Stage.find(PetraConfig.STAGE_NAME)!!
         logger.fine("Load Stage \"${stage.key}\"")
