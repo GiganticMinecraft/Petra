@@ -36,7 +36,7 @@ class Petra : Plugin() {
         logger.fine("Load Stage \"${stage.key}\"")
         game = PetraGame(stage)
         preparator = SimplePreparator(game, stage.playerRange)
-        playerLocator = PlayerLocator(game, preparator, stage.playerRange)
+        playerLocator = PlayerLocator(game, preparator)
     }
 
     override fun registerListeners(vararg listeners: Listener) {
