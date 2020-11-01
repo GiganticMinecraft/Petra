@@ -187,6 +187,7 @@ class PetraGame(private val stage: Stage) : Listener, Game {
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
         val player = event.player
         player.gameMode = GameMode.SURVIVAL
+        player.inventory.clear()
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

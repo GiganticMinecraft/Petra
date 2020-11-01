@@ -19,6 +19,7 @@ class PlayerLocator(
 
     override fun join(player: Player): String? {
         if (!isStarted) {
+            Bukkit.getPluginManager().callEvent(PlayerJoinGameEvent(player))
             return "${player.name} が入場しました"
         }
 
