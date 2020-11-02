@@ -73,8 +73,8 @@ object GameSound {
     val KIIN = SoundMessage(
             Sound.BLOCK_ANVIL_HIT,
             SoundCategory.BLOCKS,
-            0.5f,
-            2.0f
+            1.0f,
+            1.4f
     )
 
 

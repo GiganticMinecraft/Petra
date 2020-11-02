@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack
 /**
  * @author tar0ss
  */
-class AnnihilationWave(
+open class AnnihilationWave(
         private val waveNum: Int,
         minutes: Int,
         raidData: WaveData,

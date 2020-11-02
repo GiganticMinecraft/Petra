@@ -24,8 +24,8 @@ import org.bukkit.inventory.ItemStack
 /**
  * @author tar0ss
  */
-class DefeatSummonerWave(
-        private val waveNum: Int,
+open class DefeatSummonerWave(
+        protected val waveNum: Int,
         private val minutes: Int,
         raidData: WaveData,
         private val targetSummoner: ISummoner,
@@ -37,11 +37,11 @@ class DefeatSummonerWave(
         rewards
 ), Listener {
 
-    private lateinit var target: Mob
-    private val targetName = (targetSummoner as Named).getName()
+    protected lateinit var target: Mob
+    protected val targetName = (targetSummoner as Named).getName()
     private var isDefeat = false
 
-    private var maxHealth = Double.MAX_VALUE
+    protected var maxHealth = Double.MAX_VALUE
 
     private lateinit var enemyHpBar: BossBar
 
@@ -60,7 +60,7 @@ class DefeatSummonerWave(
         maxHealth = target.health
     }
 
-    private fun updateHpBar(remain: Double) {
+    protected fun updateHpBar(remain: Double) {
         val title = if (remain == 0.0) "${ChatColor.WHITE}クリア"
         else "${ChatColor.LIGHT_PURPLE}残りHP"
         enemyHpBar.setTitle(title)
@@ -98,7 +98,7 @@ class DefeatSummonerWave(
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onDamage(event: EntityDamageEvent) {
+    open fun onDamage(event: EntityDamageEvent) {
         if (!isStarted) return
         val entity = event.entity
         if (entity !is LivingEntity) return

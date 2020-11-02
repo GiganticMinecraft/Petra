@@ -113,11 +113,15 @@ open class Wave(
     }
 
     private fun summon(summonData: SummonData) {
+        onStartRaid(summonData)
         val summonedSet = summonData.summoner.summon(world, summonProxy, players)
         entitySet.addAll(summonedSet)
         summonedSet.mapNotNull { Bukkit.getServer().getEntity(it) }
                 .forEach { onSummoned(it) }
         summonData.message.broadcast()
+    }
+
+    protected open fun onStartRaid(summonData: SummonData) {
     }
 
     protected open fun onSummoned(entity: Entity) {

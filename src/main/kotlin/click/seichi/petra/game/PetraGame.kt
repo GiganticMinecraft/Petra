@@ -4,8 +4,6 @@ import click.seichi.petra.GameSound
 import click.seichi.petra.config.PetraConfig
 import click.seichi.petra.config.WinnerConfig
 import click.seichi.petra.event.StartGameEvent
-import click.seichi.petra.function.async
-import click.seichi.petra.function.sync
 import click.seichi.petra.game.event.*
 import click.seichi.petra.stage.Facilitator
 import click.seichi.petra.stage.ResultSender
@@ -15,6 +13,7 @@ import click.seichi.petra.util.Random
 import click.seichi.petra.util.Timer
 import click.seichi.petra.util.TopBar
 import com.destroystokyo.paper.event.block.BlockDestroyEvent
+import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import io.reactivex.disposables.Disposable
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
@@ -171,22 +170,19 @@ class PetraGame(private val stage: Stage) : Listener, Game {
         val player = event.player
         event.respawnLocation = stage.generator.getFixedSpawnLocation(player.world, Random.generator)!!
 
-        val uuid = player.uniqueId
-        async(5L) {
-            sync {
-                Bukkit.getServer().getPlayer(uuid)?.apply {
-                    addPotionEffects(
-                            mutableListOf(
-                                    PotionEffect(PotionEffectType.WEAKNESS, 10 * 20, 1, true, true),
-                                    PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10 * 20, 3, true, true),
-                                    PotionEffect(PotionEffectType.HUNGER, 30 * 20, 1, true, true)
-                            )
-                    )
-                }
-            }
-        }
+
     }
 
+    @EventHandler
+    fun onPostRespawn(event: PlayerPostRespawnEvent) {
+        event.player.addPotionEffects(
+                mutableListOf(
+                        PotionEffect(PotionEffectType.WEAKNESS, 10 * 20, 1, true, true),
+                        PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10 * 20, 3, true, true),
+                        PotionEffect(PotionEffectType.HUNGER, 30 * 20, 1, true, true)
+                )
+        )
+    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
