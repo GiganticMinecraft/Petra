@@ -39,6 +39,12 @@ class AnnihilationInADreamWave(
         ChatMessage("${ChatColor.YELLOW}幸せな夢を見ている...").broadcast()
     }
 
+    override fun onEnd() {
+        PlayerBedEnterEvent.getHandlerList().unregister(this)
+        PlayerPostRespawnEvent.getHandlerList().unregister(this)
+        super.onEnd()
+    }
+
     @EventHandler(priority = EventPriority.HIGH)
     fun onBedIn(event: PlayerBedEnterEvent) {
         val player = event.player

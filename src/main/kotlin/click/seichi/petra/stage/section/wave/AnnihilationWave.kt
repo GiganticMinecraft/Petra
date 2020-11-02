@@ -72,6 +72,7 @@ open class AnnihilationWave(
 
     override fun onEnd() {
         enemyCountBar.isVisible = false
+        EntityDeathEvent.getHandlerList().unregister(this)
         super.onEnd()
     }
 

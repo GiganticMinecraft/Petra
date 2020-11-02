@@ -85,6 +85,8 @@ open class DefeatSummonerWave(
 
     override fun onEnd() {
         enemyHpBar.isVisible = false
+        EntityDeathEvent.getHandlerList().unregister(this)
+        EntityDamageEvent.getHandlerList().unregister(this)
         super.onEnd()
     }
 

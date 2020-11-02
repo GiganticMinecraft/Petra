@@ -73,6 +73,8 @@ class DefensePlayerWave(
         playerHpBar.isVisible = false
         target.isGlowing = false
         (target as Player).setPlayerListName(target.name)
+        PlayerDeathEvent.getHandlerList().unregister(this)
+        EntityDamageEvent.getHandlerList().unregister(this)
         super.onEnd()
     }
 

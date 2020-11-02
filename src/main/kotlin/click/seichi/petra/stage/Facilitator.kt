@@ -1,6 +1,7 @@
 package click.seichi.petra.stage
 
 import click.seichi.petra.event.WaveEvent
+import click.seichi.petra.extension.register
 import click.seichi.petra.function.warning
 import click.seichi.petra.game.Game
 import click.seichi.petra.stage.section.Section
@@ -10,6 +11,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import org.bukkit.Bukkit
+import org.bukkit.event.Listener
 
 /**
  * ゲームの進行役
@@ -55,6 +57,7 @@ class Facilitator {
     private fun startSection(i: Int) {
         val section = sectionList[i]
         Bukkit.getPluginManager().callEvent(WaveEvent(i))
+        if (section is Listener) section.register()
         disposable = section.start(game, summonProxy)
                 .endAsObservable()
                 .take(1)

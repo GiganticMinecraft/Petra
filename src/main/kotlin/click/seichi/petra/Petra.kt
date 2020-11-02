@@ -50,8 +50,7 @@ class Petra : Plugin() {
                 game,
                 WorldListener(),
                 DebugListener(),
-                SummonerListener(),
-                *stage.sections.filterIsInstance<Listener>().toTypedArray()
+                SummonerListener()
         )
     }
 
