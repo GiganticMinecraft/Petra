@@ -1,7 +1,10 @@
 package click.seichi.petra.stage.stages
 
 import click.seichi.petra.extension.setRegion
-import click.seichi.petra.generator.*
+import click.seichi.petra.generator.FlowerPopulator
+import click.seichi.petra.generator.GrassPopulator
+import click.seichi.petra.generator.LakePopulator
+import click.seichi.petra.generator.TreePopulator
 import click.seichi.petra.stage.generator.RoundStageGenerator
 import click.seichi.petra.stage.section.BreakSection
 import click.seichi.petra.stage.section.Section
@@ -78,14 +81,14 @@ object SmallHalloween {
                     LakePopulator(),
                     TreePopulator(),
                     GrassPopulator(),
-                    FlowerPopulator(Material.DANDELION, Material.POPPY),
-                    OrePopulator(Material.COAL_ORE, 35, 0..62, 1.0),
-                    OrePopulator(Material.DIAMOND_ORE, 1, 0..15, 0.9),
-                    OrePopulator(Material.IRON_ORE, 30, 0..62, 0.95),
-                    OrePopulator(Material.GOLD_ORE, 8, 0..50, 0.84),
-                    OrePopulator(Material.LAPIS_ORE, 3, 0..40, 0.4),
-                    OrePopulator(Material.REDSTONE_ORE, 3, 0..40, 0.4),
-                    OrePopulator(Material.EMERALD_ORE, 1, 0..30, 0.1)
+                    FlowerPopulator(Material.DANDELION, Material.POPPY)
+//                    OrePopulator(Material.COAL_ORE, 35, 0..62, 1.0),
+//                    OrePopulator(Material.DIAMOND_ORE, 1, 0..15, 0.9),
+//                    OrePopulator(Material.IRON_ORE, 30, 0..62, 0.95),
+//                    OrePopulator(Material.GOLD_ORE, 8, 0..50, 0.84),
+//                    OrePopulator(Material.LAPIS_ORE, 3, 0..40, 0.4),
+//                    OrePopulator(Material.REDSTONE_ORE, 3, 0..40, 0.4),
+//                    OrePopulator(Material.EMERALD_ORE, 1, 0..30, 0.1)
             )
         }
     }
@@ -118,7 +121,7 @@ object SmallHalloween {
                                     )
                             )
                     )
-                    ), listOf(ItemStack(Material.COAL, 10))
+                    ), listOf(ItemStack(Material.COAL_ORE, 9))
             ),
             BonusWave(
                     SummonData(
@@ -165,8 +168,7 @@ object SmallHalloween {
                                             Summoner(EntityType.CREEPER, { 1 }) to 2
                                     )
                             )
-                    )), Summoners.KIMETSU_TEONI
-                    , listOf(ItemStack(Material.IRON_INGOT, 30))
+                    )), Summoners.KIMETSU_TEONI, listOf(ItemStack(Material.IRON_ORE, 32))
             ), BreakSection(60),
             DefenseSummonerWave(3, 1,
                     WaveData(mapOf(
