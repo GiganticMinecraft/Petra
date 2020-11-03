@@ -40,7 +40,7 @@ open class DefeatSummonerWave(
 
     protected lateinit var target: Mob
     protected val targetName = (targetSummoner as Named).getName()
-    private var isDefeat = false
+    protected var isDefeat = false
 
     protected var maxHealth = Double.MAX_VALUE
 

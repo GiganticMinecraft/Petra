@@ -96,7 +96,10 @@ object SmallHalloween {
     val SPAWN_PROXY = RoundStageSummonProxy(RADIUS, DANGER_ZONE_LENGTH)
 
     val SECTIONS: Array<Section> = arrayOf(
+            // ここで2分経過済み
+            //4分
             BreakSection(120, null),
+            //6分
             AnnihilationWave(1, 2,
                     WaveData(mapOf(
                             0 to SummonData(
@@ -121,6 +124,7 @@ object SmallHalloween {
                     )
                     ), listOf(ItemStack(Material.COAL, 32))
             ),
+            //7分
             BonusWave(
                     SummonData(
                             MultiEntity(
@@ -129,6 +133,7 @@ object SmallHalloween {
                             )
                     ), 60
             ),
+            //9分
             DefeatSummonerWave(2, 2,
                     WaveData(mapOf(
                             0 to SummonData(
@@ -167,7 +172,10 @@ object SmallHalloween {
                                     )
                             )
                     )), Summoners.KIMETSU_TEONI, listOf(ItemStack(Material.IRON_ORE, 32))
-            ), BreakSection(60),
+            ),
+            //10分
+            BreakSection(60),
+            //11分
             DefenseSummonerWave(3, 1,
                     WaveData(mapOf(
                             0 to SummonData(
@@ -183,8 +191,11 @@ object SmallHalloween {
                     ItemStack(Material.SAND, 32),
                     ItemStack(Material.FLINT, 16)
             )
-            ), BreakSection(60),
-            DefeatSummonerWithTNTWave(4, 2,
+            ),
+            //12分
+            BreakSection(60),
+            //14分
+            DefeatSummonerWithTNTWave(4, 2, 1,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
@@ -207,6 +218,7 @@ object SmallHalloween {
                     )
                     ), Summoners.KIMETSU_RUI, listOf(ItemStack(Material.STRING, 64))
             ),
+            //15分
             BonusWave(
                     SummonData(
                             MultiEntity(
@@ -215,22 +227,13 @@ object SmallHalloween {
                             )
                     ), 60
             ),
+            //17分
             AnnihilationInADreamWave(5, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 2,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 2,
-                                            Summoner(EntityType.HUSK, { 1 }) to 3,
-                                            Summoner(EntityType.STRAY, { 1 }) to 3
-                                    )
-                            ),
-                            30 to SummonData(
-                                    MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 4,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 4,
-                                            Summoner(EntityType.HUSK, { 1 }) to 6,
-                                            Summoner(EntityType.STRAY, { 1 }) to 6
+                                            Summoner(EntityType.SKELETON, { 1 }) to 4
                                     )
                             ),
                             60 to SummonData(

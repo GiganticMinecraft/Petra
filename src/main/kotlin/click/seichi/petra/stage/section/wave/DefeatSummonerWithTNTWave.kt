@@ -1,6 +1,8 @@
 package click.seichi.petra.stage.section.wave
 
 import click.seichi.petra.GameSound
+import click.seichi.petra.function.sync
+import click.seichi.petra.message.ChatMessage
 import click.seichi.petra.message.Message
 import click.seichi.petra.message.TitleMessage
 import click.seichi.petra.stage.summoner.ISummoner
@@ -18,6 +20,7 @@ import org.bukkit.inventory.ItemStack
 class DefeatSummonerWithTNTWave(
         waveNum: Int,
         minutes: Int,
+        private val hintMinutes: Int,
         raidData: WaveData,
         targetSummoner: ISummoner,
         rewards: List<ItemStack> = listOf()
@@ -28,6 +31,15 @@ class DefeatSummonerWithTNTWave(
         targetSummoner,
         rewards
 ), Listener {
+
+    override fun onStart() {
+        sync(hintMinutes * 60 * 20L) {
+            if (!isDefeat) {
+                ChatMessage("${ChatColor.YELLOW}【ヒント】" +
+                        " ${ChatColor.WHITE} ${targetName}は○○○で爆破して倒せ").broadcast()
+            }
+        }
+    }
 
     override fun getStartMessage(): Message {
         return TitleMessage(
