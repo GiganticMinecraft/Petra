@@ -129,6 +129,11 @@ object Summoners {
                 it.setItemInMainHand(bow)
             }
 
+            skeleton.equipment?.let {
+                it.helmetDropChance = 0F
+                it.helmet = ItemStack(Material.IRON_HELMET)
+            }
+
             skeleton.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000, 3, false, false, false))
             skeleton.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST, 10000, 3, false, false, false))
             skeleton.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 10000, 4, false, false, false))
@@ -247,18 +252,6 @@ object Summoners {
             spider.addPotionEffect(PotionEffect(PotionEffectType.INVISIBILITY, 10000, 1, true, true))
             spider.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10000, 4, true, true))
             spider.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10000, 3, true, true))
-            val spiderUniqueId = spider.uniqueId
-            ChatMessage("${ChatColor.RED}僕たち家族の静かな暮らしを邪魔するな!").broadcast()
-            sync(0L, 20L) {
-                val e = Bukkit.getServer().getEntity(spiderUniqueId)
-                if (e != null && e.isValid && !e.isDead) return@sync true
-                else {
-                    sync(5L) {
-                        ChatMessage("${ChatColor.RED}バカな...糸が焼き切れた!?").broadcast()
-                    }
-                    return@sync false
-                }
-            }
         }
 
         override fun getName(): String {

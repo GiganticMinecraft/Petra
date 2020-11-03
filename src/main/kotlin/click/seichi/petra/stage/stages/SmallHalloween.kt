@@ -251,13 +251,56 @@ object SmallHalloween {
             // 20分
             SurviveWave(6, 2,
                     WaveData(mapOf(
-                            60 to SummonData(
+                            0 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.ENDERMAN, { 1 }) to 3
+                                    )
+                            ),
+                            30 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 6,
                                             Summoner(EntityType.SKELETON, { 1 }) to 6,
                                             Summoner(EntityType.HUSK, { 1 }) to 8,
                                             Summoner(EntityType.STRAY, { 1 }) to 8,
                                             Summoners.HONEBUTO to 1
+                                    )
+                            ),
+                            60 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
+                                            Summoner(EntityType.PILLAGER, { 1 }) to 2,
+                                            Summoner(EntityType.EVOKER, { 1 }) to 1,
+                                            Summoner(EntityType.RAVAGER, { 1 }) to 1
+                                    )
+                            ),
+                            90 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                    )
+                            ),
+                            95 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                    )
+                            ),
+                            100 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                    )
+                            ),
+                            105 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                    )
+                            ),
+                            110 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                    )
+                            ),
+                            115 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
                                     )
                             )
                     ))
