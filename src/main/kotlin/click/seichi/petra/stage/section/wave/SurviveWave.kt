@@ -75,7 +75,7 @@ class SurviveWave(
         deathCountBar.setTitle(title)
         deathCountBar.isVisible = true
 
-        deathCountBar.progress = deathPlayers.size.toDouble() / players.size.toDouble()
+        deathCountBar.progress = 1.0 - (deathPlayers.size.toDouble() / players.size.toDouble())
     }
 
     override fun onTimeUp() {
