@@ -101,8 +101,8 @@ object SmallHalloween {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 4,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 4
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6
                                     )
                             ),
                             30 to SummonData(
