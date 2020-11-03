@@ -9,6 +9,7 @@ import org.bukkit.entity.Monster
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import java.util.*
@@ -22,6 +23,7 @@ class ResultRecorder : Listener {
 
     val deathCountMap = mutableMapOf<UUID, Int>()
     val defeatCountMap = mutableMapOf<UUID, Int>()
+    val breakCountMap = mutableMapOf<UUID, Int>()
 
     open fun broadcast() {
         broadcastRanking(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数ランキング")) { rank, count, name ->
@@ -31,6 +33,10 @@ class ResultRecorder : Listener {
         broadcastRanking(defeatCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}撃退数ランキング")) { rank, count, name ->
             val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
             ChatMessage("${color}${rank}位 $name ${count}体")
+        }
+        broadcastRanking(breakCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}破壊数ランキング")) { rank, count, name ->
+            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
+            ChatMessage("${color}${rank}位 $name ${count}ブロック")
         }
     }
 
@@ -48,7 +54,6 @@ class ResultRecorder : Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerDeath(event: PlayerDeathEvent) {
         val player = event.entity
-        if (!players.contains(player.uniqueId)) return
         deathCountMap[player.uniqueId] = deathCountMap.getOrDefault(player.uniqueId, 0) + 1
     }
 
@@ -57,10 +62,14 @@ class ResultRecorder : Listener {
         val entity = event.entity
         if (entity !is Monster) return
         val killer = entity.killer ?: return
-        if (!players.contains(killer.uniqueId)) return
-        defeatCountMap[killer.uniqueId] = deathCountMap.getOrDefault(killer.uniqueId, 0) + 1
+        defeatCountMap[killer.uniqueId] = defeatCountMap.getOrDefault(killer.uniqueId, 0) + 1
     }
 
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    fun onBlockBreak(event: BlockBreakEvent) {
+        val player = event.player
+        breakCountMap[player.uniqueId] = breakCountMap.getOrDefault(player.uniqueId, 0) + 1
+    }
 
     fun start(players: Set<UUID>) {
         this.players = players.toSet()
