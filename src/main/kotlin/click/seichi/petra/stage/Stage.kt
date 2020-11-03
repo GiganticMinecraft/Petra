@@ -29,7 +29,7 @@ enum class Stage(
             SmallHalloween.KEY,
             SmallHalloween.GENERATOR,
             SmallHalloween.SPAWN_PROXY,
-            24000L - 6000L,
+            24000L - 5800L,
             4..4,
             *SmallHalloween.SECTIONS
     )
