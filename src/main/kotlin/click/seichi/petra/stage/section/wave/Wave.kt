@@ -157,7 +157,7 @@ open class Wave(
     protected open fun getStartMessage(): Message {
         return TitleMessage(
                 "${ChatColor.WHITE}Wave$waveNum ${ChatColor.RED}襲撃",
-                "${ChatColor.AQUA}${minutes}分間生き延びろ"
+                "${ChatColor.AQUA}${minutes}分間耐えろ"
         ).add(
                 GameSound.START_WAVE
         )

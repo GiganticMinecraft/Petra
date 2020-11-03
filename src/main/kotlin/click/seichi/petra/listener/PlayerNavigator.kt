@@ -26,21 +26,21 @@ class PlayerNavigator(
     fun onPlayerJoinGame(event: PlayerJoinGameEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.WHITE}${player.name}")
-        GameMessage.JOIN.broadcast()
+        GameMessage.JOIN.sendTo(player)
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerReady(event: PlayerReadyEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.GREEN}${player.name}")
-        GameMessage.CANCEL_READY(event.ready, event.startableCount).broadcast()
+        GameMessage.CANCEL_READY(event.ready, event.startableCount).sendTo(player)
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerCancelReady(event: PlayerCancelReadyEvent) {
         val player = event.player
         player.setPlayerListName("${ChatColor.WHITE}${player.name}")
-        GameMessage.READY(event.ready, event.all).broadcast()
+        GameMessage.READY(event.ready, event.all).sendTo(player)
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
