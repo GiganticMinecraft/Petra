@@ -335,7 +335,7 @@ object Summoners {
                     this.bootsDropChance = 0.0F
                 }
 
-                vi.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000, 2, false, false, false))
+                vi.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 10000, 3, false, false, false))
                 vi.addPotionEffect(PotionEffect(PotionEffectType.HEALTH_BOOST, 10000, 3, false, false, false))
                 vi.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 10000, 3, false, false, false))
                 vi.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 10000, 1, false, false, false))
