@@ -253,7 +253,6 @@ object Summoners {
                 val e = Bukkit.getServer().getEntity(spiderUniqueId)
                 if (e != null && e.isValid && !e.isDead) return@sync true
                 else {
-                    ChatMessage("${ChatColor.LIGHT_PURPLE}爆血!").broadcast()
                     sync(5L) {
                         ChatMessage("${ChatColor.RED}バカな...糸が焼き切れた!?").broadcast()
                     }
@@ -313,7 +312,7 @@ object Summoners {
     }
 
     val KIMETSU_NEZUKO: (String?) -> ISummoner = { target: String? ->
-        object : Summoner(EntityType.VILLAGER, { sqrt(it.toDouble()).toInt() }, SummonCase.CENTER), Named {
+        object : Summoner(EntityType.VILLAGER, { 1 }, SummonCase.SAFE_ZONE), Named {
             private lateinit var name: String
             override fun onCreate(entity: Entity) {
                 super.onCreate(entity)

@@ -216,7 +216,7 @@ object SmallHalloween {
                                     )
                             )
                     )
-                    ), Summoners.KIMETSU_RUI, listOf(ItemStack(Material.STRING, 64))
+                    ), Summoners.KIMETSU_RUI, listOf(ItemStack(Material.STRING, 32))
             ),
             //15分
             BonusWave(
@@ -228,7 +228,7 @@ object SmallHalloween {
                     ), 60
             ),
             //17分
-            AnnihilationInADreamWave(5, 2,
+            AnnihilationInADreamWave(5, 2, 1,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
@@ -241,11 +241,26 @@ object SmallHalloween {
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 6,
                                             Summoner(EntityType.SKELETON, { 1 }) to 6,
                                             Summoner(EntityType.HUSK, { 1 }) to 8,
+                                            Summoner(EntityType.STRAY, { 1 }) to 8
+                                    )
+                            )
+                    )), listOf(ItemStack(Material.DIAMOND, 24))
+            ),
+            // 18分
+            BreakSection(60),
+            // 20分
+            SurviveWave(6, 2,
+                    WaveData(mapOf(
+                            60 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
+                                            Summoner(EntityType.HUSK, { 1 }) to 8,
                                             Summoner(EntityType.STRAY, { 1 }) to 8,
                                             Summoners.HONEBUTO to 1
                                     )
                             )
-                    )), listOf(ItemStack(Material.DIAMOND, 10))
+                    ))
             )
     )
 }

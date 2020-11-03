@@ -1,5 +1,6 @@
 package click.seichi.petra.stage.section.wave
 
+import click.seichi.petra.function.sync
 import click.seichi.petra.message.ChatMessage
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import org.bukkit.Bukkit
@@ -19,6 +20,7 @@ import java.util.*
 class AnnihilationInADreamWave(
         waveNum: Int,
         minutes: Int,
+        private val hintMinutes: Int,
         raidData: WaveData,
         rewards: List<ItemStack> = listOf()
 ) : AnnihilationWave(
@@ -29,12 +31,25 @@ class AnnihilationInADreamWave(
 ) {
     val wakeUpPlayers = mutableSetOf<UUID>()
 
+    val debufEffect = PotionEffect(PotionEffectType.BLINDNESS, 10000, 1, true, true)
+
+    override fun onStart() {
+        sync(hintMinutes * 60 * 20L) {
+            players.filter { !wakeUpPlayers.contains(it) }.mapNotNull { Bukkit.getServer().getPlayer(it) }
+                    .forEach {
+                        ChatMessage("${ChatColor.YELLOW}【ヒント】" +
+                                " ${ChatColor.WHITE} ベッドで寝る").sendTo(it)
+                    }
+        }
+        super.onStart()
+    }
+
     override fun onStartRaid(summonData: SummonData) {
         super.onStartRaid(summonData)
         wakeUpPlayers.clear()
         players.mapNotNull { Bukkit.getServer().getPlayer(it) }
                 .forEach {
-                    it.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 10000, 5, true, true))
+                    it.addPotionEffect(debufEffect)
                 }
         ChatMessage("${ChatColor.YELLOW}幸せな夢を見ている...").broadcast()
     }
@@ -60,7 +75,12 @@ class AnnihilationInADreamWave(
     @EventHandler(priority = EventPriority.HIGH)
     fun onPostRespawn(event: PlayerPostRespawnEvent) {
         val player = event.player
-        if (wakeUpPlayers.contains(player.uniqueId)) return
-        player.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 10000, 5, true, true))
+        if (wakeUpPlayers.contains(player.uniqueId)) {
+            player.activePotionEffects.forEach {
+                player.removePotionEffect(it.type)
+            }
+        } else {
+            player.addPotionEffect(debufEffect)
+        }
     }
 }

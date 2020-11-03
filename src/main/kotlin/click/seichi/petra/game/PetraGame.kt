@@ -199,7 +199,7 @@ class PetraGame(private val stage: Stage) : Listener, Game {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerQuitInGame(event: PlayerQuitInGameEvent) {
-        if (players.size == 0) {
+        if (players.mapNotNull { Bukkit.getServer().getPlayer(it) }.isEmpty()) {
             result(StageResult.DEATH_ALL_PLAYERS)
         }
     }

@@ -39,6 +39,7 @@ class DefeatSummonerWithTNTWave(
                         " ${ChatColor.WHITE} ${targetName}は○○○で爆破して倒せ").broadcast()
             }
         }
+        super.onStart()
     }
 
     override fun getStartMessage(): Message {
