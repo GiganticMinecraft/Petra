@@ -21,9 +21,9 @@ class ResultRecorder : Listener {
 
     lateinit var players: Set<UUID>
 
-    val deathCountMap = mutableMapOf<UUID, Int>()
-    val defeatCountMap = mutableMapOf<UUID, Int>()
-    val breakCountMap = mutableMapOf<UUID, Int>()
+    private val deathCountMap = mutableMapOf<UUID, Int>()
+    private val defeatCountMap = mutableMapOf<UUID, Int>()
+    private val breakCountMap = mutableMapOf<UUID, Int>()
 
     open fun broadcast() {
         broadcastRanking(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数ランキング")) { rank, count, name ->
