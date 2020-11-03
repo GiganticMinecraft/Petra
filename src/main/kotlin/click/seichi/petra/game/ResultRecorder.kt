@@ -27,27 +27,18 @@ class ResultRecorder : Listener {
     private val breakCountMap = mutableMapOf<UUID, Int>()
 
     open fun broadcast() {
-        broadcastList(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数")) { count, name ->
-            ChatMessage("$name ${count}回")
+        broadcastRanking(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数ランキング")) { rank, count, name ->
+            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
+            ChatMessage("${color}${rank}位 $name ${count}回")
         }
-        broadcastList(defeatCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}撃退数")) { count, name ->
-            ChatMessage("$name ${count}体")
+        broadcastRanking(defeatCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}撃退数ランキング")) { rank, count, name ->
+            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
+            ChatMessage("${color}${rank}位 $name ${count}体")
         }
-        broadcastList(breakCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}破壊数")) { count, name ->
-            ChatMessage("$name ${count}ブロック")
+        broadcastRanking(breakCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}破壊数ランキング")) { rank, count, name ->
+            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
+            ChatMessage("${color}${rank}位 $name ${count}ブロック")
         }
-//        broadcastRanking(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数ランキング")) { rank, count, name ->
-//            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
-//            ChatMessage("${color}${rank}位 $name ${count}回")
-//        }
-//        broadcastRanking(defeatCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}撃退数ランキング")) { rank, count, name ->
-//            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
-//            ChatMessage("${color}${rank}位 $name ${count}体")
-//        }
-//        broadcastRanking(breakCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}破壊数ランキング")) { rank, count, name ->
-//            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
-//            ChatMessage("${color}${rank}位 $name ${count}ブロック")
-//        }
     }
 
     private fun broadcastList(map: Map<UUID, Int>, title: Message, message: (Int, String) -> Message) {
@@ -81,25 +72,25 @@ class ResultRecorder : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerDeath(event: PlayerDeathEvent) {
-        debug("called ${event::class.simpleName}")
         val player = event.entity
-        deathCountMap[player.uniqueId] = deathCountMap.getOrDefault(player.uniqueId, 0) + 1
+        val current = deathCountMap.getOrPut(player.uniqueId, { 0 })
+        deathCountMap[player.uniqueId] = current + 1
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onEntityDeath(event: EntityDeathEvent) {
-        debug("called ${event::class.simpleName}")
         val entity = event.entity
         if (entity !is Monster) return
         val killer = entity.killer ?: return
-        defeatCountMap[killer.uniqueId] = defeatCountMap.getOrDefault(killer.uniqueId, 0) + 1
+        val current = deathCountMap.getOrPut(killer.uniqueId, { 0 })
+        deathCountMap[killer.uniqueId] = current + 1
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onBlockBreak(event: BlockBreakEvent) {
-        debug("called ${event::class.simpleName}")
         val player = event.player
-        breakCountMap[player.uniqueId] = breakCountMap.getOrDefault(player.uniqueId, 0) + 1
+        val current = breakCountMap.getOrPut(player.uniqueId, { 0 })
+        breakCountMap[player.uniqueId] = current + 1
     }
 
     fun start(players: Set<UUID>) {
