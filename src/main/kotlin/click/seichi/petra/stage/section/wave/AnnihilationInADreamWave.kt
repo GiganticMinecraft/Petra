@@ -66,21 +66,16 @@ class AnnihilationInADreamWave(
         val bed = event.bed
         event.setUseBed(Event.Result.DENY)
         val world = bed.world
+        ChatMessage("${ChatColor.AQUA}${player.name}が夢から醒めた").broadcast()
         world.createExplosion(bed.location, 8F, false, false)
         player.health = 0.0
         wakeUpPlayers.add(player.uniqueId)
-        ChatMessage("${ChatColor.AQUA}${player.name}が夢から醒めた").broadcast()
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     fun onPostRespawn(event: PlayerPostRespawnEvent) {
         val player = event.player
-        if (wakeUpPlayers.contains(player.uniqueId)) {
-            player.activePotionEffects.forEach {
-                player.removePotionEffect(it.type)
-            }
-        } else {
-            player.addPotionEffect(debufEffect)
-        }
+        if (wakeUpPlayers.contains(player.uniqueId)) return
+        player.addPotionEffect(debufEffect)
     }
 }

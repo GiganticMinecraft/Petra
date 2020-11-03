@@ -236,12 +236,12 @@ object SmallHalloween {
                                             Summoner(EntityType.SKELETON, { 1 }) to 4
                                     )
                             ),
-                            60 to SummonData(
+                            62 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 6,
                                             Summoner(EntityType.SKELETON, { 1 }) to 6,
-                                            Summoner(EntityType.HUSK, { 1 }) to 8,
-                                            Summoner(EntityType.STRAY, { 1 }) to 8
+                                            Summoner(EntityType.HUSK, { 1 }) to 2,
+                                            Summoner(EntityType.STRAY, { 1 }) to 2
                                     )
                             )
                     )), listOf(ItemStack(Material.DIAMOND, 24))
