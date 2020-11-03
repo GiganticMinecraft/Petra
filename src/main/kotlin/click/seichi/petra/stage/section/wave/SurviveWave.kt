@@ -59,6 +59,7 @@ class SurviveWave(
         val survived = players.size - deathPlayers.size
         val title = "${ChatColor.GREEN}生き残り ${survived}人"
         deathCountBar.setTitle(title)
+        deathCountBar.isVisible = true
 
         deathCountBar.progress = deathPlayers.size.toDouble() / players.size.toDouble()
     }
