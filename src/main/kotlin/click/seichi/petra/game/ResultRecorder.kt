@@ -24,7 +24,7 @@ class ResultRecorder : Listener {
     val defeatCountMap = mutableMapOf<UUID, Int>()
 
     open fun broadcast() {
-        broadcastRanking(defeatCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数ランキング")) { rank, count, name ->
+        broadcastRanking(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数ランキング")) { rank, count, name ->
             val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
             ChatMessage("${color}${rank}位 $name ${count}回")
         }
