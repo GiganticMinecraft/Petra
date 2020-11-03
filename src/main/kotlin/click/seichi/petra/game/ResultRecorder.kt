@@ -1,6 +1,7 @@
 package click.seichi.petra.game
 
 import click.seichi.petra.extension.register
+import click.seichi.petra.function.debug
 import click.seichi.petra.message.ChatMessage
 import click.seichi.petra.message.Message
 import org.bukkit.Bukkit
@@ -42,6 +43,7 @@ class ResultRecorder : Listener {
 
     private fun broadcastRanking(map: Map<UUID, Int>, title: Message, message: (Int, Int, String) -> Message) {
         title.broadcast()
+        if (map.isEmpty()) debug("map is empty!!")
         map.values.sortedByDescending { it }.toSet().forEachIndexed { index, count ->
             val rank = index + 1
             map.filter { it.value == count }.forEach { (uuid, count) ->
