@@ -5,7 +5,6 @@ import click.seichi.petra.message.ChatMessage
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
-import org.bukkit.Material
 import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -82,12 +81,12 @@ class AnnihilationInADreamWave(
         player.addPotionEffect(debufEffect)
     }
 
-    @EventHandler
-    fun onDrink(event: PlayerItemConsumeEvent) {
-        val player = event.player
-        val item = event.item
-        if (item.type != Material.MILK_BUCKET) return
-        if (wakeUpPlayers.contains(player.uniqueId)) return
-        event.isCancelled = true
-    }
+//    @EventHandler
+//    fun onDrink(event: PlayerItemConsumeEvent) {
+//        val player = event.player
+//        val item = event.item
+//        if (item.type != Material.MILK_BUCKET) return
+//        if (wakeUpPlayers.contains(player.uniqueId)) return
+//        event.isCancelled = true
+//    }
 }
