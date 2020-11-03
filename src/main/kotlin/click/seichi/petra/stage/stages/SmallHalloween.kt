@@ -123,7 +123,7 @@ object SmallHalloween {
                                     )
                             )
                     )
-                    ), listOf(ItemStack(Material.COAL_ORE, 32))
+                    ), listOf(ItemStack(Material.COAL, 32))
             ),
             BonusWave(
                     SummonData(
