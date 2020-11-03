@@ -81,12 +81,14 @@ class ResultRecorder : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerDeath(event: PlayerDeathEvent) {
+        debug("called ${event::class.simpleName}")
         val player = event.entity
         deathCountMap[player.uniqueId] = deathCountMap.getOrDefault(player.uniqueId, 0) + 1
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onEntityDeath(event: EntityDeathEvent) {
+        debug("called ${event::class.simpleName}")
         val entity = event.entity
         if (entity !is Monster) return
         val killer = entity.killer ?: return
@@ -95,6 +97,7 @@ class ResultRecorder : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onBlockBreak(event: BlockBreakEvent) {
+        debug("called ${event::class.simpleName}")
         val player = event.player
         breakCountMap[player.uniqueId] = breakCountMap.getOrDefault(player.uniqueId, 0) + 1
     }
