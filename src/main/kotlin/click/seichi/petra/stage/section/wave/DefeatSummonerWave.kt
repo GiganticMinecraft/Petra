@@ -20,6 +20,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.inventory.ItemStack
+import org.spigotmc.event.entity.EntityMountEvent
 
 /**
  * @author tar0ss
@@ -87,6 +88,7 @@ open class DefeatSummonerWave(
         enemyHpBar.isVisible = false
         EntityDeathEvent.getHandlerList().unregister(this)
         EntityDamageEvent.getHandlerList().unregister(this)
+        EntityMountEvent.getHandlerList().unregister(this)
         super.onEnd()
     }
 
@@ -107,5 +109,10 @@ open class DefeatSummonerWave(
         if (entity.uniqueId == target.uniqueId) {
             updateHpBar(entity.health.coerceAtLeast(0.0) / maxHealth)
         }
+    }
+
+    @EventHandler
+    fun onMount(event: EntityMountEvent) {
+        event.isCancelled = true
     }
 }
