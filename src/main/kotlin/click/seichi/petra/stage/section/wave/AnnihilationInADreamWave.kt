@@ -51,7 +51,7 @@ class AnnihilationInADreamWave(
         val bed = event.bed
         event.setUseBed(Event.Result.DENY)
         val world = bed.world
-        world.createExplosion(bed.location, 0F, false, false)
+        world.createExplosion(bed.location, 8F, false, true)
         player.health = 0.0
         wakeUpPlayers.add(player.uniqueId)
         ChatMessage("${ChatColor.AQUA}${player.name}が夢から醒めた").broadcast()

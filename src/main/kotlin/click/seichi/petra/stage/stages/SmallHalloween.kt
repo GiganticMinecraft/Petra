@@ -121,7 +121,7 @@ object SmallHalloween {
                                     )
                             )
                     )
-                    ), listOf(ItemStack(Material.COAL_ORE, 9))
+                    ), listOf(ItemStack(Material.COAL_ORE, 32))
             ),
             BonusWave(
                     SummonData(
@@ -176,11 +176,11 @@ object SmallHalloween {
                                     MultiEntity(
                                             Summoner(EntityType.HUSK, { 1 }) to 6,
                                             Summoner(EntityType.VINDICATOR, { 1 }) to 2,
+                                            Summoner(EntityType.PILLAGER, { 1 }) to 2,
                                             Summoner(EntityType.EVOKER, { 1 }) to 1
                                     )
                             )
-                    )), Summoners.KIMETSU_NEZUKO("unchama")
-                    , listOf(
+                    )), Summoners.KIMETSU_NEZUKO("unchama"), listOf(
                     ItemStack(Material.GUNPOWDER, 32),
                     ItemStack(Material.SAND, 32),
                     ItemStack(Material.FLINT, 16)
@@ -207,27 +207,46 @@ object SmallHalloween {
                                     )
                             )
                     )
-                    ), Summoners.KIMETSU_RUI
-                    , listOf(ItemStack(Material.STRING, 64))
+                    ), Summoners.KIMETSU_RUI, listOf(ItemStack(Material.STRING, 64))
             ),
-            DefensePlayerWave(5, 2,
+            BonusWave(
+                    SummonData(
+                            MultiEntity(
+                                    Summoner(EntityType.CHICKEN, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 10,
+                                    Summoner(EntityType.IRON_GOLEM, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 2
+                            )
+                    ), 60
+            ),
+            AnnihilationInADreamWave(5, 2,
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }) to 4,
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 8,
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
                                             Summoner(EntityType.SKELETON, { 1 }) to 6,
-                                            Summoner(EntityType.HUSK, { 1 }) to 4,
-                                            Summoner(EntityType.STRAY, { 1 }) to 4,
-                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
-                                            Summoner(EntityType.ILLUSIONER, { 1 }) to 1,
-                                            Summoner(EntityType.EVOKER, { 1 }) to 1,
-                                            Summoner(EntityType.VEX, { 2 }) to 1,
-                                            Summoner(EntityType.ENDERMAN, { 1 }) to 1
+                                            Summoner(EntityType.HUSK, { 1 }) to 8,
+                                            Summoner(EntityType.STRAY, { 1 }) to 8,
+                                            Summoners.HONEBUTO to 1
+                                    )
+                            ),
+                            30 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
+                                            Summoner(EntityType.HUSK, { 1 }) to 8,
+                                            Summoner(EntityType.STRAY, { 1 }) to 8,
+                                            Summoners.HONEBUTO to 1
+                                    )
+                            ),
+                            60 to SummonData(
+                                    MultiEntity(
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
+                                            Summoner(EntityType.HUSK, { 1 }) to 8,
+                                            Summoner(EntityType.STRAY, { 1 }) to 8,
+                                            Summoners.HONEBUTO to 1
                                     )
                             )
-                    )), "unchama"
+                    )), listOf(ItemStack(Material.DIAMOND, 10))
             )
-    // TODO 殲滅
     )
 }
