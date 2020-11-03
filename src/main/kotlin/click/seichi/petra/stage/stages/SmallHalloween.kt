@@ -214,8 +214,7 @@ object SmallHalloween {
             BonusWave(
                     SummonData(
                             MultiEntity(
-                                    Summoner(EntityType.CHICKEN, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 10,
-                                    Summoner(EntityType.IRON_GOLEM, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 2
+                                    Summoner(EntityType.CHICKEN, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 10
                             )
                     ), 60
             ),
@@ -223,20 +222,18 @@ object SmallHalloween {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
-                                            Summoner(EntityType.HUSK, { 1 }) to 8,
-                                            Summoner(EntityType.STRAY, { 1 }) to 8,
-                                            Summoners.HONEBUTO to 1
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 2,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 2,
+                                            Summoner(EntityType.HUSK, { 1 }) to 3,
+                                            Summoner(EntityType.STRAY, { 1 }) to 3
                                     )
                             ),
                             30 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.ZOMBIE, { 1 }) to 6,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
-                                            Summoner(EntityType.HUSK, { 1 }) to 8,
-                                            Summoner(EntityType.STRAY, { 1 }) to 8,
-                                            Summoners.HONEBUTO to 1
+                                            Summoner(EntityType.ZOMBIE, { 1 }) to 4,
+                                            Summoner(EntityType.SKELETON, { 1 }) to 4,
+                                            Summoner(EntityType.HUSK, { 1 }) to 6,
+                                            Summoner(EntityType.STRAY, { 1 }) to 6
                                     )
                             ),
                             60 to SummonData(
