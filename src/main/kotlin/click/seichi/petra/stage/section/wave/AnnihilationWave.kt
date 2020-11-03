@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack
  * @author tar0ss
  */
 open class AnnihilationWave(
-        private val waveNum: Int,
+        waveNum: Int,
         minutes: Int,
         raidData: WaveData,
         rewards: List<ItemStack> = listOf()

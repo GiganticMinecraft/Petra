@@ -210,7 +210,8 @@ object SmallHalloween {
             BonusWave(
                     SummonData(
                             MultiEntity(
-                                    Summoner(EntityType.CHICKEN, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 10
+                                    Summoner(EntityType.CHICKEN, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 10,
+                                    Summoner(EntityType.SHEEP, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 10
                             )
                     ), 60
             ),

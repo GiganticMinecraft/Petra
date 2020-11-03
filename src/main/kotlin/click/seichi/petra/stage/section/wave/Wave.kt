@@ -38,8 +38,8 @@ import java.util.*
  * @param rewards
  */
 open class Wave(
-        private val waveNum: Int,
-        private val minutes: Int,
+        protected val waveNum: Int,
+        protected val minutes: Int,
         private val raidData: WaveData,
         private val rewards: List<ItemStack>
 ) : Section {
