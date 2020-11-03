@@ -272,8 +272,7 @@ object SmallHalloween {
                                             Summoner(EntityType.VINDICATOR, { 1 }) to 2,
                                             Summoner(EntityType.PILLAGER, { 1 }) to 2,
                                             Summoner(EntityType.EVOKER, { 1 }) to 1,
-                                            Summoner(EntityType.VEX, { 1 }) to 4,
-                                            Summoner(EntityType.RAVAGER, { 1 }) to 1
+                                            Summoner(EntityType.VEX, { 1 }) to 4
                                     )
                             ),
                             90 to SummonData(
