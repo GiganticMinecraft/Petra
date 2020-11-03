@@ -58,6 +58,9 @@ class PetraGame(private val stage: Stage) : Listener, Game {
 
 
     private var readyPlayers = setOf<UUID>()
+
+    private val resultRecorder = ResultRecorder()
+
     private fun start() {
         isStarted = true
 
@@ -69,6 +72,8 @@ class PetraGame(private val stage: Stage) : Listener, Game {
                 .filter { !players.contains(it.uniqueId) }
                 .toSet()
         spectators.forEach { it.gameMode = GameMode.SPECTATOR }
+
+        ResultRecorder().start(players)
 
         world.time = stage.startTime
 
@@ -92,7 +97,9 @@ class PetraGame(private val stage: Stage) : Listener, Game {
             WinnerConfig.addWinners(playerList)
         }
 
-        ResultSender(10).start(result, this)
+        resultRecorder.broadcast()
+
+        ResultSender(30).start(result, this)
                 .endAsObservable()
                 .take(1)
                 .subscribe { end() }
