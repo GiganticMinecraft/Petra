@@ -271,38 +271,44 @@ object SmallHalloween {
                                             Summoner(EntityType.VINDICATOR, { 1 }) to 2,
                                             Summoner(EntityType.PILLAGER, { 1 }) to 2,
                                             Summoner(EntityType.EVOKER, { 1 }) to 1,
-                                            Summoner(EntityType.VEX, { 1 }) to 5,
+                                            Summoner(EntityType.VEX, { 1 }) to 4,
                                             Summoner(EntityType.RAVAGER, { 1 }) to 1
                                     )
                             ),
                             90 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4,
+                                            Summoner(EntityType.VEX, { 1 }, Summoner.SummonCase.NEAR_A_PLAYER) to 4
                                     )
                             ),
                             95 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4,
+                                            Summoner(EntityType.VEX, { 1 }, Summoner.SummonCase.NEAR_A_PLAYER) to 4
                                     )
                             ),
                             100 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4,
+                                            Summoner(EntityType.VEX, { 1 }, Summoner.SummonCase.NEAR_A_PLAYER) to 4
                                     )
                             ),
                             105 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4,
+                                            Summoner(EntityType.VEX, { 1 }, Summoner.SummonCase.NEAR_A_PLAYER) to 4
                                     )
                             ),
                             110 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4,
+                                            Summoner(EntityType.VEX, { 1 }, Summoner.SummonCase.NEAR_A_PLAYER) to 4
                                     )
                             ),
                             115 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4
+                                            Summoner(EntityType.CREEPER, { 1 }, Summoner.SummonCase.SAFE_ZONE) to 4,
+                                            Summoner(EntityType.VEX, { 1 }, Summoner.SummonCase.NEAR_A_PLAYER) to 4
                                     )
                             )
                     ))

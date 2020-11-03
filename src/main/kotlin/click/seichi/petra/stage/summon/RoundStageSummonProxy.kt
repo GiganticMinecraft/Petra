@@ -1,11 +1,13 @@
 package click.seichi.petra.stage.summon
 
 import click.seichi.petra.util.Random
+import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
 import org.bukkit.util.Consumer
+import java.util.*
 
 /**
  * @author tar0ss
@@ -32,6 +34,16 @@ class RoundStageSummonProxy(
         val z = xz.second
         val highestHeight = world.getHighestBlockYAt(x.toInt(), z.toInt())
         val loc = Location(world, x, (highestHeight + 2).toDouble(), z)
+        return if (function == null) world.spawnEntity(loc, entityType)
+        else world.spawn(loc, entityType.entityClass as Class<Entity>, function)
+    }
+
+    override fun summonNearPlayer(world: World, entityType: EntityType, players: Set<UUID>, function: Consumer<Entity>?): Entity {
+        val diffX = Random.nextDouble(5.0, 7.0)
+        val diffZ = Random.nextDouble(5.0, 7.0)
+        val diffY = Random.nextDouble(1.0, 5.0) * (if (Random.nextBoolean()) -1 else 1)
+        val target = players.mapNotNull { Bukkit.getServer().getPlayer(it) }.random()
+        val loc = Location(world, target.location.x + diffX, target.location.y + diffY, target.location.z + diffZ)
         return if (function == null) world.spawnEntity(loc, entityType)
         else world.spawn(loc, entityType.entityClass as Class<Entity>, function)
     }

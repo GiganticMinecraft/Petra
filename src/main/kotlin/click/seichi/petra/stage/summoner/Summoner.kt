@@ -19,7 +19,8 @@ open class Summoner(
     enum class SummonCase {
         DANGER_ZONE,
         CENTER,
-        SAFE_ZONE
+        SAFE_ZONE,
+        NEAR_A_PLAYER
     }
 
     override fun summon(world: World, summonProxy: SummonProxy, players: Set<UUID>): Set<UUID> {
@@ -33,6 +34,7 @@ open class Summoner(
                 SummonCase.DANGER_ZONE -> summonProxy.summonAtDangerZone(world, entityType, consumer)
                 SummonCase.CENTER -> summonProxy.summonToCenter(world, entityType, consumer)
                 SummonCase.SAFE_ZONE -> summonProxy.summonAtSafeZone(world, entityType, consumer)
+                SummonCase.NEAR_A_PLAYER -> summonProxy.summonNearPlayer(world, entityType, players, consumer)
             }
             if (this is Named) {
                 // カーソル合わせた時に見えればよい
@@ -54,6 +56,7 @@ open class Summoner(
             SummonCase.DANGER_ZONE -> summonProxy.summonAtDangerZone(world, entityType, consumer)
             SummonCase.CENTER -> summonProxy.summonToCenter(world, entityType, consumer)
             SummonCase.SAFE_ZONE -> summonProxy.summonAtSafeZone(world, entityType, consumer)
+            SummonCase.NEAR_A_PLAYER -> summonProxy.summonNearPlayer(world, entityType, players, consumer)
         }
         if (this is Named) {
             // カーソル合わせた時に見えればよい
