@@ -108,7 +108,8 @@ object SmallHalloween {
                             30 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 6,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 6
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
+                                            Summoners.RAIN_BRAIN to 1
                                     )
                             ),
                             60 to SummonData(
