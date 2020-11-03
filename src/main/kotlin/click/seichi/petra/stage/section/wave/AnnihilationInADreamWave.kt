@@ -17,7 +17,7 @@ import java.util.*
  * @author tar0ss
  */
 class AnnihilationInADreamWave(
-        private val waveNum: Int,
+        waveNum: Int,
         minutes: Int,
         raidData: WaveData,
         rewards: List<ItemStack> = listOf()

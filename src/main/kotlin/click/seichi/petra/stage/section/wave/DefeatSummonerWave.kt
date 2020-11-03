@@ -26,8 +26,8 @@ import org.spigotmc.event.entity.EntityMountEvent
  * @author tar0ss
  */
 open class DefeatSummonerWave(
-        protected val waveNum: Int,
-        private val minutes: Int,
+        waveNum: Int,
+        minutes: Int,
         raidData: WaveData,
         private val targetSummoner: ISummoner,
         rewards: List<ItemStack> = listOf()

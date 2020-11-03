@@ -27,8 +27,8 @@ import org.bukkit.inventory.ItemStack
  * @author tar0ss
  */
 class DefensePlayerWave(
-        private val waveNum: Int,
-        private val minutes: Int,
+        waveNum: Int,
+        minutes: Int,
         raidData: WaveData,
         private val playerName: String? = null,
         rewards: List<ItemStack> = listOf()

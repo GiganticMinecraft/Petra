@@ -26,8 +26,8 @@ import org.bukkit.inventory.ItemStack
  * @author tar0ss
  */
 class DefenseSummonerWave(
-        private val waveNum: Int,
-        private val minutes: Int,
+        waveNum: Int,
+        minutes: Int,
         raidData: WaveData,
         private val targetSummoner: ISummoner,
         rewards: List<ItemStack> = listOf()
