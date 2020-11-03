@@ -1,5 +1,6 @@
 package click.seichi.petra.event
 
+import org.bukkit.event.HandlerList
 import java.util.*
 
 /**
@@ -7,4 +8,14 @@ import java.util.*
  */
 class StartGameEvent(
         val playerSet: Set<UUID>
-) : CustomEvent()
+) : CustomEvent() {
+    companion object {
+        @JvmStatic
+        private val handler = HandlerList()
+
+        @JvmStatic
+        fun getHandlerList() = handler
+    }
+
+    override fun getHandlers() = handler
+}

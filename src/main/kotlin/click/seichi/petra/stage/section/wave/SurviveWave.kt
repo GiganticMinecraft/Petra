@@ -6,6 +6,8 @@ import click.seichi.petra.game.event.PlayerQuitInGameEvent
 import click.seichi.petra.message.Message
 import click.seichi.petra.message.TitleMessage
 import click.seichi.petra.stage.StageResult
+import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
@@ -45,6 +47,18 @@ class SurviveWave(
     }
 
     override fun onStart() {
+
+        val remainedPlayers = players.mapNotNull { Bukkit.getServer().getPlayer(it) }
+
+        remainedPlayers.forEach {
+            it.isGlowing = true
+        }
+
+        val remainedPlayerUUIDs = remainedPlayers.map { it.uniqueId }.toSet()
+        players.toSet().filter { !remainedPlayerUUIDs.contains(it) }.forEach {
+            deathPlayers.add(it)
+        }
+
         deathCountBar = topBar.get(TopBarType.DEATH_COUNT)
 
         deathCountBar.color = BarColor.GREEN
@@ -71,6 +85,8 @@ class SurviveWave(
     override fun onEnd() {
         deathCountBar.isVisible = false
         PlayerDeathEvent.getHandlerList().unregister(this)
+        PlayerPostRespawnEvent.getHandlerList().unregister(this)
+        PlayerQuitInGameEvent.getHandlerList().unregister(this)
         super.onEnd()
     }
 
@@ -92,5 +108,12 @@ class SurviveWave(
         if (deathPlayers.size == players.size) {
             subject.onNext(StageResult.DEATH_ALL_PLAYERS)
         }
+    }
+
+    @EventHandler
+    fun onPostRespawn(event: PlayerPostRespawnEvent) {
+        val uniqueId = event.player.uniqueId
+        if (!deathPlayers.contains(uniqueId)) return
+        event.player.isGlowing = false
     }
 }
