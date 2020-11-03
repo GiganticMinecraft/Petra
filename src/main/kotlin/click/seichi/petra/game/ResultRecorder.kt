@@ -27,17 +27,40 @@ class ResultRecorder : Listener {
     private val breakCountMap = mutableMapOf<UUID, Int>()
 
     open fun broadcast() {
-        broadcastRanking(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数ランキング")) { rank, count, name ->
-            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
-            ChatMessage("${color}${rank}位 $name ${count}回")
+        broadcastList(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数")) { count, name ->
+            ChatMessage("$name ${count}回")
         }
-        broadcastRanking(defeatCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}撃退数ランキング")) { rank, count, name ->
-            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
-            ChatMessage("${color}${rank}位 $name ${count}体")
+        broadcastList(defeatCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}撃退数")) { count, name ->
+            ChatMessage("$name ${count}体")
         }
-        broadcastRanking(breakCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}破壊数ランキング")) { rank, count, name ->
-            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
-            ChatMessage("${color}${rank}位 $name ${count}ブロック")
+        broadcastList(breakCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}破壊数")) { count, name ->
+            ChatMessage("$name ${count}ブロック")
+        }
+//        broadcastRanking(deathCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}死亡数ランキング")) { rank, count, name ->
+//            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
+//            ChatMessage("${color}${rank}位 $name ${count}回")
+//        }
+//        broadcastRanking(defeatCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}撃退数ランキング")) { rank, count, name ->
+//            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
+//            ChatMessage("${color}${rank}位 $name ${count}体")
+//        }
+//        broadcastRanking(breakCountMap, ChatMessage("${ChatColor.AQUA}${ChatColor.BOLD}破壊数ランキング")) { rank, count, name ->
+//            val color = if (rank == 1) ChatColor.YELLOW else ChatColor.WHITE
+//            ChatMessage("${color}${rank}位 $name ${count}ブロック")
+//        }
+    }
+
+    private fun broadcastList(map: Map<UUID, Int>, title: Message, message: (Int, String) -> Message) {
+        if (map.isEmpty()) {
+            debug("map is empty!!")
+            return
+        }
+
+        title.broadcast()
+
+        map.forEach { (uuid, count) ->
+            val name = Bukkit.getServer().getPlayer(uuid)?.name ?: "no name"
+            message(count, name).broadcast()
         }
     }
 
