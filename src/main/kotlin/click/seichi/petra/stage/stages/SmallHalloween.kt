@@ -178,11 +178,12 @@ object SmallHalloween {
                     WaveData(mapOf(
                             0 to SummonData(
                                     MultiEntity(
-                                            Summoner(EntityType.HUSK, { 1 }) to 6,
-                                            Summoner(EntityType.STRAY, { 1 }) to 4,
-                                            Summoner(EntityType.VINDICATOR, { 1 }) to 2,
-                                            Summoner(EntityType.PILLAGER, { 1 }) to 2,
-                                            Summoner(EntityType.EVOKER, { 1 }) to 2
+                                            Summoner(EntityType.VINDICATOR, { 1 }) to 3,
+                                            Summoner(EntityType.PILLAGER, { 1 }) to 3,
+                                            Summoner(EntityType.ILLUSIONER, { 1 }) to 1,
+                                            Summoner(EntityType.EVOKER, { 1 }) to 2,
+                                            Summoner(EntityType.RAVAGER, { 1 }) to 1
+
                                     )
                             )
                     )), Summoners.KIMETSU_NEZUKO("unchama"), listOf(
