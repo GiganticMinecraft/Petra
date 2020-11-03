@@ -82,8 +82,8 @@ class ResultRecorder : Listener {
         val entity = event.entity
         if (entity !is Monster) return
         val killer = entity.killer ?: return
-        val current = deathCountMap.getOrPut(killer.uniqueId, { 0 })
-        deathCountMap[killer.uniqueId] = current + 1
+        val current = defeatCountMap.getOrPut(killer.uniqueId, { 0 })
+        defeatCountMap[killer.uniqueId] = current + 1
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
