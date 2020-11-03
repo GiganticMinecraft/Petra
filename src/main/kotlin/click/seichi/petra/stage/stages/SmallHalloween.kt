@@ -102,24 +102,19 @@ object SmallHalloween {
                             0 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 4,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 4,
-                                            Summoners.CAPPED_SKELETON to 4,
-                                            Summoners.RAIN_BRAIN to 1
+                                            Summoner(EntityType.SKELETON, { 1 }) to 4
                                     )
                             ),
                             30 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 6,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 6,
-                                            Summoners.CAPPED_SKELETON to 6
+                                            Summoner(EntityType.SKELETON, { 1 }) to 6
                                     )
                             ),
                             60 to SummonData(
                                     MultiEntity(
                                             Summoner(EntityType.ZOMBIE, { 1 }) to 8,
-                                            Summoner(EntityType.SKELETON, { 1 }) to 8,
-                                            Summoners.CAPPED_SKELETON to 8,
-                                            Summoners.RAIN_BRAIN to 1
+                                            Summoner(EntityType.SKELETON, { 1 }) to 8
                                     )
                             )
                     )
