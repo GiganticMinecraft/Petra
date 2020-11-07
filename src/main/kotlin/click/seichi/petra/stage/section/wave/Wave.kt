@@ -126,7 +126,8 @@ open class Wave(
 
     protected open fun onSummoned(entity: Entity) {
         if (entity is Mob) {
-            entity.target = entity.getNearestPlayer(players)
+            if (entity.target == null)
+                entity.target = entity.getNearestPlayer(players)
         }
     }
 
