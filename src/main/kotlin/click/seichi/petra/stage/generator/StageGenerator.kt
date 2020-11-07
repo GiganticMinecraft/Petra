@@ -1,5 +1,6 @@
 package click.seichi.petra.stage.generator
 
+import org.bukkit.Location
 import org.bukkit.generator.ChunkGenerator
 
 /**
@@ -7,13 +8,28 @@ import org.bukkit.generator.ChunkGenerator
  */
 abstract class StageGenerator : ChunkGenerator() {
 
+    fun isDangerZone(loc: Location): Boolean {
+        return isDangerZone(loc.blockX, loc.blockY, loc.blockZ)
+    }
+
     abstract fun isDangerZone(globalX: Int, globalY: Int, globalZ: Int): Boolean
 
+    fun isSafeZone(loc: Location): Boolean {
+        return isSafeZone(loc.blockX, loc.blockY, loc.blockZ)
+    }
+
     abstract fun isSafeZone(globalX: Int, globalY: Int, globalZ: Int): Boolean
+
+    fun isStageZone(loc: Location): Boolean {
+        return isStageZone(loc.blockX, loc.blockY, loc.blockZ)
+    }
+
+    abstract fun isStageZone(globalX: Int, globalY: Int, globalZ: Int): Boolean
 
     override fun shouldGenerateCaves(): Boolean {
         return false
     }
+
 
     override fun isParallelCapable(): Boolean {
         return false

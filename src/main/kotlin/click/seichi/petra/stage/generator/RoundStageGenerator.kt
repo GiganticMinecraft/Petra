@@ -27,6 +27,11 @@ abstract class RoundStageGenerator(
         return distance in 0.0..radius.toDouble()
     }
 
+    override fun isStageZone(globalX: Int, globalY: Int, globalZ: Int): Boolean {
+        val distance = sqrt((globalX * globalX + globalZ * globalZ).toDouble())
+        return distance <= (dangerZoneRadius.toDouble() + 1.0)
+    }
+
     override fun getFixedSpawnLocation(world: World, random: java.util.Random): Location? {
         val xz = Random.nextRoundPoint(radius.toDouble())
         val x = xz.first

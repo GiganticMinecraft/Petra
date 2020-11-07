@@ -5,6 +5,7 @@ import click.seichi.petra.config.PetraConfig
 import click.seichi.petra.config.WinnerConfig
 import click.seichi.petra.event.StartGameEvent
 import click.seichi.petra.game.event.*
+import click.seichi.petra.message.ChatMessage
 import click.seichi.petra.stage.Facilitator
 import click.seichi.petra.stage.ResultSender
 import click.seichi.petra.stage.Stage
@@ -15,16 +16,14 @@ import click.seichi.petra.util.TopBar
 import com.destroystokyo.paper.event.block.BlockDestroyEvent
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import io.reactivex.disposables.Disposable
-import org.bukkit.Bukkit
-import org.bukkit.GameMode
-import org.bukkit.Location
-import org.bukkit.World
+import org.bukkit.*
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.EntityChangeBlockEvent
 import org.bukkit.event.entity.EntityExplodeEvent
+import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.event.world.TimeSkipEvent
 import org.bukkit.potion.PotionEffect
@@ -209,5 +208,30 @@ class PetraGame(private val stage: Stage) : Listener, Game {
         if (players.mapNotNull { Bukkit.getServer().getPlayer(it) }.isEmpty()) {
             result(StageResult.DEATH_ALL_PLAYERS)
         }
+    }
+
+    private val witheredSet = mutableSetOf<UUID>()
+
+    @EventHandler
+    fun onPlayerMove(event: PlayerMoveEvent) {
+        val player = event.player
+        if (!players.contains(player.uniqueId)) return
+        if (stage.generator.isStageZone(event.to)) {
+            if (witheredSet.contains(player.uniqueId)) {
+                witheredSet.remove(player.uniqueId)
+                // 解除
+                player.removePotionEffect(PotionEffectType.WITHER)
+            }
+        } else {
+            if (!witheredSet.contains(player.uniqueId)) {
+                witheredSet.add(player.uniqueId)
+                // 付与
+                player.addPotionEffect(PotionEffect(PotionEffectType.WITHER, 10000, 1, false, false, true))
+                ChatMessage("${ChatColor.LIGHT_PURPLE}${player.name}は深淵を覗いてしまった...").broadcast()
+
+            }
+        }
+
+
     }
 }
