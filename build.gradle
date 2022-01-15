@@ -12,7 +12,7 @@ buildscript {
 
 //        protcollib_version = '4.5.0-SNAPSHOT'
         slf4j_version = '1.7.30'
-        exposed_version = '0.17.7'
+        exposed_version = '0.17.14'
     }
     repositories {
         mavenCentral()
@@ -49,10 +49,6 @@ repositories {
     maven {
         name = 'papermc'
         url = 'https://papermc.io/repo/repository/maven-public/'
-    }
-    maven {
-        name = 'exposed-repo'
-        url = 'https://dl.bintray.com/kotlin/exposed/'
     }
 //    maven {
 //        name = 'Multiverse-Core'
