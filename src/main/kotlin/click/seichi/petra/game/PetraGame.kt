@@ -214,22 +214,22 @@ class PetraGame(private val stage: Stage) : Listener, Game {
     fun onPlayerMove(event: PlayerMoveEvent) {
         val player = event.player
         if (!players.contains(player.uniqueId)) return
-        if (stage.generator.isStageZone(event.to)) {
-            if (witheredSet.contains(player.uniqueId)) {
-                witheredSet.remove(player.uniqueId)
-                // 解除
-                player.removePotionEffect(PotionEffectType.WITHER)
-            }
-        } else {
-            if (!witheredSet.contains(player.uniqueId)) {
-                witheredSet.add(player.uniqueId)
-                // 付与
-                player.addPotionEffect(PotionEffect(PotionEffectType.WITHER, 10000, 1, false, false, true))
-                ChatMessage("${ChatColor.LIGHT_PURPLE}${player.name}は深淵を覗いてしまった...").broadcast()
+        event.to?.let {
+            if (stage.generator.isStageZone(it)) {
+                if (witheredSet.contains(player.uniqueId)) {
+                    witheredSet.remove(player.uniqueId)
+                    // 解除
+                    player.removePotionEffect(PotionEffectType.WITHER)
+                }
+            } else {
+                if (!witheredSet.contains(player.uniqueId)) {
+                    witheredSet.add(player.uniqueId)
+                    // 付与
+                    player.addPotionEffect(PotionEffect(PotionEffectType.WITHER, 10000, 1, false, false, true))
+                    ChatMessage("${ChatColor.LIGHT_PURPLE}${player.name}は深淵を覗いてしまった...").broadcast()
 
+                }
             }
         }
-
-
     }
 }
