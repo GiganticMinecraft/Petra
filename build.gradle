@@ -50,6 +50,10 @@ repositories {
         name = 'spigotmc'
         url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
     }
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
 //    maven {
 //        name = 'Multiverse-Core'
 //        url = 'http://repo.onarandombox.com/content/repositories/multiverse/'
