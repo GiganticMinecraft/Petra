@@ -2,7 +2,6 @@ package click.seichi.petra.stage.section.wave
 
 import click.seichi.petra.function.sync
 import click.seichi.petra.message.ChatMessage
-import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.event.Event
@@ -10,6 +9,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.player.PlayerBedEnterEvent
 import org.bukkit.event.player.PlayerItemConsumeEvent
+import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
@@ -57,7 +57,7 @@ class AnnihilationInADreamWave(
 
     override fun onEnd() {
         PlayerBedEnterEvent.getHandlerList().unregister(this)
-        PlayerPostRespawnEvent.getHandlerList().unregister(this)
+        PlayerRespawnEvent.getHandlerList().unregister(this)
         PlayerItemConsumeEvent.getHandlerList().unregister(this)
         super.onEnd()
     }
@@ -75,7 +75,7 @@ class AnnihilationInADreamWave(
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    fun onPostRespawn(event: PlayerPostRespawnEvent) {
+    fun onRespawn(event: PlayerRespawnEvent) {
         val player = event.player
         if (wakeUpPlayers.contains(player.uniqueId)) return
         player.addPotionEffect(debufEffect)
