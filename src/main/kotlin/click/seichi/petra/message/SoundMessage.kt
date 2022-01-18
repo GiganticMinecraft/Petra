@@ -54,5 +54,5 @@ data class SoundMessage(
             player.playSound(player.location, sound, category, volume, pitch)
 
     fun sendAt(location: Location) =
-            location.world.playSound(location, sound, category, volume, pitch)
+            location.world?.playSound(location, sound, category, volume, pitch)
 }
