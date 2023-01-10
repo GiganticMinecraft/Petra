@@ -22,8 +22,6 @@ buildscript {
     }
 }
 
-
-
 group = 'click.seichi'
 version = '1.0-SNAPSHOT'
 
@@ -36,6 +34,7 @@ compileJava {
 
 processResources {
     filteringCharset = 'UTF-8'
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from(sourceSets.main.resources.srcDirs) {
         include '**/*.yml'
         filter(ReplaceTokens, tokens: [version: project.version])
@@ -88,6 +87,5 @@ dependencies {
 }
 
 jar {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
 }
