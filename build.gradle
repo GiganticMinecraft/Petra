@@ -11,7 +11,7 @@ buildscript {
 //        rxkotlin_version = '3.0.0'
 
 //        protcollib_version = '4.5.0-SNAPSHOT'
-        slf4j_version = '1.7.30'
+        slf4j_version = '1.7.36'
         exposed_version = '0.17.14'
     }
     repositories {
