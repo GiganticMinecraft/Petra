@@ -5,8 +5,8 @@ Petra Plugin（以下、当プラグイン）は、[ギガンティック☆整�
 
 Description
 ---
-当プラグインはMySQLを用いて全データベースを管理しています．
-デバッグサーバ起動時には”gigantic”データベースを作成済であることを確認してください．
+当プラグインはMySQLを用いて全データベースを管理しています。
+デバッグサーバ起動時には`gigantic`データベースを作成済であることを確認してください。
 
 Auto Release
 ---
@@ -24,7 +24,7 @@ Development
 基本的には[スマートテック・ベンチャーズ Kotlinコーディング規約](https://github.com/SmartTechVentures/kotlin-style-guide)に準拠します。
 
 ## Nullable
-!!演算子は，原則使用禁止とするが，Nullではないことが明確な場合は使用可能とする．
+!!演算子は原則使用禁止とするが、Nullではないことが明確な場合は使用可能とする。
 
 ## JavaDocs
 publicなメソッドについては、JavaDocsを記載するよう心がけてください。
