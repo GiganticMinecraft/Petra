@@ -68,9 +68,9 @@ configurations {
 }
 
 dependencies {
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlin_version
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlin_version
-    compile group: 'com.destroystokyo.paper', name: 'paper-api', version: paper_api_version
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlin_version
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlin_version
+    implementation group: 'com.destroystokyo.paper', name: 'paper-api', version: paper_api_version
 
 //    compile group: 'org.spigotmc', name: 'spigot', version: paper_api_version
 
@@ -84,7 +84,7 @@ dependencies {
     embed group: "org.slf4j", name: "slf4j-log4j12", version: slf4j_version
     embed group: "org.jetbrains.exposed", name: "exposed", version: exposed_version
 
-    compile fileTree(dir: "libs", include: "*.jar")
+    implementation fileTree(dir: "libs", include: "*.jar")
 }
 
 jar {
