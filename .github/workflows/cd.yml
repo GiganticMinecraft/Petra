@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - develop
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: true
 jobs:
   build:
     name: Build jar
