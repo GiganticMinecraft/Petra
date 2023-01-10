@@ -9,6 +9,7 @@ import click.seichi.petra.stage.StageResult
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.GameMode
 import org.bukkit.boss.BarColor
 import org.bukkit.boss.BarStyle
 import org.bukkit.boss.BossBar
@@ -49,6 +50,7 @@ class SurviveWave(
     override fun onStart() {
 
         val remainedPlayers = players.mapNotNull { Bukkit.getServer().getPlayer(it) }
+            .filter { it.gameMode === GameMode.SURVIVAL }
 
         remainedPlayers.forEach {
             it.isGlowing = true
@@ -92,7 +94,10 @@ class SurviveWave(
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onDeath(event: PlayerDeathEvent) {
-        deathPlayers.add(event.entity.uniqueId)
+        val player = event.entity
+        if (player.gameMode !== GameMode.SURVIVAL) return
+
+        deathPlayers.add(player.uniqueId)
         updateCountBar()
         if (deathPlayers.size == players.size) {
             subject.onNext(StageResult.DEATH_ALL_PLAYERS)
