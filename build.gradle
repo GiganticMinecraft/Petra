@@ -64,7 +64,7 @@ repositories {
 
 configurations {
     embed
-    compile.extendsFrom(embed)
+    implementation.extendsFrom(embed)
 }
 
 dependencies {
@@ -88,5 +88,6 @@ dependencies {
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
 }
