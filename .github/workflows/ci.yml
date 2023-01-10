@@ -20,9 +20,7 @@ jobs:
         distribution: 'temurin'
         cache: 'gradle'
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2
-      with:
-        arguments: jar
+      run: ./gradlew jar
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
