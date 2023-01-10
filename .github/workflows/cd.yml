@@ -1,15 +1,11 @@
-name: deploy_develop
-
+name: CD
 on:
   push:
     branches:
       - develop
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 1.8
@@ -18,12 +14,9 @@ jobs:
         java-version: 1.8
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-
     - name: Build with Gradle
       run: gradle build
-
     - name: Exports SSH private key
       run: echo "${{ secrets.DEPLOY_SECRET_KEY }}" > id_rsa && chmod 600 id_rsa
-
     - name: Scp artifact
       run: scp -o 'StrictHostKeyChecking no' -P ${{ secrets.PORT }} -i id_rsa build/libs/*.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.DEBUG_DEPLOY_TARGET_DIRECTORY }}
