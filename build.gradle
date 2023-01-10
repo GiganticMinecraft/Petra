@@ -87,5 +87,6 @@ dependencies {
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
 }
