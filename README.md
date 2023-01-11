@@ -23,10 +23,10 @@ Development
 基本的には[スマートテック・ベンチャーズ Kotlinコーディング規約](https://github.com/SmartTechVentures/kotlin-style-guide)に準拠します。
 
 ## Nullable
-!!演算子は原則使用禁止とするが、Nullではないことが明確な場合は使用可能とする。
+`!!`演算子は原則使用禁止とするが、`null`ではないことが明確な場合は使用可能とする。
 
 ## JavaDocs
-publicなメソッドについては、JavaDocsを記載するよう心がけてください。
+`public`なメソッドについては、JavaDocsを記載するよう心がけてください。
 その他は各自が必要だと判断した場合のみ記載してください。
 
 ## Commit Style
