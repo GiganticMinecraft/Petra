@@ -62,10 +62,10 @@ dependencies {
     embed group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version
     embed group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: coroutines_version
     embed group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-rx2', version: coroutines_version
-    embed group: "org.slf4j", name: "slf4j-log4j12", version: slf4j_version
-    embed group: "org.jetbrains.exposed", name: "exposed", version: exposed_version
+    embed group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4j_version
+    embed group: 'org.jetbrains.exposed', name: 'exposed', version: exposed_version
 
-    implementation fileTree(dir: "libs", include: "*.jar")
+    implementation fileTree(dir: 'libs', include: '*.jar')
 }
 
 jar {
