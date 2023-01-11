@@ -18,7 +18,7 @@ Development
 ---
 * [IntelliJ IDEA 2020.1](https://www.jetbrains.com/idea/)
 * [java 1.8](http://www.oracle.com/technetwork/java/javase/overview/index.html)
-* [paper-240](https://papermc.io/)
+* [Spigot 1.15.2](https://www.spigotmc.org)
 
 ## Kotlin Style Guide
 基本的には[スマートテック・ベンチャーズ Kotlinコーディング規約](https://github.com/SmartTechVentures/kotlin-style-guide)に準拠します。
