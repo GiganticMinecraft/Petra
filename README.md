@@ -16,8 +16,8 @@ Auto Release
 
 Development
 ---
-* [Java 1.8](http://www.oracle.com/technetwork/java/javase/overview/index.html)
-* [Spigot 1.15.2](https://www.spigotmc.org)
+* Java 1.8
+* Spigot 1.15.2
 
 ## Kotlin Style Guide
 基本的には[スマートテック・ベンチャーズ Kotlinコーディング規約](https://github.com/SmartTechVentures/kotlin-style-guide)に準拠します。
