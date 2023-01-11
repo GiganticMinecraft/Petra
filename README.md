@@ -17,7 +17,7 @@ Auto Release
 Development
 ---
 * [IntelliJ IDEA 2020.1](https://www.jetbrains.com/idea/)
-* [java 1.8](http://www.oracle.com/technetwork/java/javase/overview/index.html)
+* [Java 1.8](http://www.oracle.com/technetwork/java/javase/overview/index.html)
 * [Spigot 1.15.2](https://www.spigotmc.org)
 
 ## Kotlin Style Guide
