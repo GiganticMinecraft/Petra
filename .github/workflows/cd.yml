@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
+        with:
+          name: jar
       - name: Exports SSH private key
         run: |
           echo "${{ secrets.DEPLOY_SECRET_KEY }}" > id_rsa
