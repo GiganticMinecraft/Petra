@@ -16,18 +16,17 @@ Auto Release
 
 Development
 ---
-* [IntelliJ IDEA 2020.1](https://www.jetbrains.com/idea/)
-* [java 1.8](http://www.oracle.com/technetwork/java/javase/overview/index.html)
-* [paper-240](https://papermc.io/)
+* Java 1.8
+* Spigot 1.15.2
 
 ## Kotlin Style Guide
 基本的には[スマートテック・ベンチャーズ Kotlinコーディング規約](https://github.com/SmartTechVentures/kotlin-style-guide)に準拠します。
 
 ## Nullable
-!!演算子は原則使用禁止とするが、Nullではないことが明確な場合は使用可能とする。
+`!!`演算子は原則使用禁止とするが、`null`ではないことが明確な場合は使用可能とする。
 
-## JavaDocs
-publicなメソッドについては、JavaDocsを記載するよう心がけてください。
+## Documents
+`public`なメソッドについては、KDocを記載するよう心がけてください。
 その他は各自が必要だと判断した場合のみ記載してください。
 
 ## Commit Style

@@ -26,7 +26,7 @@ object Summoners {
             super.onCreate(entity)
             val zombie = entity as Zombie
             zombie.isBaby = false
-            zombie.setShouldBurnInDay(false)
+            zombie.equipment?.helmet = ItemStack(Material.LEATHER_HELMET)
         }
 
         override fun getName(): String {

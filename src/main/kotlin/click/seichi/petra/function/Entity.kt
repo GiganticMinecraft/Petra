@@ -11,6 +11,6 @@ import java.util.*
 
 fun Entity.getNearestPlayer(players: Set<UUID>): Player? {
     return players.mapNotNull { Bukkit.getServer().getPlayer(it) }
-            .map { it to it.location.distanceSquared(this.location) }
-            .minBy { it.second }?.first
+        .map { it to it.location.distanceSquared(this.location) }
+        .minByOrNull { it.second }?.first
 }

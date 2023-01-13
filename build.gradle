@@ -4,13 +4,7 @@ buildscript {
     ext {
         kotlin_version = '1.8.0'
         coroutines_version = '1.6.4'
-        paper_api_version = '1.15.2-R0.1-SNAPSHOT'
-
-//        multiversecore_version = '4.1.0'
-
-//        rxkotlin_version = '3.0.0'
-
-//        protcollib_version = '4.5.0-SNAPSHOT'
+        spigot_api_version = '1.15.2-R0.1-SNAPSHOT'
         slf4j_version = '2.0.6'
         exposed_version = '0.17.14'
     }
@@ -46,19 +40,13 @@ processResources {
 repositories {
     mavenCentral()
     maven {
-        name = 'papermc'
-        url = 'https://papermc.io/repo/repository/maven-public/'
+        name = 'spigotmc'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
     }
-//    maven {
-//        name = 'Multiverse-Core'
-//        url = 'http://repo.onarandombox.com/content/repositories/multiverse/'
-//    }
-
-    // ProtocolLib
-//    maven {
-//        name = 'dmulloy2-repo'
-//        url = 'http://repo.dmulloy2.net/nexus/repository/public/'
-//    }
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
 }
 
 configurations {
@@ -69,21 +57,15 @@ configurations {
 dependencies {
     implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlin_version
     implementation group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlin_version
-    implementation group: 'com.destroystokyo.paper', name: 'paper-api', version: paper_api_version
-
-//    compile group: 'org.spigotmc', name: 'spigot', version: paper_api_version
+    implementation group: 'org.spigotmc', name: 'spigot-api', version: spigot_api_version
 
     embed group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version
-
-//    compile group: 'com.comphenix.protocol', name: 'ProtocolLib', version: protcollib_version
-//    compile group: 'com.onarandombox.multiversecore', name : 'Multiverse-Core', version: multiversecore_version
-
     embed group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: coroutines_version
     embed group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-rx2', version: coroutines_version
-    embed group: "org.slf4j", name: "slf4j-log4j12", version: slf4j_version
-    embed group: "org.jetbrains.exposed", name: "exposed", version: exposed_version
+    embed group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4j_version
+    embed group: 'org.jetbrains.exposed', name: 'exposed', version: exposed_version
 
-    implementation fileTree(dir: "libs", include: "*.jar")
+    implementation fileTree(dir: 'libs', include: '*.jar')
 }
 
 jar {

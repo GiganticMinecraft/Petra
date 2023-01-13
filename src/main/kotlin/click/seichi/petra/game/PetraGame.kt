@@ -13,8 +13,6 @@ import click.seichi.petra.stage.StageResult
 import click.seichi.petra.util.Random
 import click.seichi.petra.util.Timer
 import click.seichi.petra.util.TopBar
-import com.destroystokyo.paper.event.block.BlockDestroyEvent
-import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import io.reactivex.disposables.Disposable
 import org.bukkit.*
 import org.bukkit.event.EventHandler
@@ -130,7 +128,7 @@ class PetraGame(private val stage: Stage) : Listener, Game {
     }
 
     @EventHandler(ignoreCancelled = true)
-    fun onBlockDestroy(event: BlockDestroyEvent) {
+    fun onBlockDestroy(event: BlockBreakEvent) {
         val block = event.block
         event.isCancelled = !shouldChanged(block.location)
     }
@@ -179,8 +177,8 @@ class PetraGame(private val stage: Stage) : Listener, Game {
 
     }
 
-    @EventHandler
-    fun onPostRespawn(event: PlayerPostRespawnEvent) {
+    @EventHandler(priority = EventPriority.HIGH)
+    fun onRespawnHighly(event: PlayerRespawnEvent) {
         event.player.addPotionEffects(
                 mutableListOf(
                         PotionEffect(PotionEffectType.WEAKNESS, 10 * 20, 1, true, true),
@@ -216,22 +214,22 @@ class PetraGame(private val stage: Stage) : Listener, Game {
     fun onPlayerMove(event: PlayerMoveEvent) {
         val player = event.player
         if (!players.contains(player.uniqueId)) return
-        if (stage.generator.isStageZone(event.to)) {
-            if (witheredSet.contains(player.uniqueId)) {
-                witheredSet.remove(player.uniqueId)
-                // 解除
-                player.removePotionEffect(PotionEffectType.WITHER)
-            }
-        } else {
-            if (!witheredSet.contains(player.uniqueId)) {
-                witheredSet.add(player.uniqueId)
-                // 付与
-                player.addPotionEffect(PotionEffect(PotionEffectType.WITHER, 10000, 1, false, false, true))
-                ChatMessage("${ChatColor.LIGHT_PURPLE}${player.name}は深淵を覗いてしまった...").broadcast()
+        event.to?.let {
+            if (stage.generator.isStageZone(it)) {
+                if (witheredSet.contains(player.uniqueId)) {
+                    witheredSet.remove(player.uniqueId)
+                    // 解除
+                    player.removePotionEffect(PotionEffectType.WITHER)
+                }
+            } else {
+                if (!witheredSet.contains(player.uniqueId)) {
+                    witheredSet.add(player.uniqueId)
+                    // 付与
+                    player.addPotionEffect(PotionEffect(PotionEffectType.WITHER, 10000, 1, false, false, true))
+                    ChatMessage("${ChatColor.LIGHT_PURPLE}${player.name}は深淵を覗いてしまった...").broadcast()
 
+                }
             }
         }
-
-
     }
 }
