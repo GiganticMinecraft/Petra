@@ -28,7 +28,7 @@ Petra Plugin（以下、当プラグイン）は、[ギガンティック☆整�
 
 ### Documents
 
-`public`なメソッドについては、KDocを記載するよう心がけてください。
+`public`なメソッドについては、[KDoc](https://kotlinlang.org/docs/kotlin-doc.html)を記載するよう心がけてください。
 その他は各自が必要だと判断した場合のみ記載してください。
 
 ### Commit Style
