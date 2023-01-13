@@ -3,16 +3,16 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - develop
+      - main
 concurrency:
-  group: deploy-dev
+  group: deploy
   cancel-in-progress: true
 jobs:
   build:
     name: Build jar
     uses: ./.github/workflows/ci.yml
-  deploy-dev:
-    name: Deploy jar for development
+  deploy:
+    name: Deploy jar
     runs-on: ubuntu-latest
     needs:
       - build
@@ -26,4 +26,4 @@ jobs:
           echo "${{ secrets.DEPLOY_SECRET_KEY }}" > id_rsa
           chmod 600 id_rsa
       - name: Scp artifact
-        run: scp -o 'StrictHostKeyChecking no' -P ${{ secrets.PORT }} -i id_rsa *.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.DEBUG_DEPLOY_TARGET_DIRECTORY }}
+        run: scp -o 'StrictHostKeyChecking no' -P ${{ secrets.PORT }} -i id_rsa *.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.DEPLOY_TARGET_DIRECTORY }}
