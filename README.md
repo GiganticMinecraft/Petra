@@ -4,8 +4,8 @@ Petra Plugin（以下、当プラグイン）は、[ギガンティック☆整�
 
 ## Description
 
-当プラグインはMySQLを用いて全データベースを管理しています。
-デバッグサーバ起動時には`gigantic`データベースを作成済であることを確認してください。
+- プレイヤーたちにはいくつもの課題が次々と与えられる
+- その課題を協働してクリアし、生き残ることが目標
 
 ## Auto Release
 
@@ -15,8 +15,15 @@ Petra Plugin（以下、当プラグイン）は、[ギガンティック☆整�
 
 ## Development
 
+### Dependencies
+
 - Java 1.8
 - Spigot 1.15.2
+
+### Database
+
+- 当プラグインはMySQLを用いて全データベースを管理しています。
+- デバッグサーバー起動時には`gigantic`データベースを作成済であることを確認してください。
 
 ### Kotlin Style Guide
 
