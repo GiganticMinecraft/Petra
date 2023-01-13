@@ -25,8 +25,8 @@ Development
 ## Nullable
 `!!`演算子は原則使用禁止とするが、`null`ではないことが明確な場合は使用可能とする。
 
-## JavaDocs
-`public`なメソッドについては、JavaDocsを記載するよう心がけてください。
+## Documents
+`public`なメソッドについては、KDocを記載するよう心がけてください。
 その他は各自が必要だと判断した場合のみ記載してください。
 
 ## Commit Style
