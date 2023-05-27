@@ -2,7 +2,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
     ext {
-        kotlin_version = '1.8.20'
+        kotlin_version = '1.8.21'
         coroutines_version = '1.7.1'
         spigot_api_version = '1.15.2-R0.1-SNAPSHOT'
         slf4j_version = '2.0.7'
